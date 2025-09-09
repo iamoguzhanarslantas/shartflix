@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/src/core/theme/app_theme.dart';
+import 'package:shartflix/src/presentation/pages/home/home_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -9,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Shartflix',
       theme: AppTheme.lightTheme,
-      home: const Scaffold(body: Center(child: Text('Hello, Shartflix!'))),
+      home: const HomePage(),
     );
   }
 }
