@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/src/core/constants/app_colors.dart';
+import 'package:shartflix/core/constants/app_colors.dart';
 
 class AppGradients {
   // Background Gradient: #3F0306 to #090909

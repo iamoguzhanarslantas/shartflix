@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shartflix/src/core/constants/app_colors.dart';
-import 'package:shartflix/src/core/theme/app_text_styles.dart';
+import 'package:shartflix/core/constants/app_colors.dart';
+import 'package:shartflix/core/theme/app_text_styles.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

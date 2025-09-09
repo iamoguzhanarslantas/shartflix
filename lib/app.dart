@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/src/core/theme/app_theme.dart';
-import 'package:shartflix/src/presentation/pages/home/home_page.dart';
+import 'package:shartflix/core/theme/app_theme.dart';
+import 'package:shartflix/presentation/pages/home/home_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
