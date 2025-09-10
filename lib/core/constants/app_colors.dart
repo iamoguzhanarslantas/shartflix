@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  AppColors._();
+
   // Brand Colors
   static const Color primary = Color(0xFFE50914);
   static const Color primaryDark = Color(0xFF6F0B0B);

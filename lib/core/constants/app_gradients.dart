@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 
 class AppGradients {
+  AppGradients._();
+
   // Background Gradient: #3F0306 to #090909
   static const LinearGradient backgroundGradient = LinearGradient(
     colors: [Color(0xFF3F0306), Color(0xFF090909)],

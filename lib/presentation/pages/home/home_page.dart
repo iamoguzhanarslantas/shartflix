@@ -1,29 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:shartflix/core/theme/app_text_styles.dart';
+import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:shartflix/presentation/animations/login_lottie.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final AnimationController _lottieController;
-
-  @override
-  void initState() {
-    super.initState();
-    _lottieController = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _lottieController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +22,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset(
-              'assets/lottie/artboard.json',
-              controller: _lottieController,
-              onLoaded: (composition) {
-                _lottieController
-                  ..duration = composition.duration
-                  ..forward();
-              },
-            ),
+            LoginLottie(),
             const SizedBox(height: 20),
             Text(
               'Hello World',

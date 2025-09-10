@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+
+class AppTextStyles {
+  AppTextStyles._();
+
+  // Font Family
+  static const String _fontFamily = 'Instrument Sans';
+
+  // Font Weights
+  static const FontWeight bold = FontWeight.w700;
+  static const FontWeight semiBold = FontWeight.w600;
+  static const FontWeight medium = FontWeight.w500;
+  static const FontWeight regular = FontWeight.w400;
+
+  // Headings
+  static final TextStyle h1 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 48,
+    fontWeight: bold,
+  );
+  static final TextStyle h2 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 40,
+    fontWeight: bold,
+  );
+  static final TextStyle h3 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 32,
+    fontWeight: bold,
+  );
+  static final TextStyle h4 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 24,
+    fontWeight: bold,
+  );
+  static final TextStyle h5 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 20,
+    fontWeight: bold,
+  );
+  static final TextStyle h6 = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: bold,
+  );
+
+  // Body Bold
+  static final TextStyle bodyXLargeBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: bold,
+  );
+  static final TextStyle bodyLargeBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: bold,
+  );
+  static final TextStyle bodyNormalBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: bold,
+  );
+  static final TextStyle bodySmallBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: bold,
+  );
+  static final TextStyle bodyXSmallBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 10,
+    fontWeight: bold,
+  );
+
+  // Body SemiBold
+  static final TextStyle bodyXLargeSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: semiBold,
+  );
+  static final TextStyle bodyLargeSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: semiBold,
+  );
+  static final TextStyle bodyNormalSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: semiBold,
+  );
+  static final TextStyle bodySmallSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: semiBold,
+  );
+  static final TextStyle bodyXSmallSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 10,
+    fontWeight: semiBold,
+  );
+
+  // Body Medium
+  static final TextStyle bodyXLargeMedium = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: medium,
+  );
+  static final TextStyle bodyLargeMedium = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: medium,
+  );
+  static final TextStyle bodyNormalMedium = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: medium,
+  );
+  static final TextStyle bodySmallMedium = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: medium,
+  );
+  static final TextStyle bodyXSmallMedium = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 10,
+    fontWeight: medium,
+  );
+
+  // Body Regular
+  static final TextStyle bodyXLarge = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: regular, // Default to regular, can be overridden
+  );
+  static final TextStyle bodyLarge = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: regular,
+  );
+  static final TextStyle bodyNormal = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: regular,
+  );
+  static final TextStyle bodySmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: regular,
+  );
+  static final TextStyle bodyXSmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 10,
+    fontWeight: regular,
+  );
+}
