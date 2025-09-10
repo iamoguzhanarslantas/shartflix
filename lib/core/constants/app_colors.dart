@@ -28,7 +28,7 @@ class AppColors {
 
   // Radial Gradient Colors
   static const Color radialStart = Color(0xFFFF1B1B);
-  static const Color radialEnd = Color(0x008D0000); // rgba(141, 0, 0, 0)
+  static const Color radialEnd = Color(0x008D0000);
 
   // Background Gradient Colors
   static const Color backgroundStart = Color(0xFF3F0306);

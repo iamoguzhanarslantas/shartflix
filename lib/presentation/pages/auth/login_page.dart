@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/presentation/widgets/app_layout.dart';
+import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/login_header.dart';
 import 'package:shartflix/presentation/widgets/auth/login_form.dart';
 import 'package:shartflix/presentation/widgets/auth/login_footer.dart';

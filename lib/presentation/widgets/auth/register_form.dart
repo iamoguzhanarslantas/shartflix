@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/presentation/widgets/custom_text_input.dart';
+import 'package:shartflix/presentation/widgets/auth/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
 import 'package:shartflix/presentation/widgets/auth/terms_and_conditions_checkbox.dart';
 import 'package:sizer/sizer.dart';

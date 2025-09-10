@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/presentation/widgets/app_background.dart';
-import 'package:shartflix/presentation/widgets/glowing_radial_gradient.dart';
+import 'package:shartflix/presentation/widgets/common/app_background.dart';
+import 'package:shartflix/presentation/widgets/common/glowing_radial_gradient.dart';
 import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class AppLayout extends StatelessWidget {
