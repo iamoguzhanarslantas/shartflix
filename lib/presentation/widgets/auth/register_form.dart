@@ -13,23 +13,23 @@ class RegisterForm extends StatelessWidget {
       formFields: [
         const CustomTextInput(
           labelText: 'Ad Soyad',
-          iconPath: 'assets/icon/user.png', // Assuming a user icon
+          iconPath: 'assets/icon/User.svg', // Changed to .svg
         ),
         SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Email',
-          iconPath: 'assets/icon/mail.png',
+          iconPath: 'assets/icon/Mail.svg', // Changed to .svg
         ),
         SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Şifre',
-          iconPath: 'assets/icon/lock.png',
+          iconPath: 'assets/icon/Lock.svg', // Changed to .svg
           isPassword: true,
         ),
         SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Şifre Tekrar',
-          iconPath: 'assets/icon/lock.png',
+          iconPath: 'assets/icon/Lock.svg', // Changed to .svg
           isPassword: true,
         ),
         SizedBox(height: 1.h), // Responsive gap

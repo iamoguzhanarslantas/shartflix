@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/animations/login_lottie.dart';
@@ -16,8 +17,8 @@ class LoginHeader extends StatelessWidget {
           height: context.isSmallScreenHeight ? 22.h : 22.h,
           child: const LoginLottie(),
         ),
-        Image.asset(
-          'assets/icon/app_logo.png',
+        SvgPicture.asset(
+          'assets/icon/Icon.svg',
           width: context.isSmallScreenHeight ? 18.w : 20.w,
           height: context.isSmallScreenHeight ? 18.w : 20.w,
         ),

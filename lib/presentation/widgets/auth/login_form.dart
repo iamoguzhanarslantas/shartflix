@@ -15,12 +15,12 @@ class LoginForm extends StatelessWidget {
       formFields: [
         const CustomTextInput(
           labelText: 'Email',
-          iconPath: 'assets/icon/mail.png',
+          iconPath: 'assets/icon/Mail.svg', // Changed to .svg
         ),
         SizedBox(height: context.isSmallScreenHeight ? 1.h : 1.5.h),
         const CustomTextInput(
           labelText: 'Password',
-          iconPath: 'assets/icon/lock.png',
+          iconPath: 'assets/icon/Lock.svg', // Changed to .svg
           isPassword: true,
         ),
         SizedBox(

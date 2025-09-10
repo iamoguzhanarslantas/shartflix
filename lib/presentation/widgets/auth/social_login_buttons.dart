@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:sizer/sizer.dart';
 import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
+import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 
 class SocialLoginButton extends StatelessWidget {
   final String iconPath;
@@ -35,7 +36,7 @@ class SocialLoginButton extends StatelessWidget {
           ), // 0xFFFFFFFF33 is 20% opacity white
         ),
         child: Center(
-          child: Image.asset(
+          child: SvgPicture.asset(
             iconPath,
             width: 8.w, // Adjusted responsive icon size using Sizer
             height: 8.w, // Adjusted responsive icon size using Sizer
@@ -55,21 +56,21 @@ class SocialLoginButtonsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialLoginButton(
-          iconPath: 'assets/icon/google.png',
+          iconPath: 'assets/icon/Google.svg', // Changed to .svg
           onPressed: () {
             // Handle Google login
           },
         ),
         SizedBox(width: 8.0), // Fixed gap between buttons
         SocialLoginButton(
-          iconPath: 'assets/icon/apple.png',
+          iconPath: 'assets/icon/Apple.svg', // Changed to .svg
           onPressed: () {
             // Handle Apple login
           },
         ),
         SizedBox(width: 8.0), // Fixed gap between buttons
         SocialLoginButton(
-          iconPath: 'assets/icon/facebook.png',
+          iconPath: 'assets/icon/Facebook.svg', // Changed to .svg
           onPressed: () {
             // Handle Facebook login
           },

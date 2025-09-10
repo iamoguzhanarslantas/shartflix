@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:sizer/sizer.dart';
 import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
+import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 
 class CustomTextInput extends StatefulWidget {
   final String labelText;
@@ -61,10 +63,14 @@ class _CustomTextInputState extends State<CustomTextInput> {
                 padding: const EdgeInsets.only(
                   right: 10.0,
                 ), // Gap between icon and text field
-                child: Image.asset(
+                child: SvgPicture.asset(
                   widget.iconPath!,
                   width: 4.5.w, // Responsive width using Sizer
                   height: 4.h, // Responsive height using Sizer
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.white,
+                    BlendMode.srcIn,
+                  ), // Apply color filter
                 ),
               ),
             Expanded(
@@ -90,12 +96,16 @@ class _CustomTextInputState extends State<CustomTextInput> {
                               0,
                               0,
                             ), // Adjust icon position
-                            child: Image.asset(
+                            child: SvgPicture.asset(
                               _obscureText
-                                  ? 'assets/icon/hide.png'
-                                  : 'assets/icon/see.png',
+                                  ? 'assets/icon/Hide.svg' // Change to .svg
+                                  : 'assets/icon/See.svg', // Change to .svg
                               width: 5.w, // Responsive width using Sizer
                               height: 4.5.h, // Responsive height using Sizer
+                              colorFilter: const ColorFilter.mode(
+                                AppColors.white,
+                                BlendMode.srcIn,
+                              ), // Apply color filter
                             ),
                           ),
                         )
