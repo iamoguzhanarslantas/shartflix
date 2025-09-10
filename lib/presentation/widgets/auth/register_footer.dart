@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shartflix/presentation/pages/auth/register_page.dart';
+import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_footer.dart';
 
-class LoginFooter extends StatelessWidget {
-  const LoginFooter({super.key});
+class RegisterFooter extends StatelessWidget {
+  const RegisterFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AuthFooter(
-      promptText: 'Bir hesabın yok mu?',
-      actionText: 'Kayıt ol',
+      promptText: 'Hesabın var mı?',
+      actionText: 'Giriş yap',
       onActionPressed: () {
-        context.go(RegisterPage.routeName);
+        context.go(LoginPage.routeName);
       },
     );
   }

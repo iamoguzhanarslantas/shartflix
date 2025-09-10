@@ -5,6 +5,7 @@ import 'package:shartflix/presentation/widgets/auth/login_form.dart';
 import 'package:shartflix/presentation/widgets/auth/login_footer.dart';
 
 class LoginPage extends StatelessWidget {
+  static const String routeName = '/login';
   const LoginPage({super.key});
 
   @override
@@ -13,12 +14,17 @@ class LoginPage extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: AppLayout(
         child: SingleChildScrollView(
+          physics: MediaQuery.of(context).viewInsets.bottom == 0
+              ? NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
+              : BouncingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               LoginHeader(),
+              SizedBox(height: 24),
               LoginForm(),
               LoginFooter(),
+              SizedBox(height: 24),
             ],
           ),
         ),
