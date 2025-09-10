@@ -4,6 +4,7 @@ import 'package:shartflix/presentation/widgets/auth/register_header.dart';
 import 'package:shartflix/presentation/widgets/auth/register_form.dart';
 import 'package:shartflix/presentation/widgets/auth/register_footer.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class RegisterPage extends StatelessWidget {
   static const String routeName = '/register';
@@ -24,12 +25,21 @@ class RegisterPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  SizedBox(height: 2.h), // Responsive height using Sizer
+                  SizedBox(
+                    height: context.isSmallScreenHeight ? 0.5.h : 1.0.h,
+                  ), // Adjust height for minimal spacing on small screens, slightly less on large
                   RegisterHeader(),
-                  SizedBox(height: 2.h), // Responsive height using Sizer
+                  SizedBox(
+                    height: context.isSmallScreenHeight ? 1.h : 2.0.h,
+                  ), // Adjust height for 24px on large screens
                   RegisterForm(),
+                  SizedBox(
+                    height: context.isSmallScreenHeight ? 0.5.h : 0.75.h,
+                  ), // Adjust height for 8px on large screens
                   RegisterFooter(),
-                  SizedBox(height: 2.h), // Responsive height using Sizer
+                  SizedBox(
+                    height: context.isSmallScreenHeight ? 0.5.h : 1.0.h,
+                  ), // Adjust height for minimal spacing on small screens, slightly less on large
                 ],
               ),
             ),

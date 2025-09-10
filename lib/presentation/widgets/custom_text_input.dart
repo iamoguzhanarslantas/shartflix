@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class CustomTextInput extends StatefulWidget {
   final String labelText;
@@ -38,10 +39,17 @@ class _CustomTextInputState extends State<CustomTextInput> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 88.w, // Responsive width using Sizer
+      width: context.isSmallScreenHeight
+          ? 88.w
+          : 88.w, // Responsive width using Sizer
       child: Container(
-        height: 56,
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+        height: context.isSmallScreenHeight
+            ? 7.h
+            : 7.h, // Consistent height with buttons
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: context.isSmallScreenHeight ? 2.h : 2.25.h,
+        ), // Responsive vertical padding
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           border: Border.all(color: Colors.white, width: 1),

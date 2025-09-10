@@ -3,6 +3,7 @@ import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/animations/login_lottie.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -12,16 +13,20 @@ class LoginHeader extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 20.h, // Responsive height
-          child: LoginLottie(),
+          height: context.isSmallScreenHeight ? 22.h : 22.h,
+          child: const LoginLottie(),
         ),
-        Image.asset('assets/icon/app_logo.png', width: 20.w, height: 20.w), // Responsive width and height
-        SizedBox(height: 1.h), // Responsive gap
+        Image.asset(
+          'assets/icon/app_logo.png',
+          width: context.isSmallScreenHeight ? 18.w : 20.w,
+          height: context.isSmallScreenHeight ? 18.w : 20.w,
+        ),
+        SizedBox(height: context.isSmallScreenHeight ? 1.h : 1.5.h),
         Text(
           'Giriş Yap',
           style: AppTextStyles.h4.copyWith(color: AppColors.white),
         ),
-        SizedBox(height: 0.5.h), // Responsive gap
+        SizedBox(height: context.isSmallScreenHeight ? 0.5.h : 1.h),
         Text(
           'Kullanıcı bilgilerinle giriş yap',
           style: AppTextStyles.bodyNormalRegular.copyWith(

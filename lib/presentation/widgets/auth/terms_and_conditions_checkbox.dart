@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class TermsAndConditionsCheckbox extends StatefulWidget {
   const TermsAndConditionsCheckbox({super.key});
@@ -29,11 +30,11 @@ class _TermsAndConditionsCheckboxState
               });
             },
             child: Container(
-              width: 5.w, // Responsive width using Sizer
-              height: 5.w, // Responsive height using Sizer
+              width: context.isSmallScreenHeight ? 3.5.w : 5.w, // Adjust width for minimal spacing on small screens, slightly less on large
+              height: context.isSmallScreenHeight ? 3.5.w : 5.w, // Adjust height for minimal spacing on small screens, slightly less on large
               margin: EdgeInsets.only(
-                top: 0.2.h, // Responsive top margin using Sizer
-                left: 0.5.w, // Responsive left margin using Sizer
+                top: context.isSmallScreenHeight ? 0.05.h : 0.2.h, // Adjust top margin for minimal spacing on small screens, slightly less on large
+                left: context.isSmallScreenHeight ? 0.2.w : 0.5.w, // Adjust left margin for minimal spacing on small screens, slightly less on large
               ),
               decoration: BoxDecoration(
                 color: _isChecked

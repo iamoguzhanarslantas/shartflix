@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class LoginLottie extends StatefulWidget {
   const LoginLottie({super.key});
@@ -9,7 +10,8 @@ class LoginLottie extends StatefulWidget {
   State<LoginLottie> createState() => _LoginLottieState();
 }
 
-class _LoginLottieState extends State<LoginLottie> with TickerProviderStateMixin {
+class _LoginLottieState extends State<LoginLottie>
+    with TickerProviderStateMixin {
   late final AnimationController _lottieController;
 
   @override
@@ -27,8 +29,12 @@ class _LoginLottieState extends State<LoginLottie> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100.w, // Make Lottie responsive to screen width
-      height: 30.h, // Make Lottie responsive to screen height
+      width: context.isSmallScreenHeight
+          ? 100.w
+          : 105.w, // Responsive width for small screens, 105.w for large
+      height: context.isSmallScreenHeight
+          ? 20.h
+          : 25.h, // Responsive height for small screens, 25.h for large (equivalent to 186px on 800px height screen)
       child: Lottie.asset(
         'assets/lottie/artboard.json',
         controller: _lottieController,

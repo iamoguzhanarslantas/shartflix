@@ -4,6 +4,7 @@ import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/widgets/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
 import 'package:sizer/sizer.dart';
+import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -16,19 +17,19 @@ class LoginForm extends StatelessWidget {
           labelText: 'Email',
           iconPath: 'assets/icon/mail.png',
         ),
-        SizedBox(height: 1.h), // Responsive height using Sizer
+        SizedBox(height: context.isSmallScreenHeight ? 1.h : 1.5.h),
         const CustomTextInput(
           labelText: 'Password',
           iconPath: 'assets/icon/lock.png',
           isPassword: true,
         ),
         SizedBox(
-          height: 1.h,
-        ), // Responsive height using Sizer
+          height: context.isSmallScreenHeight ? 1.h : 1.5.h,
+        ),
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.w), // Responsive horizontal padding
+            padding: EdgeInsets.symmetric(horizontal: 6.w),
             child: Text(
               'Şifremi unuttum',
               style: AppTextStyles.bodyNormalSemiBold.copyWith(

@@ -23,7 +23,7 @@ class AuthHeader extends StatelessWidget {
         Image.asset(
           'assets/icon/app_logo.png',
           width: 20.w, // Responsive width using Sizer
-          height: 20.w, // Responsive height using Sizer
+          height: 25.w, // Responsive height using Sizer
         ),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
         SizedBox(height: 1.h), // Responsive gap using Sizer
