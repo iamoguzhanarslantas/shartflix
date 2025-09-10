@@ -25,4 +25,12 @@ class AppColors {
   static const Color white20 = Color(0x33FFFFFF); // 20% opacity
   static const Color white10 = Color(0x1AFFFFFF); // 10% opacity
   static const Color white05 = Color(0x0DFFFFFF); // 5% opacity
+
+  // Radial Gradient Colors
+  static const Color radialStart = Color(0xFFFF1B1B);
+  static const Color radialEnd = Color(0x008D0000); // rgba(141, 0, 0, 0)
+
+  // Background Gradient Colors
+  static const Color backgroundStart = Color(0xFF3F0306);
+  static const Color backgroundEnd = Color(0xFF090909);
 }

@@ -6,17 +6,14 @@ class AppGradients {
 
   // Background Gradient: #3F0306 to #090909
   static const LinearGradient backgroundGradient = LinearGradient(
-    colors: [Color(0xFF3F0306), Color(0xFF090909)],
+    colors: [AppColors.backgroundStart, AppColors.backgroundEnd],
     begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
+    end: Alignment.center,
   );
 
   // Popular Card Gradient: Red-Purple tones
   static const LinearGradient popularCardGradient = LinearGradient(
-    colors: [
-      AppColors.primary, // Example red tone
-      AppColors.secondary, // Example purple tone
-    ],
+    colors: [AppColors.primary, AppColors.secondary],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -33,5 +30,14 @@ class AppGradients {
     colors: [AppColors.primary, AppColors.primaryDark],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
+  );
+
+  // Login Radial Gradient
+  static const RadialGradient loginRadialGradient = RadialGradient(
+    center: Alignment.center,
+    colors: [AppColors.radialStart, AppColors.radialEnd],
+    stops: [0.0, 1.0],
+    radius: 0.8,
+    focal: Alignment.center,
   );
 }

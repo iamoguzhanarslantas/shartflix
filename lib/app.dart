@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/theme/app_theme.dart';
+import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 
 class App extends StatelessWidget {
@@ -10,7 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Shartflix',
       theme: AppTheme.lightTheme,
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

@@ -31,7 +31,7 @@ class _LoginLottieState extends State<LoginLottie> with TickerProviderStateMixin
       onLoaded: (composition) {
         _lottieController
           ..duration = composition.duration
-          ..forward();
+          ..repeat(); // Loop the animation
       },
     );
   }
