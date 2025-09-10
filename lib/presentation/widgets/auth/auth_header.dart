@@ -20,15 +20,11 @@ class AuthHeader extends StatelessWidget {
       children: [
         if (topWidget != null) topWidget!,
         Image.asset('assets/icon/app_logo.png', width: 78, height: 78),
-        const SizedBox(height: 10), // Gap between logo and text
-        Text(
-          title,
-          style: AppTextStyles.h4.copyWith(color: AppColors.white),
-        ),
+        Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
         const SizedBox(height: 5), // Small gap between texts
         Text(
           subtitle,
-          style: AppTextStyles.bodyNormal.copyWith(
+          style: AppTextStyles.bodyNormalRegular.copyWith(
             color: AppColors.white,
           ),
         ),

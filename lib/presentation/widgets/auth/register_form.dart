@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/presentation/widgets/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
+import 'package:shartflix/presentation/widgets/auth/terms_and_conditions_checkbox.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -30,6 +31,8 @@ class RegisterForm extends StatelessWidget {
           iconPath: 'assets/icon/lock.png',
           isPassword: true,
         ),
+        const SizedBox(height: 10), // Gap between password repeat and checkbox
+        const TermsAndConditionsCheckbox(),
       ],
       buttonText: 'Kaydol',
       onButtonPressed: () {

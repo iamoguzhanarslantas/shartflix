@@ -20,14 +20,21 @@ class SocialLoginButton extends StatelessWidget {
         height: 60, // Updated height
         decoration: BoxDecoration(
           color: AppColors.white05, // #FFFFFF0D is 5% opacity white
-          borderRadius: BorderRadius.circular(21.9), // Assuming this is the border radius for the icon container
-          border: Border.all(color: AppColors.white20, width: 1), // 0xFFFFFFFF33 is 20% opacity white
+          borderRadius: BorderRadius.circular(
+            16,
+          ), // Assuming this is the border radius for the icon container
+          border: Border.all(
+            color: AppColors.white20,
+            width: 1,
+          ), // 0xFFFFFFFF33 is 20% opacity white
         ),
         child: Center(
           child: Image.asset(
             iconPath,
-            width: 60 * 0.6, // Adjust icon size to fit within the 60x60 container
-            height: 60 * 0.6, // Adjust icon size to fit within the 60x60 container
+            width:
+                60 * 0.6, // Adjust icon size to fit within the 60x60 container
+            height:
+                60 * 0.6, // Adjust icon size to fit within the 60x60 container
           ),
         ),
       ),

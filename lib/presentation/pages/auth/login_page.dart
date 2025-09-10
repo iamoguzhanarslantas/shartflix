@@ -21,10 +21,10 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoginHeader(),
-              SizedBox(height: 24),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03), // Responsive height
               LoginForm(),
               LoginFooter(),
-              SizedBox(height: 24),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03), // Responsive height
             ],
           ),
         ),

@@ -61,7 +61,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
                 decoration: InputDecoration(
                   labelText: widget.labelText,
                   border: InputBorder.none, // Remove default TextField border
-                  labelStyle: AppTextStyles.bodyNormal.copyWith(
+                  labelStyle: AppTextStyles.bodyNormalRegular.copyWith(
                     color: Colors.white,
                   ),
                   isDense: true, // Reduce vertical space
@@ -91,7 +91,9 @@ class _CustomTextInputState extends State<CustomTextInput> {
                     const Size(30, 24),
                   ), // Adjust suffix icon size
                 ),
-                style: AppTextStyles.bodyNormal.copyWith(color: Colors.white),
+                style: AppTextStyles.bodyNormalRegular.copyWith(
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

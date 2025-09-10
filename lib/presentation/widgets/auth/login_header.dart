@@ -23,7 +23,7 @@ class LoginHeader extends StatelessWidget {
         const SizedBox(height: 5), // Small gap between texts
         Text(
           'Kullanıcı bilgilerinle giriş yap',
-          style: AppTextStyles.bodyNormal.copyWith(
+          style: AppTextStyles.bodyNormalRegular.copyWith(
             color: AppColors.white,
           ),
         ),

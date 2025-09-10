@@ -126,27 +126,27 @@ class AppTextStyles {
   );
 
   // Body Regular
-  static final TextStyle bodyXLarge = TextStyle(
+  static final TextStyle bodyXLargeRegular = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 18,
-    fontWeight: regular, // Default to regular, can be overridden
+    fontWeight: regular,
   );
-  static final TextStyle bodyLarge = TextStyle(
+  static final TextStyle bodyLargeRegular = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 16,
     fontWeight: regular,
   );
-  static final TextStyle bodyNormal = TextStyle(
+  static final TextStyle bodyNormalRegular = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 14,
     fontWeight: regular,
   );
-  static final TextStyle bodySmall = TextStyle(
+  static final TextStyle bodySmallRegular = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 12,
     fontWeight: regular,
   );
-  static final TextStyle bodyXSmall = TextStyle(
+  static final TextStyle bodyXSmallRegular = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 10,
     fontWeight: regular,

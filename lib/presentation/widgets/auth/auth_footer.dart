@@ -27,7 +27,7 @@ class AuthFooter extends StatelessWidget {
           children: [
             Text(
               promptText,
-              style: AppTextStyles.bodyNormal.copyWith(
+              style: AppTextStyles.bodyNormalRegular.copyWith(
                 color: AppColors.white80,
               ),
               textAlign: TextAlign.center,

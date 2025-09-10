@@ -32,11 +32,11 @@ class AppTheme {
         headlineSmall: AppTextStyles.h5.copyWith(color: AppColors.white90),
         titleLarge: AppTextStyles.h6.copyWith(color: AppColors.white90),
         // Body Text
-        bodyLarge: AppTextStyles.bodyXLarge.copyWith(color: AppColors.white90),
-        bodyMedium: AppTextStyles.bodyLarge.copyWith(color: AppColors.white90),
-        bodySmall: AppTextStyles.bodyNormal.copyWith(color: AppColors.white90),
-        labelLarge: AppTextStyles.bodySmall.copyWith(color: AppColors.white90),
-        labelSmall: AppTextStyles.bodyXSmall.copyWith(color: AppColors.white90),
+        bodyLarge: AppTextStyles.bodyXLargeRegular.copyWith(color: AppColors.white90),
+        bodyMedium: AppTextStyles.bodyLargeRegular.copyWith(color: AppColors.white90),
+        bodySmall: AppTextStyles.bodyNormalRegular.copyWith(color: AppColors.white90),
+        labelLarge: AppTextStyles.bodySmallRegular.copyWith(color: AppColors.white90),
+        labelSmall: AppTextStyles.bodyXSmallRegular.copyWith(color: AppColors.white90),
       ),
       // Add other theme properties as needed
       // For example, AppBarTheme, ButtonTheme, etc.

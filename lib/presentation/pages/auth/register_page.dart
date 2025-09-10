@@ -20,13 +20,19 @@ class RegisterPage extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SizedBox(height: 24),
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ), // Responsive height
                 RegisterHeader(),
-                SizedBox(height: 24),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ), // Responsive height
                 RegisterForm(),
                 RegisterFooter(),
-                SizedBox(height: 24),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ), // Responsive height
               ],
             ),
           ),
