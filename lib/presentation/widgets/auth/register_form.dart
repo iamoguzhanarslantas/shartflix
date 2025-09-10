@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/presentation/widgets/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
 import 'package:shartflix/presentation/widgets/auth/terms_and_conditions_checkbox.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -14,24 +15,24 @@ class RegisterForm extends StatelessWidget {
           labelText: 'Ad Soyad',
           iconPath: 'assets/icon/user.png', // Assuming a user icon
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Email',
           iconPath: 'assets/icon/mail.png',
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Şifre',
           iconPath: 'assets/icon/lock.png',
           isPassword: true,
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 1.h), // Responsive gap
         const CustomTextInput(
           labelText: 'Şifre Tekrar',
           iconPath: 'assets/icon/lock.png',
           isPassword: true,
         ),
-        const SizedBox(height: 10), // Gap between password repeat and checkbox
+        SizedBox(height: 1.h), // Responsive gap
         const TermsAndConditionsCheckbox(),
       ],
       buttonText: 'Kaydol',

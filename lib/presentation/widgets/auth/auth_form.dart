@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:sizer/sizer.dart';
 
 class AuthForm extends StatelessWidget {
   final List<Widget> formFields;
@@ -19,13 +20,13 @@ class AuthForm extends StatelessWidget {
     return Column(
       children: [
         ...formFields,
-        const SizedBox(height: 16),
+        SizedBox(height: 2.h), // Responsive height using Sizer
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.06,
-          ), // Responsive horizontal padding
+            horizontal: 6.w, // Responsive horizontal padding using Sizer
+          ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.88, // Responsive width
+            width: 88.w, // Responsive width using Sizer
             height: 56, // Fixed height
             child: ElevatedButton(
               onPressed: onButtonPressed,

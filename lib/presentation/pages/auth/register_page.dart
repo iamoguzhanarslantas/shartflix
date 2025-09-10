@@ -3,6 +3,7 @@ import 'package:shartflix/presentation/widgets/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/register_header.dart';
 import 'package:shartflix/presentation/widgets/auth/register_form.dart';
 import 'package:shartflix/presentation/widgets/auth/register_footer.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterPage extends StatelessWidget {
   static const String routeName = '/register';
@@ -12,28 +13,25 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: AppLayout(
-        child: SingleChildScrollView(
-          physics: MediaQuery.of(context).viewInsets.bottom == 0
-              ? NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
-              : BouncingScrollPhysics(), // Klavye açık → scroll var
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
-                ), // Responsive height
-                RegisterHeader(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
-                ), // Responsive height
-                RegisterForm(),
-                RegisterFooter(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
-                ), // Responsive height
-              ],
+      body: SafeArea(
+        child: AppLayout(
+          child: SingleChildScrollView(
+            physics: MediaQuery.of(context).viewInsets.bottom == 0
+                ? const NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
+                : const BouncingScrollPhysics(), // Klavye açık → scroll var
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  SizedBox(height: 2.h), // Responsive height using Sizer
+                  RegisterHeader(),
+                  SizedBox(height: 2.h), // Responsive height using Sizer
+                  RegisterForm(),
+                  RegisterFooter(),
+                  SizedBox(height: 2.h), // Responsive height using Sizer
+                ],
+              ),
             ),
           ),
         ),

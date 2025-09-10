@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/animations/login_lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -11,16 +12,16 @@ class LoginHeader extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2, // Responsive height
+          height: 20.h, // Responsive height
           child: LoginLottie(),
         ),
-        Image.asset('assets/icon/app_logo.png', width: 78, height: 78),
-        const SizedBox(height: 10), // Gap between logo and text
+        Image.asset('assets/icon/app_logo.png', width: 20.w, height: 20.w), // Responsive width and height
+        SizedBox(height: 1.h), // Responsive gap
         Text(
           'Giriş Yap',
           style: AppTextStyles.h4.copyWith(color: AppColors.white),
         ),
-        const SizedBox(height: 5), // Small gap between texts
+        SizedBox(height: 0.5.h), // Responsive gap
         Text(
           'Kullanıcı bilgilerinle giriş yap',
           style: AppTextStyles.bodyNormalRegular.copyWith(

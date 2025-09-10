@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/widgets/social_login_buttons.dart';
+import 'package:sizer/sizer.dart';
 
 class AuthFooter extends StatelessWidget {
   final String promptText;
@@ -19,9 +20,9 @@ class AuthFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 15), // Gap between Login button and social icons
+        SizedBox(height: 1.5.h), // Responsive gap using Sizer
         const SocialLoginButtonsRow(),
-        const SizedBox(height: 8), // Gap between social icons and text
+        SizedBox(height: 1.h), // Responsive gap using Sizer
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,7 +33,7 @@ class AuthFooter extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(width: 8), // Gap between texts
+            SizedBox(width: 2.w), // Responsive gap using Sizer
             GestureDetector(
               onTap: onActionPressed,
               child: Text(

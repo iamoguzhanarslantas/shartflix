@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/animations/login_lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,17 +19,19 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppColors.black,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LoginLottie(),
-            const SizedBox(height: 20),
-            Text(
-              'Hello World',
-              style: AppTextStyles.h2.copyWith(color: AppColors.white90),
-            ),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LoginLottie(),
+              SizedBox(height: 2.h), // Responsive height using Sizer
+              Text(
+                'Hello World',
+                style: AppTextStyles.h2.copyWith(color: AppColors.white90),
+              ),
+            ],
+          ),
         ),
       ),
     );

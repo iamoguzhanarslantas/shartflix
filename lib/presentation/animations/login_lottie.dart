@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginLottie extends StatefulWidget {
   const LoginLottie({super.key});
@@ -25,14 +26,18 @@ class _LoginLottieState extends State<LoginLottie> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Lottie.asset(
-      'assets/lottie/artboard.json',
-      controller: _lottieController,
-      onLoaded: (composition) {
-        _lottieController
-          ..duration = composition.duration
-          ..repeat(); // Loop the animation
-      },
+    return SizedBox(
+      width: 100.w, // Make Lottie responsive to screen width
+      height: 30.h, // Make Lottie responsive to screen height
+      child: Lottie.asset(
+        'assets/lottie/artboard.json',
+        controller: _lottieController,
+        onLoaded: (composition) {
+          _lottieController
+            ..duration = composition.duration
+            ..repeat(); // Loop the animation
+        },
+      ),
     );
   }
 }

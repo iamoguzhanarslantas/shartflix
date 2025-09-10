@@ -3,7 +3,7 @@ import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData get lightTheme { // Renamed to lightTheme
     return ThemeData(
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.black,

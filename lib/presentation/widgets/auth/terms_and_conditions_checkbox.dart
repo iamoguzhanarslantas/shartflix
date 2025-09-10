@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:sizer/sizer.dart';
 
 class TermsAndConditionsCheckbox extends StatefulWidget {
   const TermsAndConditionsCheckbox({super.key});
@@ -17,7 +18,7 @@ class _TermsAndConditionsCheckboxState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: EdgeInsets.symmetric(horizontal: 6.w), // Responsive horizontal padding using Sizer
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,12 +29,12 @@ class _TermsAndConditionsCheckboxState
               });
             },
             child: Container(
-              width: 20,
-              height: 20,
-              margin: const EdgeInsets.only(
-                top: 2,
-                left: 2,
-              ), // Adjust top and left as per 'top: 2px; left: 2px;'
+              width: 5.w, // Responsive width using Sizer
+              height: 5.w, // Responsive height using Sizer
+              margin: EdgeInsets.only(
+                top: 0.2.h, // Responsive top margin using Sizer
+                left: 0.5.w, // Responsive left margin using Sizer
+              ),
               decoration: BoxDecoration(
                 color: _isChecked
                     ? AppColors.primary
@@ -47,11 +48,11 @@ class _TermsAndConditionsCheckboxState
                 ), // Border color #FFFFFF99 is white60
               ),
               child: _isChecked
-                  ? const Icon(Icons.check, size: 16, color: AppColors.white)
+                  ? Icon(Icons.check, size: 4.w, color: AppColors.white) // Responsive icon size using Sizer
                   : null,
             ),
           ),
-          const SizedBox(width: 8), // Gap between checkbox and text
+          SizedBox(width: 2.w), // Responsive gap using Sizer
           Expanded(
             child: RichText(
               text: TextSpan(

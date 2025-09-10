@@ -3,6 +3,7 @@ import 'package:shartflix/presentation/widgets/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/login_header.dart';
 import 'package:shartflix/presentation/widgets/auth/login_form.dart';
 import 'package:shartflix/presentation/widgets/auth/login_footer.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = '/login';
@@ -12,20 +13,23 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: AppLayout(
-        child: SingleChildScrollView(
-          physics: MediaQuery.of(context).viewInsets.bottom == 0
-              ? NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
-              : BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LoginHeader(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03), // Responsive height
-              LoginForm(),
-              LoginFooter(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03), // Responsive height
-            ],
+      body: SafeArea(
+        child: AppLayout(
+          child: SingleChildScrollView(
+            physics: MediaQuery.of(context).viewInsets.bottom == 0
+                ? const NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
+                : const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                LoginHeader(),
+                SizedBox(height: 2.h), // Responsive height using Sizer
+                LoginForm(),
+                LoginFooter(),
+                SizedBox(height: 2.h), // Responsive height using Sizer
+              ],
+            ),
           ),
         ),
       ),

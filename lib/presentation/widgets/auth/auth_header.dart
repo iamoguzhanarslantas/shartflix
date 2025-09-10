@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:sizer/sizer.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;
@@ -19,9 +20,13 @@ class AuthHeader extends StatelessWidget {
     return Column(
       children: [
         if (topWidget != null) topWidget!,
-        Image.asset('assets/icon/app_logo.png', width: 78, height: 78),
+        Image.asset(
+          'assets/icon/app_logo.png',
+          width: 20.w, // Responsive width using Sizer
+          height: 20.w, // Responsive height using Sizer
+        ),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
-        const SizedBox(height: 5), // Small gap between texts
+        SizedBox(height: 1.h), // Responsive gap using Sizer
         Text(
           subtitle,
           style: AppTextStyles.bodyNormalRegular.copyWith(

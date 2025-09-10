@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomTextInput extends StatefulWidget {
   final String labelText;
@@ -37,7 +38,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.88, // Responsive width
+      width: 88.w, // Responsive width using Sizer
       child: Container(
         height: 56,
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
@@ -52,7 +53,11 @@ class _CustomTextInputState extends State<CustomTextInput> {
                 padding: const EdgeInsets.only(
                   right: 10.0,
                 ), // Gap between icon and text field
-                child: Image.asset(widget.iconPath!, width: 18, height: 16),
+                child: Image.asset(
+                  widget.iconPath!,
+                  width: 4.5.w, // Responsive width using Sizer
+                  height: 4.h, // Responsive height using Sizer
+                ),
               ),
             Expanded(
               child: TextField(
@@ -81,15 +86,15 @@ class _CustomTextInputState extends State<CustomTextInput> {
                               _obscureText
                                   ? 'assets/icon/hide.png'
                                   : 'assets/icon/see.png',
-                              width: 19,
-                              height: 18,
+                              width: 5.w, // Responsive width using Sizer
+                              height: 4.5.h, // Responsive height using Sizer
                             ),
                           ),
                         )
                       : null,
                   suffixIconConstraints: BoxConstraints.tight(
-                    const Size(30, 24),
-                  ), // Adjust suffix icon size
+                    Size(7.5.w, 6.h), // Responsive suffix icon size using Sizer
+                  ),
                 ),
                 style: AppTextStyles.bodyNormalRegular.copyWith(
                   color: Colors.white,

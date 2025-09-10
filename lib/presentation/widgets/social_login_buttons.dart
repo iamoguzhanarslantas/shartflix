@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
+import 'package:sizer/sizer.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final String iconPath;
@@ -16,8 +17,8 @@ class SocialLoginButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 60, // Updated width
-        height: 60, // Updated height
+        width: 15.w, // Responsive width using Sizer
+        height: 15.w, // Responsive height using Sizer
         decoration: BoxDecoration(
           color: AppColors.white05, // #FFFFFF0D is 5% opacity white
           borderRadius: BorderRadius.circular(
@@ -31,10 +32,8 @@ class SocialLoginButton extends StatelessWidget {
         child: Center(
           child: Image.asset(
             iconPath,
-            width:
-                60 * 0.6, // Adjust icon size to fit within the 60x60 container
-            height:
-                60 * 0.6, // Adjust icon size to fit within the 60x60 container
+            width: 9.w, // Responsive icon size using Sizer
+            height: 9.w, // Responsive icon size using Sizer
           ),
         ),
       ),
@@ -56,14 +55,14 @@ class SocialLoginButtonsRow extends StatelessWidget {
             // Handle Google login
           },
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 2.w), // Responsive gap using Sizer
         SocialLoginButton(
           iconPath: 'assets/icon/apple.png',
           onPressed: () {
             // Handle Apple login
           },
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 2.w), // Responsive gap using Sizer
         SocialLoginButton(
           iconPath: 'assets/icon/facebook.png',
           onPressed: () {
