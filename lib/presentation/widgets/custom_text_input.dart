@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:shartflix/core/constants/app_text_styles.dart';
+
+class CustomTextInput extends StatefulWidget {
+  final String labelText;
+  final String? iconPath;
+  final bool isPassword;
+  final TextEditingController? controller;
+
+  const CustomTextInput({
+    super.key,
+    required this.labelText,
+    this.iconPath,
+    this.isPassword = false,
+    this.controller,
+  });
+
+  @override
+  State<CustomTextInput> createState() => _CustomTextInputState();
+}
+
+class _CustomTextInputState extends State<CustomTextInput> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
+  void _toggleObscureText() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.88, // Responsive width
+      child: Container(
+        height: 56,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.white, width: 1),
+        ),
+        child: Row(
+          children: [
+            if (widget.iconPath != null)
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 10.0,
+                ), // Gap between icon and text field
+                child: Image.asset(widget.iconPath!, width: 18, height: 16),
+              ),
+            Expanded(
+              child: TextField(
+                controller: widget.controller,
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  labelText: widget.labelText,
+                  border: InputBorder.none, // Remove default TextField border
+                  labelStyle: AppTextStyles.bodyNormal.copyWith(
+                    color: Colors.white,
+                  ),
+                  isDense: true, // Reduce vertical space
+                  contentPadding:
+                      EdgeInsets.zero, // Remove default content padding
+                  suffixIcon: widget.isPassword
+                      ? GestureDetector(
+                          onTap: _toggleObscureText,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              2,
+                              3,
+                              0,
+                              0,
+                            ), // Adjust icon position
+                            child: Image.asset(
+                              _obscureText
+                                  ? 'assets/icon/hide.png'
+                                  : 'assets/icon/see.png',
+                              width: 19,
+                              height: 18,
+                            ),
+                          ),
+                        )
+                      : null,
+                  suffixIconConstraints: BoxConstraints.tight(
+                    const Size(30, 24),
+                  ), // Adjust suffix icon size
+                ),
+                style: AppTextStyles.bodyNormal.copyWith(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

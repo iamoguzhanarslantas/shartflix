@@ -18,7 +18,7 @@ class AppLayout extends StatelessWidget {
           right: 43,
           child: GlowingRadialGradient(),
         ),
-        if (child != null) child!,
+        if (child != null) Expanded(child: child!),
       ],
     );
   }
