@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:sizer/sizer.dart';
-import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 
 class SocialLoginButton extends StatelessWidget {
@@ -19,29 +18,15 @@ class SocialLoginButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: context.isSmallScreenHeight
-            ? 16.w
-            : 16.w, // Adjusted width for smaller icons
-        height: context.isSmallScreenHeight
-            ? 16.w
-            : 16.w, // Adjusted height for smaller icons
+        padding: EdgeInsets.all(8.r),
+        width: 60.w,
+        height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.white05, // #FFFFFF0D is 5% opacity white
-          borderRadius: BorderRadius.circular(
-            16,
-          ), // Adjusted border radius for smaller icons
-          border: Border.all(
-            color: AppColors.white20,
-            width: 1,
-          ), // 0xFFFFFFFF33 is 20% opacity white
+          color: AppColors.white05,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: AppColors.white20, width: 1.w),
         ),
-        child: Center(
-          child: SvgPicture.asset(
-            iconPath,
-            width: 8.w, // Adjusted responsive icon size using Sizer
-            height: 8.w, // Adjusted responsive icon size using Sizer
-          ),
-        ),
+        child: Center(child: SvgPicture.asset(iconPath, width: 24.w, height: 24.h)),
       ),
     );
   }
@@ -61,14 +46,14 @@ class SocialLoginButtonsRow extends StatelessWidget {
             // Handle Google login
           },
         ),
-        SizedBox(width: 8.0), // Fixed gap between buttons
+        SizedBox(width: 8.w), // Fixed gap between buttons
         SocialLoginButton(
           iconPath: 'assets/icon/Apple.svg', // Changed to .svg
           onPressed: () {
             // Handle Apple login
           },
         ),
-        SizedBox(width: 8.0), // Fixed gap between buttons
+        SizedBox(width: 8.w), // Fixed gap between buttons
         SocialLoginButton(
           iconPath: 'assets/icon/Facebook.svg', // Changed to .svg
           onPressed: () {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/widgets/auth/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
-import 'package:sizer/sizer.dart';
-import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -15,21 +14,19 @@ class LoginForm extends StatelessWidget {
       formFields: [
         const CustomTextInput(
           labelText: 'Email',
-          iconPath: 'assets/icon/Mail.svg', // Changed to .svg
+          iconPath: 'assets/icon/Mail.svg',
         ),
-        SizedBox(height: context.isSmallScreenHeight ? 1.h : 1.5.h),
+        SizedBox(height: 10.h),
         const CustomTextInput(
           labelText: 'Password',
-          iconPath: 'assets/icon/Lock.svg', // Changed to .svg
+          iconPath: 'assets/icon/Lock.svg',
           isPassword: true,
         ),
-        SizedBox(
-          height: context.isSmallScreenHeight ? 1.h : 1.5.h,
-        ),
+        SizedBox(height: 10.h),
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
               'Şifremi unuttum',
               style: AppTextStyles.bodyNormalSemiBold.copyWith(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyles {
   AppTextStyles._();
@@ -15,140 +16,140 @@ class AppTextStyles {
   // Headings
   static final TextStyle h1 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 48,
+    fontSize: 48.sp,
     fontWeight: bold,
   );
   static final TextStyle h2 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 40,
+    fontSize: 40.sp,
     fontWeight: bold,
   );
   static final TextStyle h3 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 32,
+    fontSize: 32.sp,
     fontWeight: bold,
   );
   static final TextStyle h4 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 24,
+    fontSize: 24.sp,
     fontWeight: bold,
   );
   static final TextStyle h5 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 20,
+    fontSize: 20.sp,
     fontWeight: bold,
   );
   static final TextStyle h6 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 18.sp,
     fontWeight: bold,
   );
 
   // Body Bold
   static final TextStyle bodyXLargeBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 18.sp,
     fontWeight: bold,
   );
   static final TextStyle bodyLargeBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 16,
+    fontSize: 16.sp,
     fontWeight: bold,
   );
   static final TextStyle bodyNormalBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: bold,
   );
   static final TextStyle bodySmallBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: bold,
   );
   static final TextStyle bodyXSmallBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 10,
+    fontSize: 10.sp,
     fontWeight: bold,
   );
 
   // Body SemiBold
   static final TextStyle bodyXLargeSemiBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 18.sp,
     fontWeight: semiBold,
   );
   static final TextStyle bodyLargeSemiBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 16,
+    fontSize: 16.sp,
     fontWeight: semiBold,
   );
   static final TextStyle bodyNormalSemiBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: semiBold,
   );
   static final TextStyle bodySmallSemiBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: semiBold,
   );
   static final TextStyle bodyXSmallSemiBold = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 10,
+    fontSize: 10.sp,
     fontWeight: semiBold,
   );
 
   // Body Medium
   static final TextStyle bodyXLargeMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 18.sp,
     fontWeight: medium,
   );
   static final TextStyle bodyLargeMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 16,
+    fontSize: 16.sp,
     fontWeight: medium,
   );
   static final TextStyle bodyNormalMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: medium,
   );
   static final TextStyle bodySmallMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: medium,
   );
   static final TextStyle bodyXSmallMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 10,
+    fontSize: 10.sp,
     fontWeight: medium,
   );
 
   // Body Regular
   static final TextStyle bodyXLargeRegular = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 18.sp,
     fontWeight: regular,
   );
   static final TextStyle bodyLargeRegular = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 16,
+    fontSize: 16.sp,
     fontWeight: regular,
   );
   static final TextStyle bodyNormalRegular = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: regular,
   );
   static final TextStyle bodySmallRegular = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: regular,
   );
   static final TextStyle bodyXSmallRegular = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 10,
+    fontSize: 10.sp,
     fontWeight: regular,
   );
 }

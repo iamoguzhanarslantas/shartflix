@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_gradients.dart';
 
 class GlowingRadialGradient extends StatelessWidget {
@@ -18,14 +19,14 @@ class GlowingRadialGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scaleX: 0.8, // yatayda uzatma
-      scaleY: 0.5, // dikey sabit
+      scaleX: 0.8.w, // yatayda uzatma
+      scaleY: 0.8.h, // dikey sabit
       child: Container(
-        width: width,
-        height: height,
+        width: width.w,
+        height: height.h,
         decoration: BoxDecoration(gradient: AppGradients.loginRadialGradient),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
+          filter: ImageFilter.blur(sigmaX: blurSigma.w, sigmaY: blurSigma.h),
           child: Container(color: Colors.transparent),
         ),
       ),

@@ -33,4 +33,7 @@ class AppColors {
   // Background Gradient Colors
   static const Color backgroundStart = Color(0xFF3F0306);
   static const Color backgroundEnd = Color(0xFF090909);
+
+  // Icon Gradient Colors
+  static const Color pinkLight = Color(0xFFF8C6C6);
 }

@@ -40,4 +40,11 @@ class AppGradients {
     radius: 0.8,
     focal: Alignment.center,
   );
+
+  // Icon Linear Gradient: White to PinkLight
+  static const LinearGradient iconLinearGradient = LinearGradient(
+    colors: [AppColors.white, AppColors.pinkLight],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:sizer/sizer.dart';
-import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 
 class CustomTextInput extends StatefulWidget {
@@ -40,87 +39,71 @@ class _CustomTextInputState extends State<CustomTextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.isSmallScreenHeight
-          ? 88.w
-          : 88.w, // Responsive width using Sizer
-      child: Container(
-        height: context.isSmallScreenHeight
-            ? 7.h
-            : 7.h, // Consistent height with buttons
-        padding: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: context.isSmallScreenHeight ? 2.h : 2.25.h,
-        ), // Responsive vertical padding
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: Colors.white, width: 1),
-        ),
-        child: Row(
-          children: [
-            if (widget.iconPath != null)
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 10.0,
-                ), // Gap between icon and text field
-                child: SvgPicture.asset(
-                  widget.iconPath!,
-                  width: 4.5.w, // Responsive width using Sizer
-                  height: 4.h, // Responsive height using Sizer
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.white,
-                    BlendMode.srcIn,
-                  ), // Apply color filter
-                ),
-              ),
-            Expanded(
-              child: TextField(
-                controller: widget.controller,
-                obscureText: _obscureText,
-                decoration: InputDecoration(
-                  labelText: widget.labelText,
-                  border: InputBorder.none, // Remove default TextField border
-                  labelStyle: AppTextStyles.bodyNormalRegular.copyWith(
-                    color: Colors.white,
-                  ),
-                  isDense: true, // Reduce vertical space
-                  contentPadding:
-                      EdgeInsets.zero, // Remove default content padding
-                  suffixIcon: widget.isPassword
-                      ? GestureDetector(
-                          onTap: _toggleObscureText,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              2,
-                              3,
-                              0,
-                              0,
-                            ), // Adjust icon position
-                            child: SvgPicture.asset(
-                              _obscureText
-                                  ? 'assets/icon/Hide.svg' // Change to .svg
-                                  : 'assets/icon/See.svg', // Change to .svg
-                              width: 5.w, // Responsive width using Sizer
-                              height: 4.5.h, // Responsive height using Sizer
-                              colorFilter: const ColorFilter.mode(
-                                AppColors.white,
-                                BlendMode.srcIn,
-                              ), // Apply color filter
-                            ),
-                          ),
-                        )
-                      : null,
-                  suffixIconConstraints: BoxConstraints.tight(
-                    Size(7.5.w, 6.h), // Responsive suffix icon size using Sizer
-                  ),
-                ),
-                style: AppTextStyles.bodyNormalRegular.copyWith(
-                  color: Colors.white,
-                ),
+    return Container(
+      height: 56.h,
+      width: 354.w,
+      padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 16.h),
+      decoration: BoxDecoration(
+        color: AppColors.white05,
+        borderRadius: BorderRadius.circular(18.r),
+        border: Border.all(color: AppColors.white20, width: 1.w),
+      ),
+      child: Row(
+        children: [
+          if (widget.iconPath != null)
+            Padding(
+              padding: EdgeInsets.only(
+                right: 10.w,
+              ), // Gap between icon and text field
+              child: SvgPicture.asset(
+                widget.iconPath!,
+                width: 24.w,
+                height: 24.h,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.white,
+                  BlendMode.srcIn,
+                ), // Apply color filter
               ),
             ),
-          ],
-        ),
+          Expanded(
+            child: TextField(
+              controller: widget.controller,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                labelText: widget.labelText,
+                border: InputBorder.none, // Remove default TextField border
+                labelStyle: AppTextStyles.bodyNormalRegular.copyWith(
+                  color: AppColors.white50,
+                  height: 1.h,
+                ),
+                isDense: true, // Reduce vertical space
+                contentPadding:
+                    EdgeInsets.zero, // Remove default content padding
+                suffixIcon: widget.isPassword
+                    ? GestureDetector(
+                        onTap: _toggleObscureText,
+                        child: SvgPicture.asset(
+                          _obscureText
+                              ? 'assets/icon/Hide.svg'
+                              : 'assets/icon/See.svg',
+                          width: 24.w,
+                          height: 24.h,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.white30,
+                            BlendMode.srcIn,
+                          ), // Apply color filter
+                        ),
+                      )
+                    : null,
+                suffixIconConstraints: BoxConstraints.tight(Size(24.w, 24.h)),
+              ),
+              style: AppTextStyles.bodyNormalRegular.copyWith(
+                color: AppColors.white,
+                height: 1.h,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

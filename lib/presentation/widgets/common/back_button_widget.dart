@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BackButtonWidget extends StatelessWidget {
@@ -13,28 +13,19 @@ class BackButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width:
-            11.w, // Approximately 44px on a 400px wide screen (44/400 = 0.11)
-        height: 11.w, // Maintain aspect ratio
-        padding: EdgeInsets.all(2.w), // Approximately 8px
+        width: 44.w,
+        height: 44.h,
+        padding: EdgeInsets.all(8.r),
         decoration: BoxDecoration(
           color: AppColors.white05,
-          borderRadius: BorderRadius.circular(
-            4.w, // Approximately 16px
-          ),
-          border: Border.all(
-            color: AppColors.white20,
-            width: 0.25.w, // Approximately 1px
-          ),
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: AppColors.white20, width: 1.w),
         ),
         child: SvgPicture.asset(
           'assets/icon/Arrow.svg',
-          width: 6.w, // Approximately 24px
-          height: 6.w, // Maintain aspect ratio
-          colorFilter: const ColorFilter.mode(
-            AppColors.white,
-            BlendMode.srcIn,
-          ), // Apply color filter for SVG
+          width: 24.w,
+          height: 24.h,
+          colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
         ),
       ),
     );

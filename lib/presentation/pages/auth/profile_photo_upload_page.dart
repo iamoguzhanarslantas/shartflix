@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
-import 'package:shartflix/presentation/pages/profile/widgets/profile_header_widget.dart';
-import 'package:shartflix/presentation/pages/profile/widgets/profile_avatar_widget.dart';
-import 'package:shartflix/presentation/pages/profile/widgets/profile_photo_upload_section.dart';
-import 'package:shartflix/presentation/pages/profile/widgets/profile_footer_buttons.dart';
+import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
+import 'package:shartflix/presentation/widgets/auth/profile_avatar_widget.dart';
+import 'package:shartflix/presentation/widgets/auth/profile_photo_upload_section.dart';
+import 'package:shartflix/presentation/widgets/auth/profile_footer_buttons.dart';
 
 class ProfilePhotoUploadPage extends StatelessWidget {
   static const String routeName = '/profile-photo-upload';
@@ -13,10 +13,11 @@ class ProfilePhotoUploadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: AppLayout(
-          child: Stack(
-            children: const [
+      extendBodyBehindAppBar: true,
+      body: AppLayout(
+        child: Center(
+          child: Column(
+            children: [
               ProfileHeaderWidget(),
               ProfileAvatarWidget(),
               ProfilePhotoUploadSection(),

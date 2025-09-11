@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashedBorderPainter extends CustomPainter {
   final double strokeWidth;
@@ -20,13 +21,13 @@ class DashedBorderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
       ..color = color
-      ..strokeWidth = strokeWidth
+      ..strokeWidth = strokeWidth.w
       ..style = PaintingStyle.stroke;
 
     final Path path = Path();
     final RRect rRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(0, 0, size.width, size.height),
-      Radius.circular(radius),
+      Radius.circular(radius.r),
     );
 
     _addDashedRRect(path, rRect, dashes);
@@ -35,8 +36,8 @@ class DashedBorderPainter extends CustomPainter {
   }
 
   void _addDashedRRect(Path path, RRect rRect, List<double> dashes) {
-    final double dashWidth = dashes[0];
-    final double dashSpace = dashes.length > 1 ? dashes[1] : dashes[0];
+    final double dashWidth = dashes[0].w;
+    final double dashSpace = dashes.length > 1 ? dashes[1].w : dashes[0].w;
 
     final Path borderPath = Path()..addRRect(rRect);
     final PathMetrics pathMetrics = borderPath.computeMetrics();

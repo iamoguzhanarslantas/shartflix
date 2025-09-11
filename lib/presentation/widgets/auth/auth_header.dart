@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:sizer/sizer.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;
@@ -21,19 +21,18 @@ class AuthHeader extends StatelessWidget {
     return Column(
       children: [
         if (topWidget != null) topWidget!,
-        SvgPicture.asset(
-          'assets/icon/Icon.svg',
-          width: 20.w, // Responsive width using Sizer
-          height: 25.w, // Responsive height using Sizer
-        ),
+        if (topWidget == null) SizedBox(height: 76.h),
+        SvgPicture.asset('assets/icon/Icon.svg', width: 78.w, height: 78.h),
+        SizedBox(height: 12.h),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
-        SizedBox(height: 1.h), // Responsive gap using Sizer
+        SizedBox(height: 10.h),
         Text(
           subtitle,
           style: AppTextStyles.bodyNormalRegular.copyWith(
-            color: AppColors.white,
+            color: AppColors.white90,
           ),
         ),
+        SizedBox(height: 24.h),
       ],
     );
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme { // Renamed to lightTheme
+  static ThemeData get lightTheme {
+    // Renamed to lightTheme
     return ThemeData(
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.black,
@@ -32,11 +34,21 @@ class AppTheme {
         headlineSmall: AppTextStyles.h5.copyWith(color: AppColors.white90),
         titleLarge: AppTextStyles.h6.copyWith(color: AppColors.white90),
         // Body Text
-        bodyLarge: AppTextStyles.bodyXLargeRegular.copyWith(color: AppColors.white90),
-        bodyMedium: AppTextStyles.bodyLargeRegular.copyWith(color: AppColors.white90),
-        bodySmall: AppTextStyles.bodyNormalRegular.copyWith(color: AppColors.white90),
-        labelLarge: AppTextStyles.bodySmallRegular.copyWith(color: AppColors.white90),
-        labelSmall: AppTextStyles.bodyXSmallRegular.copyWith(color: AppColors.white90),
+        bodyLarge: AppTextStyles.bodyXLargeRegular.copyWith(
+          color: AppColors.white90,
+        ),
+        bodyMedium: AppTextStyles.bodyLargeRegular.copyWith(
+          color: AppColors.white90,
+        ),
+        bodySmall: AppTextStyles.bodyNormalRegular.copyWith(
+          color: AppColors.white90,
+        ),
+        labelLarge: AppTextStyles.bodySmallRegular.copyWith(
+          color: AppColors.white90,
+        ),
+        labelSmall: AppTextStyles.bodyXSmallRegular.copyWith(
+          color: AppColors.white90,
+        ),
       ),
       // Add other theme properties as needed
       // For example, AppBarTheme, ButtonTheme, etc.
@@ -45,11 +57,11 @@ class AppTheme {
         foregroundColor: AppColors.white90,
         elevation: 0,
       ),
-      cardTheme: const CardThemeData(
+      cardTheme: CardThemeData(
         color: AppColors.black,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.r)),
         ),
       ),
       // You can add custom extensions for gradients if needed,

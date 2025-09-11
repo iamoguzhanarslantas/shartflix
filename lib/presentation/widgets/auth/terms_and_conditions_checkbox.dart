@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:sizer/sizer.dart';
-import 'package:shartflix/core/utils/responsive_helper.dart'; // Import the new helper
 
 class TermsAndConditionsCheckbox extends StatefulWidget {
   const TermsAndConditionsCheckbox({super.key});
@@ -19,7 +18,7 @@ class _TermsAndConditionsCheckboxState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.w), // Responsive horizontal padding using Sizer
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,30 +29,22 @@ class _TermsAndConditionsCheckboxState
               });
             },
             child: Container(
-              width: context.isSmallScreenHeight ? 3.5.w : 5.w, // Adjust width for minimal spacing on small screens, slightly less on large
-              height: context.isSmallScreenHeight ? 3.5.w : 5.w, // Adjust height for minimal spacing on small screens, slightly less on large
-              margin: EdgeInsets.only(
-                top: context.isSmallScreenHeight ? 0.05.h : 0.2.h, // Adjust top margin for minimal spacing on small screens, slightly less on large
-                left: context.isSmallScreenHeight ? 0.2.w : 0.5.w, // Adjust left margin for minimal spacing on small screens, slightly less on large
-              ),
+              width: 20.w,
+              height: 20.h,
+              margin: EdgeInsets.only(top: 2.h, left: 2.w),
               decoration: BoxDecoration(
                 color: _isChecked
                     ? AppColors.primary
                     : AppColors.white05, // Example checked color
-                borderRadius: BorderRadius.circular(
-                  4,
-                ), // Small border radius for checkbox look
-                border: Border.all(
-                  color: AppColors.white60,
-                  width: 1,
-                ), // Border color #FFFFFF99 is white60
+                borderRadius: BorderRadius.circular(6.r),
+                border: Border.all(color: AppColors.white20, width: 1.w),
               ),
               child: _isChecked
-                  ? Icon(Icons.check, size: 4.w, color: AppColors.white) // Responsive icon size using Sizer
+                  ? Icon(Icons.check, size: 16.sp, color: AppColors.white)
                   : null,
             ),
           ),
-          SizedBox(width: 2.w), // Responsive gap using Sizer
+          SizedBox(width: 8.w),
           Expanded(
             child: RichText(
               text: TextSpan(
