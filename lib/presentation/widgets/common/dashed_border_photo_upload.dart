@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,8 +8,13 @@ import 'package:shartflix/presentation/widgets/common/dashed_border_painter.dart
 
 class DashedBorderPhotoUpload extends StatelessWidget {
   final VoidCallback onTap;
+  final File? imageFile;
 
-  const DashedBorderPhotoUpload({super.key, required this.onTap});
+  const DashedBorderPhotoUpload({
+    super.key,
+    required this.onTap,
+    this.imageFile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +34,29 @@ class DashedBorderPhotoUpload extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.white05,
             borderRadius: BorderRadius.circular(32.r),
+            image: imageFile != null
+                ? DecorationImage(
+                    image: FileImage(imageFile!),
+                    fit: BoxFit.cover,
+                  )
+                : null,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icon/Plus.svg', // Assuming Plus.svg is the icon
-                width: 32.w, // Example size, adjust as needed
-                height: 32.h, // Example size, adjust as needed
-                colorFilter: const ColorFilter.mode(
-                  AppColors.white,
-                  BlendMode.srcIn,
-                ), // Adjust color as needed
-              ),
-            ],
-          ),
+          child: imageFile == null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icon/Plus.svg', // Assuming Plus.svg is the icon
+                      width: 32.w, // Example size, adjust as needed
+                      height: 32.h, // Example size, adjust as needed
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.white,
+                        BlendMode.srcIn,
+                      ), // Adjust color as needed
+                    ),
+                  ],
+                )
+              : null,
         ),
       ),
     );

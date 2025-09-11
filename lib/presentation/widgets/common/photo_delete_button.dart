@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class PhotoDeleteButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final bool isVisible;
+
+  const PhotoDeleteButton({
+    super.key,
+    required this.onTap,
+    required this.isVisible,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 24.h + 12.h, // Height of the icon + padding
+      child: Visibility(
+        visible: isVisible,
+        maintainSize: true,
+        maintainAnimation: true,
+        maintainState: true,
+        child: Padding(
+          padding: EdgeInsets.only(top: 12.h),
+          child: GestureDetector(
+            onTap: onTap, // Clear selected image
+            child: SvgPicture.asset(
+              'assets/icon/Photo-delete.svg', // Assuming photo-delete.svg is the icon
+              width: 24.w,
+              height: 24.h,
+              // Removed colorFilter to keep original color
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

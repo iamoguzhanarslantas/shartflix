@@ -38,6 +38,7 @@ dependencies:
   go_router: ^16.2.1
   flutter_svg: ^2.0.10+1
   flutter_screenutil: ^5.9.3
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +58,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon/app_logo.png"
+  image_path: "assets/icon/App-logo.png"
   remove_alpha_ios: true
 
 flutter_native_splash:
-  image: assets/icon/app_logo.png       # Splash ekranında göstereceğin logo
+  image: assets/icon/App-logo.png       # Splash ekranında göstereceğin logo
   color: "#ffffff"             # Arka plan rengi
   android: true
   ios: true
