@@ -6,9 +6,16 @@ import 'package:shartflix/presentation/widgets/auth/custom_text_input.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form_validator.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+class LoginForm extends StatefulWidget {
+  final ValueNotifier<bool> hasErrorNotifier;
 
+  const LoginForm({super.key, required this.hasErrorNotifier});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return AuthFormValidator(
@@ -29,6 +36,15 @@ class LoginForm extends StatelessWidget {
         validateConfirmPassword,
         onSubmit,
       ) {
+        // Update the hasErrorNotifier based on the presence of error texts
+        final bool currentHasError =
+            emailErrorText != null || passwordErrorText != null;
+        if (widget.hasErrorNotifier.value != currentHasError) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            widget.hasErrorNotifier.value = currentHasError;
+          });
+        }
+
         return Form(
           key: formKey,
           child: AuthForm(

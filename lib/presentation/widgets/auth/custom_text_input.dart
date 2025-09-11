@@ -128,7 +128,9 @@ class _CustomTextInputState extends State<CustomTextInput> {
                             ),
                           )
                         : null,
-                    suffixIconConstraints: BoxConstraints.tight(Size(24.w, 24.h)),
+                    suffixIconConstraints: BoxConstraints.tight(
+                      Size(24.w, 24.h),
+                    ),
                   ),
                   style: AppTextStyles.bodyNormalRegular.copyWith(
                     color: AppColors.white,
@@ -141,10 +143,12 @@ class _CustomTextInputState extends State<CustomTextInput> {
         ),
         if (widget.errorText != null && widget.errorText!.isNotEmpty)
           Padding(
-            padding: EdgeInsets.only(left: 20.w, top: 4.h),
+            padding: EdgeInsets.only(left: 20.w),
             child: Text(
               widget.errorText!,
-              style: AppTextStyles.bodySmallRegular.copyWith(color: AppColors.error),
+              style: AppTextStyles.bodyXSmallRegular.copyWith(
+                color: AppColors.error,
+              ),
             ),
           ),
       ],

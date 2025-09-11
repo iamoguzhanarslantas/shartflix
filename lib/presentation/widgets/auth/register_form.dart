@@ -5,9 +5,16 @@ import 'package:shartflix/presentation/widgets/auth/auth_form.dart';
 import 'package:shartflix/presentation/widgets/auth/terms_and_conditions_checkbox.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form_validator.dart';
 
-class RegisterForm extends StatelessWidget {
-  const RegisterForm({super.key});
+class RegisterForm extends StatefulWidget {
+  final ValueNotifier<bool> hasErrorNotifier;
 
+  const RegisterForm({super.key, required this.hasErrorNotifier});
+
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return AuthFormValidator(
@@ -29,6 +36,17 @@ class RegisterForm extends StatelessWidget {
         validateConfirmPassword,
         onSubmit,
       ) {
+        // Update the hasErrorNotifier based on the presence of error texts
+        final bool currentHasError = nameErrorText != null ||
+            emailErrorText != null ||
+            passwordErrorText != null ||
+            confirmPasswordErrorText != null;
+        if (widget.hasErrorNotifier.value != currentHasError) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            widget.hasErrorNotifier.value = currentHasError;
+          });
+        }
+
         return Form(
           key: formKey,
           child: AuthForm(

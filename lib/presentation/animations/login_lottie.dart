@@ -38,6 +38,8 @@ class _LoginLottieState extends State<LoginLottie>
             ..duration = composition.duration
             ..repeat(); // Loop the animation
         },
+        addRepaintBoundary:
+            true, // Improve performance by adding a repaint boundary
       ),
     );
   }

@@ -8,12 +8,14 @@ class AuthHeader extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? topWidget;
+  final bool hasError;
 
   const AuthHeader({
     super.key,
     required this.title,
     required this.subtitle,
     this.topWidget,
+    this.hasError = false,
   });
 
   @override
@@ -21,7 +23,10 @@ class AuthHeader extends StatelessWidget {
     return Column(
       children: [
         if (topWidget != null) topWidget!,
-        if (topWidget == null) SizedBox(height: 76.h),
+        if (topWidget == null)
+          SizedBox(
+            height: hasError ? 45.h : 76.h,
+          ), // Adjust height based on error state
         SvgPicture.asset('assets/icon/Icon.svg', width: 78.w, height: 78.h),
         SizedBox(height: 12.h),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
