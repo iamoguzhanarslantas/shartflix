@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shartflix/di.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_screen_wrapper.dart';
 import 'package:shartflix/presentation/widgets/auth/login_header.dart';
 import 'package:shartflix/presentation/widgets/auth/login_form.dart';
@@ -10,18 +13,19 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScreenWrapper(
-      builder: (context, hasErrorNotifier) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            LoginHeader(hasErrorNotifier: hasErrorNotifier),
-            LoginForm(hasErrorNotifier: hasErrorNotifier),
-            LoginFooter()
-          ],
-        );
-      },
+    return BlocProvider(
+      create: (context) => sl<AuthCubit>(),
+      child: AuthScreenWrapper(
+        builder: (context, hasErrorNotifier) {
+          return Column(
+            children: [
+              LoginHeader(hasErrorNotifier: hasErrorNotifier),
+              LoginForm(hasErrorNotifier: hasErrorNotifier),
+              LoginFooter()
+            ],
+          );
+        },
+      ),
     );
   }
 }

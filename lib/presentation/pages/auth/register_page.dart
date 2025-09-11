@@ -13,12 +13,10 @@ class RegisterPage extends StatelessWidget {
     return AuthScreenWrapper(
       builder: (context, hasErrorNotifier) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           children: [
             RegisterHeader(hasErrorNotifier: hasErrorNotifier),
             RegisterForm(hasErrorNotifier: hasErrorNotifier),
-            RegisterFooter()
+            RegisterFooter(),
           ],
         );
       },

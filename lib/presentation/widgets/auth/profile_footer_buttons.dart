@@ -8,8 +8,17 @@ import 'package:shartflix/presentation/widgets/common/primary_button.dart';
 
 class ProfileFooterButtons extends StatelessWidget {
   final File? imageFile;
+  final VoidCallback? onContinue;
+  final VoidCallback? onSkip;
+  final bool isLoading;
 
-  const ProfileFooterButtons({super.key, this.imageFile});
+  const ProfileFooterButtons({
+    super.key,
+    this.imageFile,
+    this.onContinue,
+    this.onSkip,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +31,14 @@ class ProfileFooterButtons extends StatelessWidget {
           opacity: imageFile != null ? 1.0 : 0.5,
           child: PrimaryButton(
             text: 'Devam Et',
-            onPressed: imageFile != null
-                ? () {
-                    // Handle continue button press
-                  }
-                : () {
-                    // Do nothing if no image is selected
-                  },
+            onPressed: (imageFile != null && !isLoading) ? onContinue : null,
+            isLoading: isLoading,
           ),
         ),
         SizedBox(height: 8.h),
         Center(
           child: TextButton(
-            onPressed: () {
-              // Handle skip button press
-            },
+            onPressed: isLoading ? null : onSkip,
             child: Text(
               'Atla',
               style: AppTextStyles.bodyLargeSemiBold.copyWith(

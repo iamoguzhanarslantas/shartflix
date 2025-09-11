@@ -6,12 +6,14 @@ class AuthForm extends StatelessWidget {
   final List<Widget> formFields;
   final String buttonText;
   final VoidCallback onButtonPressed;
+  final bool isButtonLoading;
 
   const AuthForm({
     super.key,
     required this.formFields,
     required this.buttonText,
     required this.onButtonPressed,
+    this.isButtonLoading = false,
   });
 
   @override
@@ -20,7 +22,11 @@ class AuthForm extends StatelessWidget {
       children: [
         ...formFields,
         SizedBox(height: 16.h),
-        PrimaryButton(text: buttonText, onPressed: onButtonPressed),
+        PrimaryButton(
+          text: buttonText,
+          onPressed: isButtonLoading ? null : onButtonPressed,
+          isLoading: isButtonLoading,
+        ),
       ],
     );
   }

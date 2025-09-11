@@ -1,6 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shartflix/core/services/local_storage_service.dart';
+import 'package:shartflix/di.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_avatar_widget.dart';
@@ -25,26 +31,56 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
     });
   }
 
+  void _navigateToHome() {
+    sl<LocalStorageService>().setIsNewUser(false);
+    GoRouter.of(context).go(HomePage.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: AppLayout(
-        child: Center(
-          child: Column(
-            children: [
-              ProfileHeaderWidget(),
-              ProfileAvatarWidget(),
-              ProfilePhotoUploadSection(
-                onImageSelected: _onImageSelected,
-                imageFile: _selectedImage,
+    return BlocProvider(
+      create: (context) => sl<AuthCubit>(),
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
+          } else if (state is AuthAuthenticated) {
+            _navigateToHome();
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            body: AppLayout(
+              child: Center(
+                child: Column(
+                  children: [
+                    ProfileHeaderWidget(),
+                    ProfileAvatarWidget(),
+                    ProfilePhotoUploadSection(
+                      onImageSelected: _onImageSelected,
+                      imageFile: _selectedImage,
+                    ),
+                    ProfileFooterButtons(
+                      imageFile: _selectedImage,
+                      onContinue: _selectedImage != null
+                          ? () {
+                              context.read<AuthCubit>().uploadUserPhoto(
+                                _selectedImage!.path,
+                              );
+                            }
+                          : null,
+                      onSkip: _navigateToHome,
+                      isLoading: state is AuthLoading,
+                    ),
+                  ],
+                ),
               ),
-              ProfileFooterButtons(
-                imageFile: _selectedImage,
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
