@@ -5,7 +5,7 @@ import 'package:shartflix/presentation/pages/auth/register_page.dart';
 import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
 
 final GoRouter appRouter = GoRouter(
-  initialLocation: ProfilePhotoUploadPage.routeName,
+  initialLocation: LoginPage.routeName,
   routes: <RouteBase>[
     GoRoute(
       path: LoginPage.routeName,
