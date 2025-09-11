@@ -1,25 +1,28 @@
 class UserModel {
   final String? id;
   final String? email;
-  final String? username;
+  final String? name; // Changed from username to name
   final String? photoUrl;
   final String? token; // Add token field
 
   UserModel({
     this.id,
     this.email,
-    this.username,
+    this.name, // Initialize name
     this.photoUrl,
     this.token, // Initialize token
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    print('UserModel.fromJson raw json: $json'); // Added for debugging
+    final Map<String, dynamic>? data = json['data']; // Access the nested 'data' map
+
     return UserModel(
-      id: json['id'],
-      email: json['email'],
-      username: json['username'],
-      photoUrl: json['photoUrl'],
-      token: json['token'], // Parse token from JSON
+      id: data?['id'],
+      email: data?['email'],
+      name: data?['name'], // Parse name from nested 'data'
+      photoUrl: data?['photoUrl'],
+      token: data?['token'], // Parse token from nested 'data'
     );
   }
 
@@ -27,7 +30,7 @@ class UserModel {
     return {
       'id': id,
       'email': email,
-      'username': username,
+      'name': name, // Include name in JSON
       'photoUrl': photoUrl,
       'token': token, // Include token in JSON
     };

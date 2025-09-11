@@ -27,7 +27,24 @@ class AuthCubit extends Cubit<AuthState> {
         _getUserProfile = getUserProfile,
         _uploadUserPhoto = uploadUserPhoto,
         _localStorageService = localStorageService,
-        super(AuthInitial());
+        super(AuthInitial()) {
+    _checkAuthStatus();
+  }
+
+  Future<void> _checkAuthStatus() async {
+    final token = await _localStorageService.getAuthToken();
+    if (token != null && token.isNotEmpty) {
+      try {
+        final user = await _getUserProfile();
+        emit(AuthAuthenticated(user));
+      } catch (e) {
+        emit(AuthError(e.toString()));
+        _localStorageService.removeAuthToken(); // Clear invalid token
+      }
+    } else {
+      emit(AuthUnauthenticated());
+    }
+  }
 
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
@@ -43,10 +60,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> register(String email, String password, String username) async {
+  Future<void> register(String email, String password, String name) async {
     emit(AuthLoading());
     try {
-      final user = await _registerUser(email, password, username);
+      final user = await _registerUser(email, password, name);
       if (user.token != null) {
         await _localStorageService.saveAuthToken(user.token!);
         await _localStorageService.setIsNewUser(true); // Mark as new user
@@ -70,10 +87,13 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> uploadUserPhoto(String imagePath) async {
     emit(AuthLoading());
     try {
+      print('AuthCubit: Attempting to upload photo from path: $imagePath'); // Debug print
       await _uploadUserPhoto(imagePath);
       // After uploading, refresh profile to get the new photo URL
       await getUserProfile();
+      print('AuthCubit: Photo upload successful, profile refreshed.'); // Debug print
     } catch (e) {
+      print('AuthCubit: Photo upload failed with error: $e'); // Debug print
       emit(AuthError(e.toString()));
     }
   }

@@ -40,10 +40,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     try {
       final response = await _dioClient.dio.post(
         '/user/register',
-        data: {'email': email, 'password': password, 'username': username},
+        data: {'email': email, 'password': password, 'name': username}, // Assuming 'name' is the correct field for the API
       );
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
+      print('Registration DioException: ${e.message}');
+      print('Response data: ${e.response?.data}');
+      print('Response status code: ${e.response?.statusCode}');
       throw Exception(e.response?.data['message'] ?? 'Registration failed');
     }
   }
@@ -52,8 +55,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<UserModel> getUserProfile() async {
     try {
       final response = await _dioClient.dio.get('/user/profile');
+      print('Raw User Profile Response Data: ${response.data}'); // Added for debugging
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
+      print('User Profile DioException: ${e.message}'); // Added for debugging
+      print('Response data: ${e.response?.data}'); // Added for debugging
+      print('Response status code: ${e.response?.statusCode}'); // Added for debugging
       throw Exception(e.response?.data['message'] ?? 'Failed to get profile');
     }
   }

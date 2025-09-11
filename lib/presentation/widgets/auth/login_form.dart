@@ -69,6 +69,7 @@ class _LoginFormState extends State<LoginForm> {
                 validatePassword,
                 validateConfirmPassword,
                 onSubmit,
+                isLoading,
               ) {
                 // Update the hasErrorNotifier based on the presence of error texts
                 final bool currentHasError =

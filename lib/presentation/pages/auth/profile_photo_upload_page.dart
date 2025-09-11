@@ -7,6 +7,7 @@ import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
+import 'package:shartflix/presentation/pages/profile/profile_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_avatar_widget.dart';
@@ -29,11 +30,12 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
     setState(() {
       _selectedImage = image;
     });
+    print('Selected image: ${_selectedImage?.path}'); // Added for debugging
   }
 
   void _navigateToHome() {
     sl<LocalStorageService>().setIsNewUser(false);
-    GoRouter.of(context).go(HomePage.routeName);
+    GoRouter.of(context).go(HomePage.routeName); // Navigate back to home page
   }
 
   @override
@@ -67,6 +69,9 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
                       imageFile: _selectedImage,
                       onContinue: _selectedImage != null
                           ? () {
+                              print(
+                                'Attempting to upload photo: ${_selectedImage!.path}',
+                              ); // Debug print
                               context.read<AuthCubit>().uploadUserPhoto(
                                 _selectedImage!.path,
                               );

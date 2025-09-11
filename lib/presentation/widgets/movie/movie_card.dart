@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/foundation.dart'; // For kIsWeb
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/data/models/movie_model.dart';
+import 'dart:io'; // For HttpHeaders
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
@@ -36,12 +38,18 @@ class MovieCard extends StatelessWidget {
                       width: 80.w,
                       height: 120.h,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        width: 80.w,
-                        height: 120.h,
-                        color: AppColors.white20,
-                        child: Icon(Icons.movie, color: AppColors.white50, size: 40.w),
-                      ),
+                      headers: kIsWeb ? const {} : const {},
+                      errorBuilder: (context, error, stackTrace) {
+                        print('Image loading error for URL: ${movie.posterUrl}');
+                        print('Error: $error');
+                        print('Stack trace: $stackTrace');
+                        return Container(
+                          width: 80.w,
+                          height: 120.h,
+                          color: AppColors.white20,
+                          child: Icon(Icons.movie, color: AppColors.white50, size: 40.w),
+                        );
+                      },
                     )
                   : Container(
                       width: 80.w,

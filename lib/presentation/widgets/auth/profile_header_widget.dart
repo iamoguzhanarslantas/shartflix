@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:shartflix/presentation/pages/profile/profile_page.dart';
 import 'package:shartflix/presentation/widgets/common/back_button_widget.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
@@ -15,7 +16,13 @@ class ProfileHeaderWidget extends StatelessWidget {
         children: [
           BackButtonWidget(
             onPressed: () {
-              context.pop();
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go(
+                  ProfilePage.routeName,
+                ); // Navigate to home if nothing to pop
+              }
             },
           ),
           Expanded(

@@ -4,8 +4,10 @@ import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/di.dart';
+import 'package:go_router/go_router.dart'; // Import go_router
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
 import 'package:shartflix/presentation/animations/login_lottie.dart';
+import 'package:shartflix/presentation/pages/profile/profile_page.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_card.dart'; // Import MovieCard
 
 class HomePage extends StatelessWidget {
@@ -25,6 +27,15 @@ class HomePage extends StatelessWidget {
           ),
           backgroundColor: AppColors.black,
           elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.person, color: AppColors.white),
+              onPressed: () {
+                // Navigate to the profile page
+                context.go(ProfilePage.routeName);
+              },
+            ),
+          ],
         ),
         body: SafeArea(
           child: BlocBuilder<MovieCubit, MovieState>(

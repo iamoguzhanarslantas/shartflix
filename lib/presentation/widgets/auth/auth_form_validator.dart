@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shartflix/di.dart';
+import 'package:shartflix/data/datasources/remote_data_source.dart';
 
 class AuthFormValidator extends StatefulWidget {
   final Widget Function(
@@ -17,6 +19,7 @@ class AuthFormValidator extends StatefulWidget {
     Function(String?) validatePassword,
     Function(String?, String?) validateConfirmPassword,
     VoidCallback onSubmit,
+    bool isLoading,
   ) builder;
 
   final bool isRegisterForm;
@@ -42,6 +45,7 @@ class _AuthFormValidatorState extends State<AuthFormValidator> {
   String? _emailErrorText;
   String? _passwordErrorText;
   String? _confirmPasswordErrorText;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -55,6 +59,9 @@ class _AuthFormValidatorState extends State<AuthFormValidator> {
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
       return 'Ad Soyad boş bırakılamaz';
+    }
+    if (value.length < 3) {
+      return 'Ad Soyad en az 3 karakter olmalı';
     }
     return null;
   }
@@ -89,7 +96,7 @@ class _AuthFormValidatorState extends State<AuthFormValidator> {
     return null;
   }
 
-  void _onSubmit() {
+  Future<void> _onSubmit() async {
     setState(() {
       if (widget.isRegisterForm) {
         _nameErrorText = _validateName(_nameController.text);
@@ -103,11 +110,36 @@ class _AuthFormValidatorState extends State<AuthFormValidator> {
     });
 
     if (_formKey.currentState?.validate() ?? false) {
-      // All fields are valid, perform submission logic
-      if (widget.isRegisterForm) {
-        print('Registration successful with Name: ${_nameController.text}, Email: ${_emailController.text}');
-      } else {
-        print('Login successful with Email: ${_emailController.text}');
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        // All fields are valid, perform submission logic
+        if (widget.isRegisterForm) {
+          // Call the register API
+          final remoteDataSource = sl<RemoteDataSource>();
+          await remoteDataSource.register(
+            _emailController.text,
+            _passwordController.text,
+            _nameController.text,
+          );
+          print('Registration successful with Name: ${_nameController.text}, Email: ${_emailController.text}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Kayıt başarılı!')),
+          );
+          // Optionally navigate to another page
+        } else {
+          print('Login successful with Email: ${_emailController.text}');
+        }
+      } catch (e) {
+        print('Registration failed: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Kayıt başarısız: ${e.toString()}')),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -130,6 +162,7 @@ class _AuthFormValidatorState extends State<AuthFormValidator> {
       _validatePassword,
       _validateConfirmPassword,
       _onSubmit,
+      _isLoading,
     );
   }
 }

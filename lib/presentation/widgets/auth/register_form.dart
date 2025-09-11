@@ -35,6 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
         validatePassword,
         validateConfirmPassword,
         onSubmit,
+        isLoading,
       ) {
         // Update the hasErrorNotifier based on the presence of error texts
         final bool currentHasError = nameErrorText != null ||
@@ -85,6 +86,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ],
             buttonText: 'Kaydol',
             onButtonPressed: onSubmit,
+            isButtonLoading: isLoading,
           ),
         );
       },
