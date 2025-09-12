@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/foundation.dart'; // Import for debugPrint
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
-import 'package:shartflix/presentation/pages/profile/profile_page.dart';
+import 'package:shartflix/presentation/pages/profile/profile_page.dart'; // Import ProfilePage
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_avatar_widget.dart';
@@ -30,7 +31,9 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
     setState(() {
       _selectedImage = image;
     });
-    print('Selected image: ${_selectedImage?.path}'); // Added for debugging
+    debugPrint(
+      'Selected image: ${_selectedImage?.path}',
+    ); // Added for debugging
   }
 
   void _navigateToHome() {

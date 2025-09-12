@@ -17,13 +17,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<MovieCubit>()..fetchMovieList(),
+      create: (context) => sl<MovieCubit>()..fetchAllMovies(), // Changed to fetchAllMovies
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
-          title: Text(
-            'Shartflix',
-            style: AppTextStyles.h4.copyWith(color: AppColors.white90),
+          title: BlocBuilder<MovieCubit, MovieState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Shartflix',
+                    style: AppTextStyles.h4.copyWith(color: AppColors.white90),
+                  ),
+                  if (state is MovieLoaded)
+                    Text(
+                      'Total Movies: ${state.movieResponse.movies.length}', // Display total movies
+                      style: AppTextStyles.bodySmallRegular.copyWith(color: AppColors.white70),
+                    ),
+                ],
+              );
+            },
           ),
           backgroundColor: AppColors.black,
           elevation: 0,
@@ -45,12 +59,12 @@ class HomePage extends StatelessWidget {
               } else if (state is MovieLoaded) {
                 return RefreshIndicator(
                   onRefresh: () async {
-                    await context.read<MovieCubit>().fetchMovieList();
+                    await context.read<MovieCubit>().fetchAllMovies(); // Changed to fetchAllMovies
                   },
                   child: ListView.builder(
-                    itemCount: state.movies.length,
+                    itemCount: state.movieResponse.movies.length,
                     itemBuilder: (context, index) {
-                      final MovieModel movie = state.movies[index];
+                      final MovieModel movie = state.movieResponse.movies[index];
                       return MovieCard(
                         movie: movie,
                         onFavoriteToggle: () {

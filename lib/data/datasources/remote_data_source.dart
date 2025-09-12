@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart'; // Import for debugPrint
 import 'package:shartflix/core/network/dio_client.dart';
+import 'package:shartflix/data/models/movie_list_response_model.dart';
 import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/data/models/user_model.dart';
 
@@ -8,7 +10,8 @@ abstract class RemoteDataSource {
   Future<UserModel> register(String email, String password, String username);
   Future<UserModel> getUserProfile();
   Future<void> uploadPhoto(String imagePath);
-  Future<List<MovieModel>> getMovieList();
+  Future<MovieListResponseModel> getMovieList({int page = 1});
+  Future<List<MovieModel>> getAllMovies(); // New method to fetch all movies
   Future<List<MovieModel>> getFavoriteMovieList();
   Future<void> favoriteUnfavoriteMovie(String movieId);
 }
@@ -44,9 +47,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      print('Registration DioException: ${e.message}');
-      print('Response data: ${e.response?.data}');
-      print('Response status code: ${e.response?.statusCode}');
+      debugPrint('Registration DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
       throw Exception(e.response?.data['message'] ?? 'Registration failed');
     }
   }
@@ -55,12 +58,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<UserModel> getUserProfile() async {
     try {
       final response = await _dioClient.dio.get('/user/profile');
-      print('Raw User Profile Response Data: ${response.data}'); // Added for debugging
+      debugPrint('Raw User Profile Response Data: ${response.data}'); // Added for debugging
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      print('User Profile DioException: ${e.message}'); // Added for debugging
-      print('Response data: ${e.response?.data}'); // Added for debugging
-      print('Response status code: ${e.response?.statusCode}'); // Added for debugging
+      debugPrint('User Profile DioException: ${e.message}'); // Added for debugging
+      debugPrint('Response data: ${e.response?.data}'); // Added for debugging
+      debugPrint('Response status code: ${e.response?.statusCode}'); // Added for debugging
       throw Exception(e.response?.data['message'] ?? 'Failed to get profile');
     }
   }
@@ -81,49 +84,25 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       );
     } on DioException catch (e) {
-      print('Photo upload DioException: ${e.message}');
-      print('Response data: ${e.response?.data}');
-      print('Response status code: ${e.response?.statusCode}');
+      debugPrint('Photo upload DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
       throw Exception(e.response?.data['message'] ?? 'Failed to upload photo');
     }
   }
 
   @override
-  Future<List<MovieModel>> getMovieList() async {
+  Future<MovieListResponseModel> getMovieList({int page = 1}) async {
     try {
-      final response = await _dioClient.dio.get('/movie/list');
-      print('Raw Movie list Response Data: ${response.data}'); // Always print raw data
-      List<dynamic>? movieListData;
-
-      if (response.data is Map && response.data['data'] is Map && response.data['data']['movies'] is List) {
-        movieListData = response.data['data']['movies'] as List;
-      } else if (response.data is Map && response.data['data'] is List) { // Keep this as a fallback for other APIs
-        movieListData = response.data['data'] as List;
-      } else if (response.data is Map && response.data['movies'] is List) {
-        movieListData = response.data['movies'] as List;
-      } else if (response.data is Map && response.data['results'] is List) {
-        movieListData = response.data['results'] as List;
-      } else if (response.data is Map && response.data['response'] is Map && response.data['response']['data'] is List) {
-        movieListData = response.data['response']['data'] as List;
-      } else if (response.data is List) {
-        movieListData = response.data as List;
-      } else if (response.data is Map) { // Generic fallback for a list within a map
-        for (var value in response.data.values) {
-          if (value is List) {
-            movieListData = value;
-            break;
-          }
-        }
-      }
-
-      if (movieListData != null) {
-        return movieListData.map((e) => MovieModel.fromJson(e)).toList();
-      }
-      throw Exception('Invalid response format for movie list: No list found in response.');
+      final response = await _dioClient.dio.get('/movie/list', queryParameters: {'page': page});
+      debugPrint('Raw Movie list Response Data: ${response.data}'); // Always print raw data
+      final movieListResponse = MovieListResponseModel.fromJson(response.data);
+      debugPrint('Parsed MovieListResponseModel: movies.length=${movieListResponse.movies.length}, totalPages=${movieListResponse.totalPages}, currentPage=${movieListResponse.currentPage}');
+      return movieListResponse;
     } on DioException catch (e) {
-      print('Movie list DioException: ${e.message}');
-      print('Response data: ${e.response?.data}');
-      print('Response status code: ${e.response?.statusCode}');
+      debugPrint('Movie list DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
       throw Exception(
         e.response?.data['message'] ?? 'Failed to get movie list',
       );
@@ -131,10 +110,35 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
+  Future<List<MovieModel>> getAllMovies() async {
+    List<MovieModel> allMovies = [];
+    int currentPage = 1;
+    int totalPages = 1; // Initialize to 1 to enter the loop
+
+    while (currentPage <= totalPages) {
+      try {
+        final response = await _dioClient.dio.get('/movie/list', queryParameters: {'page': currentPage});
+        final movieListResponse = MovieListResponseModel.fromJson(response.data);
+        allMovies.addAll(movieListResponse.movies);
+        totalPages = movieListResponse.totalPages;
+        currentPage++;
+      } on DioException catch (e) {
+        debugPrint('Get all movies DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+        throw Exception(
+          e.response?.data['message'] ?? 'Failed to get all movies',
+        );
+      }
+    }
+    return allMovies;
+  }
+
+  @override
   Future<List<MovieModel>> getFavoriteMovieList() async {
     try {
       final response = await _dioClient.dio.get('/movie/favorites');
-      print('Raw Favorite Movie list Response Data: ${response.data}'); // Always print raw data
+      debugPrint('Raw Favorite Movie list Response Data: ${response.data}'); // Always print raw data
       List<dynamic>? favoriteMovieListData;
 
       if (response.data is Map && response.data['data'] is Map && response.data['data']['movies'] is List) {
@@ -163,9 +167,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       }
       throw Exception('Invalid response format for favorite movie list: No list found in response.');
     } on DioException catch (e) {
-      print('Favorite movie list DioException: ${e.message}');
-      print('Response data: ${e.response?.data}');
-      print('Response status code: ${e.response?.statusCode}');
+      debugPrint('Favorite movie list DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
       throw Exception(
         e.response?.data['message'] ?? 'Failed to get favorite movie list',
       );

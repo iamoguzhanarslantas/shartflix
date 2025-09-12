@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart'; // Import for debugPrint
+
 class MovieModel {
   final String? id;
   final String? title;
@@ -18,10 +20,10 @@ class MovieModel {
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    print('MovieModel.fromJson raw json: $json');
-    final id = json['id'] ?? json['_id'];
-    final title = json['Title'];
-    final description = json['Plot'];
+    debugPrint('MovieModel.fromJson raw json: $json');
+    final id = (json['id'] ?? json['_id'])?.toString(); // Ensure ID is a string
+    final title = json['Title']?.toString() ?? 'No Title'; // Provide default
+    final description = json['Plot']?.toString() ?? 'No Description'; // Provide default
     String? posterUrl;
 
     // Try to get posterUrl from different keys, prioritizing 'Images'
@@ -42,7 +44,7 @@ class MovieModel {
       posterUrl = json['posterUrl'];
     }
 
-    print('Poster URL (after key check, before cleaning): $posterUrl'); // Added for debugging
+    debugPrint('Poster URL (after key check, before cleaning): $posterUrl'); // Added for debugging
 
     // Attempt to fix malformed image URLs and filter out invalid ones
     if (posterUrl != null && posterUrl.startsWith('http')) {
@@ -54,14 +56,27 @@ class MovieModel {
       if (posterUrl.toLowerCase() == 'n/a' || posterUrl.toLowerCase() == 'no poster') {
         posterUrl = null;
       }
+
+      // Additional checks for potentially problematic URLs
+      // Check for excessively long URLs (e.g., > 255 characters, a common limit)
+      if (posterUrl != null && posterUrl.length > 255) {
+        debugPrint('Poster URL too long, setting to null: $posterUrl');
+        posterUrl = null;
+      }
+      // Check for multiple commas in the path, which can sometimes indicate malformed URLs
+      if (posterUrl != null && posterUrl.split(',').length > 2) { // More than one comma
+        debugPrint('Poster URL contains multiple commas, setting to null: $posterUrl');
+        posterUrl = null;
+      }
+
     } else {
       posterUrl = null; // If it doesn't start with http, it's likely invalid
     }
-    final releaseDate = json['Released'];
+    final releaseDate = json['Released']?.toString();
     final voteAverage = double.tryParse(json['imdbRating']?.toString() ?? '') ?? 0.0;
-    final isFavorite = json['isFavorite'] ?? false; // Default to false if not provided
+    final isFavorite = json['isFavorite'] as bool? ?? false; // Ensure type safety and default to false
 
-    print('Parsed MovieModel (after cleaning): id=$id, title=$title, description=$description, posterUrl=$posterUrl, releaseDate=$releaseDate, voteAverage=$voteAverage, isFavorite=$isFavorite');
+    debugPrint('Parsed MovieModel (after cleaning): id=$id, title=$title, description=$description, posterUrl=$posterUrl, releaseDate=$releaseDate, voteAverage=$voteAverage, isFavorite=$isFavorite');
 
     return MovieModel(
       id: id,

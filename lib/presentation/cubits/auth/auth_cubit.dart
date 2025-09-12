@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart'; // Import for debugPrint
 import 'package:shartflix/data/models/user_model.dart';
 import 'package:shartflix/domain/usecases/auth/get_user_profile.dart';
 import 'package:shartflix/domain/usecases/auth/login_user.dart';
@@ -55,6 +56,7 @@ class AuthCubit extends Cubit<AuthState> {
         await _localStorageService.setIsNewUser(false); // Not a new user if logging in
       }
       emit(AuthAuthenticated(user));
+      debugPrint('Successfully logged in: ${user.toJson()}'); // Added for requested output
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -70,6 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
       emit(AuthAuthenticated(user));
     } catch (e) {
+      debugPrint('Register user failed: ${e.toString()}'); // Added for requested output
       emit(AuthError(e.toString()));
     }
   }
@@ -87,13 +90,13 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> uploadUserPhoto(String imagePath) async {
     emit(AuthLoading());
     try {
-      print('AuthCubit: Attempting to upload photo from path: $imagePath'); // Debug print
+      debugPrint('AuthCubit: Attempting to upload photo from path: $imagePath'); // Debug print
       await _uploadUserPhoto(imagePath);
       // After uploading, refresh profile to get the new photo URL
       await getUserProfile();
-      print('AuthCubit: Photo upload successful, profile refreshed.'); // Debug print
+      debugPrint('AuthCubit: Photo upload successful, profile refreshed.'); // Debug print
     } catch (e) {
-      print('AuthCubit: Photo upload failed with error: $e'); // Debug print
+      debugPrint('AuthCubit: Photo upload failed with error: $e'); // Debug print
       emit(AuthError(e.toString()));
     }
   }
