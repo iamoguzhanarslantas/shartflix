@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
+import 'package:go_router/go_router.dart'; // Import for GoRouter
 import 'package:shartflix/data/models/user_model.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_info_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -14,17 +16,55 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, authState) {
+            if (authState is AuthAuthenticated) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back, color: AppColors.white),
+                onPressed: () {
+                  context.pop();
+                },
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
         title: Text(
           'Profile',
           style: AppTextStyles.h5.copyWith(color: AppColors.white),
         ),
         backgroundColor: AppColors.black,
         iconTheme: const IconThemeData(color: AppColors.white),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: AppColors.white),
+            onPressed: () {
+              BlocProvider.of<AuthCubit>(context).logout();
+            },
+          ),
+        ],
       ),
-      body: BlocBuilder<AuthCubit, AuthState>(
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUnauthenticated) {
+            context.go(LoginPage.routeName);
+          }
+        },
         builder: (context, state) {
+          debugPrint('ProfilePage: Current AuthState is $state');
           if (state is AuthAuthenticated) {
             final UserModel user = state.user;
+            debugPrint(
+              'ProfilePage: Building with user: ${user.toJson()}',
+            ); // Added for debugging
+            return ProfileInfoWidget(user: user);
+          } else if (state is AuthRegistrationSuccess) {
+            // Handle AuthRegistrationSuccess
+            final UserModel user = state.user;
+            debugPrint(
+              'ProfilePage: Building with user (from registration success): ${user.toJson()}',
+            ); // Added for debugging
             return ProfileInfoWidget(user: user);
           } else if (state is AuthLoading) {
             return const Center(child: CircularProgressIndicator());

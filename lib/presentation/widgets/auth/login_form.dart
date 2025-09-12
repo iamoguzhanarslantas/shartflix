@@ -56,18 +56,19 @@ class _LoginFormState extends State<LoginForm> {
               (
                 context,
                 formKey,
-                nameController,
+                nameController, // Not used in login
                 emailController,
                 passwordController,
-                confirmPasswordController,
-                nameErrorText,
+                confirmPasswordController, // Not used in login
+                nameErrorText, // Not used in login
                 emailErrorText,
                 passwordErrorText,
-                confirmPasswordErrorText,
-                validateName,
+                confirmPasswordErrorText, // Not used in login
+                termsErrorText, // Not used in login
+                validateName, // Not used in login
                 validateEmail,
                 validatePassword,
-                validateConfirmPassword,
+                validateConfirmPassword, // Not used in login
                 onSubmit,
                 isLoading,
               ) {
@@ -89,6 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                         iconPath: 'assets/icon/Mail.svg',
                         controller: emailController,
                         errorText: emailErrorText,
+                        validator: validateEmail, // Pass the validator
                       ),
                       SizedBox(height: 10.h),
                       CustomTextInput(
@@ -97,6 +99,7 @@ class _LoginFormState extends State<LoginForm> {
                         isPassword: true,
                         controller: passwordController,
                         errorText: passwordErrorText,
+                        validator: validatePassword, // Pass the validator
                       ),
                       SizedBox(height: 10.h),
                       Align(
@@ -115,14 +118,7 @@ class _LoginFormState extends State<LoginForm> {
                     buttonText: state is AuthLoading
                         ? 'Giriş Yapılıyor...'
                         : 'Giriş Yap',
-                    onButtonPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        context.read<AuthCubit>().login(
-                          emailController.text,
-                          passwordController.text,
-                        );
-                      }
-                    },
+                    onButtonPressed: onSubmit, // Use the onSubmit callback from AuthFormValidator
                     isButtonLoading: state is AuthLoading,
                   ),
                 );

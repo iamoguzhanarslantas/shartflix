@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class UserModel {
   final String? id;
   final String? email;
@@ -14,15 +16,27 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    print('UserModel.fromJson raw json: $json'); // Added for debugging
-    final Map<String, dynamic>? data = json['data']; // Access the nested 'data' map
+    debugPrint('UserModel.fromJson raw json: $json'); // Added for debugging
 
+    // First, try to parse from a nested 'data' map (typical for API responses)
+    Map<String, dynamic>? data = json['data'];
+    if (data != null) {
+      return UserModel(
+        id: data['id'] ?? data['_id'], // API might use '_id' or 'id'
+        email: data['email'],
+        name: data['name'],
+        photoUrl: data['photoUrl'],
+        token: data['token'],
+      );
+    }
+
+    // If no nested 'data' map, try to parse directly from the top-level JSON (typical for local storage)
     return UserModel(
-      id: data?['id'],
-      email: data?['email'],
-      name: data?['name'], // Parse name from nested 'data'
-      photoUrl: data?['photoUrl'],
-      token: data?['token'], // Parse token from nested 'data'
+      id: json['id'] ?? json['_id'],
+      email: json['email'],
+      name: json['name'],
+      photoUrl: json['photoUrl'],
+      token: json['token'],
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 
 class DioClient {
@@ -29,7 +30,7 @@ class DioClient {
           // Handle token from login response if available
           if (response.requestOptions.path == '/user/login' ||
               response.requestOptions.path == '/user/register') {
-            print('Login/Register Response Data: ${response.data}');
+            debugPrint('Login/Register Response Data: ${response.data}');
             // Assuming token is directly in the response data or nested under 'data'
             final token = response.data['token'] ?? response.data['data']?['token'];
             if (token != null) {

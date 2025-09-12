@@ -63,12 +63,18 @@ class MovieModel {
         debugPrint('Poster URL too long, setting to null: $posterUrl');
         posterUrl = null;
       }
-      // Check for multiple commas in the path, which can sometimes indicate malformed URLs
-      if (posterUrl != null && posterUrl.split(',').length > 2) { // More than one comma
-        debugPrint('Poster URL contains multiple commas, setting to null: $posterUrl');
+      // Add more aggressive filtering for known bad image patterns or very short/generic URLs
+      if (posterUrl != null && (
+          posterUrl.contains('no_image') ||
+          posterUrl.contains('no-image') ||
+          posterUrl.contains('placeholder') ||
+          posterUrl.contains('default_poster') ||
+          posterUrl.length < 10 || // Very short URLs are likely invalid
+          posterUrl.contains('._V1_.jpg') && posterUrl.split(',').length > 1 // Filter out URLs with multiple commas in the path, often malformed
+      )) {
+        debugPrint('Poster URL contains problematic pattern or is too short/malformed, setting to null: $posterUrl');
         posterUrl = null;
       }
-
     } else {
       posterUrl = null; // If it doesn't start with http, it's likely invalid
     }

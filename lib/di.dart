@@ -24,14 +24,11 @@ Future<void> init() async {
   sl.registerLazySingleton<DioClient>(() => DioClient(sl()));
 
   // Data sources
-  sl.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(sl()));
 
   // Repositories
-  sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(sl()));
-  sl.registerLazySingleton<MovieRepository>(
-      () => MovieRepositoryImpl(sl()));
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+  sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(sl()));
 
   // Use cases - Auth
   sl.registerLazySingleton<LoginUser>(() => LoginUser(sl()));
@@ -41,20 +38,28 @@ Future<void> init() async {
 
   // Use cases - Movie
   sl.registerLazySingleton<GetMovieList>(() => GetMovieList(sl()));
-  sl.registerLazySingleton<GetFavoriteMovieList>(() => GetFavoriteMovieList(sl()));
-  sl.registerLazySingleton<FavoriteUnfavoriteMovie>(() => FavoriteUnfavoriteMovie(sl()));
+  sl.registerLazySingleton<GetFavoriteMovieList>(
+    () => GetFavoriteMovieList(sl()),
+  );
+  sl.registerLazySingleton<FavoriteUnfavoriteMovie>(
+    () => FavoriteUnfavoriteMovie(sl()),
+  );
 
   // Cubits
-  sl.registerFactory(() => AuthCubit(
-        loginUser: sl(),
-        registerUser: sl(),
-        getUserProfile: sl(),
-        uploadUserPhoto: sl(),
-        localStorageService: sl(),
-      ));
-  sl.registerFactory(() => MovieCubit(
-        getMovieList: sl(),
-        getFavoriteMovieList: sl(),
-        favoriteUnfavoriteMovie: sl(),
-      ));
+  sl.registerFactory<AuthCubit>(
+    () => AuthCubit(
+      loginUser: sl(),
+      registerUser: sl(),
+      getUserProfile: sl(),
+      uploadUserPhoto: sl(),
+      localStorageService: sl(),
+    ),
+  );
+  sl.registerFactory<MovieCubit>(
+    () => MovieCubit(
+      getMovieList: sl(),
+      getFavoriteMovieList: sl(),
+      favoriteUnfavoriteMovie: sl(),
+    ),
+  );
 }

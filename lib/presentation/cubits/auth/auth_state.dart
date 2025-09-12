@@ -30,3 +30,12 @@ class AuthError extends AuthState {
   @override
   List<Object> get props => [message];
 }
+
+class AuthRegistrationSuccess extends AuthState {
+  final UserModel user;
+
+  const AuthRegistrationSuccess(this.user);
+
+  @override
+  List<Object> get props => [user];
+}

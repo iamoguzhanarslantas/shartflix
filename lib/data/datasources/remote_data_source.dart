@@ -28,9 +28,24 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         '/user/login',
         data: {'email': email, 'password': password},
       );
+      debugPrint('Raw Login Response Data: ${response.data}'); // Added for debugging
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? 'Login failed');
+      debugPrint('Login DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
+      String errorMessage = 'Login failed';
+      if (e.response?.data is Map && e.response?.data['response'] is Map) {
+        final responseData = e.response?.data['response'];
+        if (responseData['message'] == 'INVALID_CREDENTIALS') {
+          errorMessage = 'Kullanıcı bulunamadı veya şifre yanlış.'; // Translated message
+        } else {
+          errorMessage = responseData['message'] ?? errorMessage;
+        }
+      } else {
+        errorMessage = e.response?.data['message'] ?? errorMessage;
+      }
+      throw Exception(errorMessage);
     }
   }
 
@@ -45,12 +60,19 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         '/user/register',
         data: {'email': email, 'password': password, 'name': username}, // Assuming 'name' is the correct field for the API
       );
+      debugPrint('Raw Register Response Data: ${response.data}'); // Added for debugging
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
       debugPrint('Registration DioException: ${e.message}');
       debugPrint('Response data: ${e.response?.data}');
       debugPrint('Response status code: ${e.response?.statusCode}');
-      throw Exception(e.response?.data['message'] ?? 'Registration failed');
+      String errorMessage = 'Registration failed';
+      if (e.response?.data is Map && e.response?.data['response'] is Map) {
+        errorMessage = e.response?.data['response']['message'] ?? errorMessage;
+      } else {
+        errorMessage = e.response?.data['message'] ?? errorMessage;
+      }
+      throw Exception(errorMessage);
     }
   }
 

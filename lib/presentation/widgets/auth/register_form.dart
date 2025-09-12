@@ -7,18 +7,27 @@ import 'package:shartflix/presentation/widgets/auth/auth_form_validator.dart';
 
 class RegisterForm extends StatefulWidget {
   final ValueNotifier<bool> hasErrorNotifier;
+  final GlobalKey<AuthFormValidatorState>? formValidatorKey;
 
-  const RegisterForm({super.key, required this.hasErrorNotifier});
+  const RegisterForm({
+    super.key,
+    required this.hasErrorNotifier,
+    this.formValidatorKey,
+  });
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  bool _termsAccepted = false; // State for the checkbox
+
   @override
   Widget build(BuildContext context) {
     return AuthFormValidator(
+      key: widget.formValidatorKey, // Pass the key here
       isRegisterForm: true,
+      termsAccepted: _termsAccepted, // Pass checkbox state
       builder: (
         context,
         formKey,
@@ -30,6 +39,7 @@ class _RegisterFormState extends State<RegisterForm> {
         emailErrorText,
         passwordErrorText,
         confirmPasswordErrorText,
+        termsErrorText, // New parameter for terms error
         validateName,
         validateEmail,
         validatePassword,
@@ -41,7 +51,8 @@ class _RegisterFormState extends State<RegisterForm> {
         final bool currentHasError = nameErrorText != null ||
             emailErrorText != null ||
             passwordErrorText != null ||
-            confirmPasswordErrorText != null;
+            confirmPasswordErrorText != null ||
+            termsErrorText != null; // Include terms error
         if (widget.hasErrorNotifier.value != currentHasError) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             widget.hasErrorNotifier.value = currentHasError;
@@ -82,7 +93,15 @@ class _RegisterFormState extends State<RegisterForm> {
                 errorText: confirmPasswordErrorText,
               ),
               SizedBox(height: 12.h),
-              const TermsAndConditionsCheckbox(),
+              TermsAndConditionsCheckbox(
+                value: _termsAccepted,
+                onChanged: (newValue) {
+                  setState(() {
+                    _termsAccepted = newValue;
+                  });
+                },
+                errorText: termsErrorText,
+              ),
             ],
             buttonText: 'Kaydol',
             onButtonPressed: onSubmit,

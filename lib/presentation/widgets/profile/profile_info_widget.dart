@@ -13,6 +13,7 @@ class ProfileInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('ProfileInfoWidget: Building with user: ${user.email}');
     return Padding(
       padding: EdgeInsets.all(16.w),
       child: Column(

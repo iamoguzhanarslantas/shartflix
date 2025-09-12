@@ -37,11 +37,7 @@ class MovieCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       headers: kIsWeb ? const {} : const {},
                       errorBuilder: (context, error, stackTrace) {
-                        print(
-                          'Image loading error for URL: ${movie.posterUrl}',
-                        );
-                        print('Error: $error');
-                        print('Stack trace: $stackTrace');
+                        // Suppress console errors for image loading, as UI handles it with a placeholder
                         return Container(
                           width: 80.w,
                           height: 120.h,

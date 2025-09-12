@@ -11,21 +11,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(402, 874),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return BlocProvider<AuthCubit>(
-          create: (context) => sl<AuthCubit>(),
-          child: MaterialApp.router(
+    return MultiBlocProvider(
+      providers: [BlocProvider<AuthCubit>(create: (_) => sl<AuthCubit>())],
+      child: ScreenUtilInit(
+        designSize: const Size(402, 874),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: 'Shartflix',
             theme: AppTheme.lightTheme,
-            routerConfig: appRouter,
-          ),
-        );
-      },
+            routerConfig: AppRouter.router,
+          );
+        },
+      ),
     );
   }
 }

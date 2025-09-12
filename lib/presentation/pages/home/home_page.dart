@@ -17,7 +17,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<MovieCubit>()..fetchAllMovies(), // Changed to fetchAllMovies
+      create: (context) =>
+          sl<MovieCubit>()..fetchAllMovies(), // Changed to fetchAllMovies
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
@@ -33,7 +34,9 @@ class HomePage extends StatelessWidget {
                   if (state is MovieLoaded)
                     Text(
                       'Total Movies: ${state.movieResponse.movies.length}', // Display total movies
-                      style: AppTextStyles.bodySmallRegular.copyWith(color: AppColors.white70),
+                      style: AppTextStyles.bodySmallRegular.copyWith(
+                        color: AppColors.white70,
+                      ),
                     ),
                 ],
               );
@@ -46,7 +49,7 @@ class HomePage extends StatelessWidget {
               icon: const Icon(Icons.person, color: AppColors.white),
               onPressed: () {
                 // Navigate to the profile page
-                context.go(ProfilePage.routeName);
+                context.push(ProfilePage.routeName); // Changed to push
               },
             ),
           ],
@@ -59,12 +62,15 @@ class HomePage extends StatelessWidget {
               } else if (state is MovieLoaded) {
                 return RefreshIndicator(
                   onRefresh: () async {
-                    await context.read<MovieCubit>().fetchAllMovies(); // Changed to fetchAllMovies
+                    await context
+                        .read<MovieCubit>()
+                        .fetchAllMovies(); // Changed to fetchAllMovies
                   },
                   child: ListView.builder(
                     itemCount: state.movieResponse.movies.length,
                     itemBuilder: (context, index) {
-                      final MovieModel movie = state.movieResponse.movies[index];
+                      final MovieModel movie =
+                          state.movieResponse.movies[index];
                       return MovieCard(
                         movie: movie,
                         onFavoriteToggle: () {

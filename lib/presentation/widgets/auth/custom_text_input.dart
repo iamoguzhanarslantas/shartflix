@@ -9,7 +9,7 @@ class CustomTextInput extends StatefulWidget {
   final String? iconPath;
   final bool isPassword;
   final TextEditingController? controller;
-  final String? Function(String?)? validator;
+  final FormFieldValidator<String>? validator; // Changed to FormFieldValidator
   final String? errorText;
 
   const CustomTextInput({
@@ -64,6 +64,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
     if (_isFocused) {
       borderColor = AppColors.primary;
     }
+    // The errorText from the parent widget takes precedence for border color
     if (widget.errorText != null && widget.errorText!.isNotEmpty) {
       borderColor = AppColors.error;
     }
@@ -98,20 +99,29 @@ class _CustomTextInputState extends State<CustomTextInput> {
                   ),
                 ),
               Expanded(
-                child: TextField(
+                child: TextFormField(
+                  // Changed to TextFormField
                   controller: widget.controller,
                   focusNode: _focusNode,
                   obscureText: _obscureText,
+                  validator: widget.validator, // Pass the validator here
+                  style: AppTextStyles.bodyNormalRegular.copyWith(
+                    color: AppColors.white,
+                  ),
                   decoration: InputDecoration(
-                    labelText: widget.labelText,
-                    border: InputBorder.none, // Remove default TextField border
-                    labelStyle: AppTextStyles.bodyNormalRegular.copyWith(
+                    hintText: widget.labelText, // Always use labelText as hint
+                    hintStyle: AppTextStyles.bodyNormalRegular.copyWith(
                       color: AppColors.white50,
                       height: 1.h,
                     ),
+                    border: InputBorder.none, // Remove default TextField border
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     isDense: true, // Reduce vertical space
-                    contentPadding:
-                        EdgeInsets.zero, // Remove default content padding
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 0.h,
+                    ), // Adjust vertical padding
+                    errorText: null, // Explicitly set errorText to null
+                    errorStyle: const TextStyle(height: 0, fontSize: 0), // Hide internal error text
                     suffixIcon: widget.isPassword
                         ? GestureDetector(
                             onTap: _toggleObscureText,
@@ -131,10 +141,6 @@ class _CustomTextInputState extends State<CustomTextInput> {
                     suffixIconConstraints: BoxConstraints.tight(
                       Size(24.w, 24.h),
                     ),
-                  ),
-                  style: AppTextStyles.bodyNormalRegular.copyWith(
-                    color: AppColors.white,
-                    height: 1.h,
                   ),
                 ),
               ),
