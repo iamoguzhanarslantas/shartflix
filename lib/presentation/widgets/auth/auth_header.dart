@@ -25,7 +25,11 @@ class AuthHeader extends StatelessWidget {
         if (topWidget != null) topWidget!,
         if (topWidget == null)
           SizedBox(
-            height: hasError ? 45.h : 76.h,
+            height: hasError
+                ? MediaQuery.of(context).size.height < 800
+                      ? 15.h
+                      : 45.h
+                : 76.h,
           ), // Adjust height based on error state
         SvgPicture.asset('assets/icon/Icon.svg', width: 78.w, height: 78.h),
         SizedBox(height: 12.h),

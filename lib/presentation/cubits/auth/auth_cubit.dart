@@ -139,6 +139,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logout() async {
+    emit(AuthLoading()); // Emit loading state
     await _localStorageService
         .removeAuthToken(); // This now also removes user model
     emit(AuthUnauthenticated());
