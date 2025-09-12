@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/foundation.dart'; // For kIsWeb
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/data/models/movie_model.dart';
+import 'package:shartflix/domain/entities/movie_entity.dart'; // Import MovieEntity
 
 class MovieCard extends StatelessWidget {
-  final MovieModel movie;
+  final MovieEntity movie;
   final VoidCallback onFavoriteToggle;
 
   const MovieCard({

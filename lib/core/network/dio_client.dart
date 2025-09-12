@@ -30,7 +30,9 @@ class DioClient {
           // Handle token from login response if available
           if (response.requestOptions.path == '/user/login' ||
               response.requestOptions.path == '/user/register') {
-            debugPrint('Login/Register Response Data: ${response.data}');
+            if (kDebugMode) {
+              debugPrint('Login/Register Response Data: ${response.data}');
+            }
             // Assuming token is directly in the response data or nested under 'data'
             final token = response.data['token'] ?? response.data['data']?['token'];
             if (token != null) {

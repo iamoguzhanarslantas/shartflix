@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:shartflix/domain/entities/user_entity.dart';
 
 class UserModel {
   final String? id;
@@ -16,8 +17,6 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    debugPrint('UserModel.fromJson raw json: $json'); // Added for debugging
-
     // First, try to parse from a nested 'data' map (typical for API responses)
     Map<String, dynamic>? data = json['data'];
     if (data != null) {
@@ -48,5 +47,14 @@ class UserModel {
       'photoUrl': photoUrl,
       'token': token, // Include token in JSON
     };
+  }
+
+  UserEntity toEntity() {
+    return UserEntity(
+      id: id,
+      email: email,
+      name: name,
+      photoUrl: photoUrl,
+    );
   }
 }

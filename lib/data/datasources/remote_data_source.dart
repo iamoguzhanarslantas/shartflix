@@ -28,17 +28,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         '/user/login',
         data: {'email': email, 'password': password},
       );
-      debugPrint('Raw Login Response Data: ${response.data}'); // Added for debugging
+      if (kDebugMode) {
+        debugPrint('Raw Login Response Data: ${response.data}');
+      }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      debugPrint('Login DioException: ${e.message}');
-      debugPrint('Response data: ${e.response?.data}');
-      debugPrint('Response status code: ${e.response?.statusCode}');
+      if (kDebugMode) {
+        debugPrint('Login DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       String errorMessage = 'Login failed';
       if (e.response?.data is Map && e.response?.data['response'] is Map) {
         final responseData = e.response?.data['response'];
         if (responseData['message'] == 'INVALID_CREDENTIALS') {
-          errorMessage = 'Kullanıcı bulunamadı veya şifre yanlış.'; // Translated message
+          errorMessage =
+              'Kullanıcı bulunamadı veya şifre yanlış.'; // Translated message
         } else {
           errorMessage = responseData['message'] ?? errorMessage;
         }
@@ -58,14 +63,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     try {
       final response = await _dioClient.dio.post(
         '/user/register',
-        data: {'email': email, 'password': password, 'name': username}, // Assuming 'name' is the correct field for the API
+        data: {
+          'email': email,
+          'password': password,
+          'name': username,
+        }, // Assuming 'name' is the correct field for the API
       );
-      debugPrint('Raw Register Response Data: ${response.data}'); // Added for debugging
+      if (kDebugMode) {
+        debugPrint('Raw Register Response Data: ${response.data}');
+      }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      debugPrint('Registration DioException: ${e.message}');
-      debugPrint('Response data: ${e.response?.data}');
-      debugPrint('Response status code: ${e.response?.statusCode}');
+      if (kDebugMode) {
+        debugPrint('Registration DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       String errorMessage = 'Registration failed';
       if (e.response?.data is Map && e.response?.data['response'] is Map) {
         errorMessage = e.response?.data['response']['message'] ?? errorMessage;
@@ -80,12 +93,16 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<UserModel> getUserProfile() async {
     try {
       final response = await _dioClient.dio.get('/user/profile');
-      debugPrint('Raw User Profile Response Data: ${response.data}'); // Added for debugging
+      if (kDebugMode) {
+        debugPrint('Raw User Profile Response Data: ${response.data}');
+      }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      debugPrint('User Profile DioException: ${e.message}'); // Added for debugging
-      debugPrint('Response data: ${e.response?.data}'); // Added for debugging
-      debugPrint('Response status code: ${e.response?.statusCode}'); // Added for debugging
+      if (kDebugMode) {
+        debugPrint('User Profile DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       throw Exception(e.response?.data['message'] ?? 'Failed to get profile');
     }
   }
@@ -106,9 +123,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       );
     } on DioException catch (e) {
-      debugPrint('Photo upload DioException: ${e.message}');
-      debugPrint('Response data: ${e.response?.data}');
-      debugPrint('Response status code: ${e.response?.statusCode}');
+      if (kDebugMode) {
+        debugPrint('Photo upload DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       throw Exception(e.response?.data['message'] ?? 'Failed to upload photo');
     }
   }
@@ -116,15 +135,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<MovieListResponseModel> getMovieList({int page = 1}) async {
     try {
-      final response = await _dioClient.dio.get('/movie/list', queryParameters: {'page': page});
-      debugPrint('Raw Movie list Response Data: ${response.data}'); // Always print raw data
-      final movieListResponse = MovieListResponseModel.fromJson(response.data);
-      debugPrint('Parsed MovieListResponseModel: movies.length=${movieListResponse.movies.length}, totalPages=${movieListResponse.totalPages}, currentPage=${movieListResponse.currentPage}');
-      return movieListResponse;
+      final response = await _dioClient.dio.get(
+        '/movie/list',
+        queryParameters: {'page': page},
+      );
+      if (kDebugMode) {
+        debugPrint('Raw Movie list Response Data: ${response.data}');
+        final movieListResponse = MovieListResponseModel.fromJson(response.data);
+        debugPrint('Parsed MovieListResponseModel: movies.length=${movieListResponse.movies.length}, totalPages=${movieListResponse.totalPages}, currentPage=${movieListResponse.currentPage}');
+      }
+      return MovieListResponseModel.fromJson(response.data);
     } on DioException catch (e) {
-      debugPrint('Movie list DioException: ${e.message}');
-      debugPrint('Response data: ${e.response?.data}');
-      debugPrint('Response status code: ${e.response?.statusCode}');
+      if (kDebugMode) {
+        debugPrint('Movie list DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       throw Exception(
         e.response?.data['message'] ?? 'Failed to get movie list',
       );
@@ -139,15 +165,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
     while (currentPage <= totalPages) {
       try {
-        final response = await _dioClient.dio.get('/movie/list', queryParameters: {'page': currentPage});
-        final movieListResponse = MovieListResponseModel.fromJson(response.data);
+        final response = await _dioClient.dio.get(
+          '/movie/list',
+          queryParameters: {'page': currentPage},
+        );
+        final movieListResponse = MovieListResponseModel.fromJson(
+          response.data,
+        );
         allMovies.addAll(movieListResponse.movies);
         totalPages = movieListResponse.totalPages;
         currentPage++;
       } on DioException catch (e) {
-        debugPrint('Get all movies DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
+        if (kDebugMode) {
+          debugPrint('Get all movies DioException: ${e.message}');
+          debugPrint('Response data: ${e.response?.data}');
+          debugPrint('Response status code: ${e.response?.statusCode}');
+        }
         throw Exception(
           e.response?.data['message'] ?? 'Failed to get all movies',
         );
@@ -160,10 +193,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<MovieModel>> getFavoriteMovieList() async {
     try {
       final response = await _dioClient.dio.get('/movie/favorites');
-      debugPrint('Raw Favorite Movie list Response Data: ${response.data}'); // Always print raw data
+      if (kDebugMode) {
+        debugPrint('Raw Favorite Movie list Response Data: ${response.data}');
+      }
       List<dynamic>? favoriteMovieListData;
 
-      if (response.data is Map && response.data['data'] is Map && response.data['data']['movies'] is List) {
+      if (response.data is Map &&
+          response.data['data'] is Map &&
+          response.data['data']['movies'] is List) {
         favoriteMovieListData = response.data['data']['movies'] as List;
       } else if (response.data is Map && response.data['data'] is List) {
         favoriteMovieListData = response.data['data'] as List;
@@ -171,7 +208,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         favoriteMovieListData = response.data['movies'] as List;
       } else if (response.data is Map && response.data['results'] is List) {
         favoriteMovieListData = response.data['results'] as List;
-      } else if (response.data is Map && response.data['response'] is Map && response.data['response']['data'] is List) {
+      } else if (response.data is Map &&
+          response.data['response'] is Map &&
+          response.data['response']['data'] is List) {
         favoriteMovieListData = response.data['response']['data'] as List;
       } else if (response.data is List) {
         favoriteMovieListData = response.data as List;
@@ -185,13 +224,19 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       }
 
       if (favoriteMovieListData != null) {
-        return favoriteMovieListData.map((e) => MovieModel.fromJson(e)).toList();
+        return favoriteMovieListData
+            .map((e) => MovieModel.fromJson(e))
+            .toList();
       }
-      throw Exception('Invalid response format for favorite movie list: No list found in response.');
+      throw Exception(
+        'Invalid response format for favorite movie list: No list found in response.',
+      );
     } on DioException catch (e) {
-      debugPrint('Favorite movie list DioException: ${e.message}');
-      debugPrint('Response data: ${e.response?.data}');
-      debugPrint('Response status code: ${e.response?.statusCode}');
+      if (kDebugMode) {
+        debugPrint('Favorite movie list DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       throw Exception(
         e.response?.data['message'] ?? 'Failed to get favorite movie list',
       );
@@ -203,6 +248,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     try {
       await _dioClient.dio.post('/movie/favorite/$movieId');
     } on DioException catch (e) {
+      if (kDebugMode) {
+        debugPrint('Favorite/Unfavorite DioException: ${e.message}');
+        debugPrint('Response data: ${e.response?.data}');
+        debugPrint('Response status code: ${e.response?.statusCode}');
+      }
       throw Exception(
         e.response?.data['message'] ?? 'Failed to favorite/unfavorite movie',
       );

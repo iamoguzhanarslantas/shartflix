@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/data/models/movie_model.dart';
+import 'package:shartflix/domain/entities/movie_entity.dart'; // Import MovieEntity
 import 'package:shartflix/di.dart';
 import 'package:go_router/go_router.dart'; // Import go_router
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: state.movieResponse.movies.length,
                     itemBuilder: (context, index) {
-                      final MovieModel movie =
+                      final MovieEntity movie =
                           state.movieResponse.movies[index];
                       return MovieCard(
                         movie: movie,

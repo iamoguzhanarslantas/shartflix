@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart'; // Import for debugPrint
+import 'package:shartflix/domain/entities/movie_entity.dart';
 
 class MovieModel {
   final String? id;
@@ -20,7 +21,6 @@ class MovieModel {
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    debugPrint('MovieModel.fromJson raw json: $json');
     final id = (json['id'] ?? json['_id'])?.toString(); // Ensure ID is a string
     final title = json['Title']?.toString() ?? 'No Title'; // Provide default
     final description = json['Plot']?.toString() ?? 'No Description'; // Provide default
@@ -44,8 +44,6 @@ class MovieModel {
       posterUrl = json['posterUrl'];
     }
 
-    debugPrint('Poster URL (after key check, before cleaning): $posterUrl'); // Added for debugging
-
     // Attempt to fix malformed image URLs and filter out invalid ones
     if (posterUrl != null && posterUrl.startsWith('http')) {
       // Handle the '..jpg' case
@@ -60,7 +58,6 @@ class MovieModel {
       // Additional checks for potentially problematic URLs
       // Check for excessively long URLs (e.g., > 255 characters, a common limit)
       if (posterUrl != null && posterUrl.length > 255) {
-        debugPrint('Poster URL too long, setting to null: $posterUrl');
         posterUrl = null;
       }
       // Add more aggressive filtering for known bad image patterns or very short/generic URLs
@@ -72,7 +69,6 @@ class MovieModel {
           posterUrl.length < 10 || // Very short URLs are likely invalid
           posterUrl.contains('._V1_.jpg') && posterUrl.split(',').length > 1 // Filter out URLs with multiple commas in the path, often malformed
       )) {
-        debugPrint('Poster URL contains problematic pattern or is too short/malformed, setting to null: $posterUrl');
         posterUrl = null;
       }
     } else {
@@ -81,8 +77,6 @@ class MovieModel {
     final releaseDate = json['Released']?.toString();
     final voteAverage = double.tryParse(json['imdbRating']?.toString() ?? '') ?? 0.0;
     final isFavorite = json['isFavorite'] as bool? ?? false; // Ensure type safety and default to false
-
-    debugPrint('Parsed MovieModel (after cleaning): id=$id, title=$title, description=$description, posterUrl=$posterUrl, releaseDate=$releaseDate, voteAverage=$voteAverage, isFavorite=$isFavorite');
 
     return MovieModel(
       id: id,
@@ -105,5 +99,17 @@ class MovieModel {
       'voteAverage': voteAverage,
       'isFavorite': isFavorite,
     };
+  }
+
+  MovieEntity toEntity() {
+    return MovieEntity(
+      id: id,
+      title: title,
+      description: description,
+      posterUrl: posterUrl,
+      releaseDate: releaseDate,
+      voteAverage: voteAverage,
+      isFavorite: isFavorite,
+    );
   }
 }

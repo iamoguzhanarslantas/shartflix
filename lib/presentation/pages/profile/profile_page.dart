@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:go_router/go_router.dart'; // Import for GoRouter
-import 'package:shartflix/data/models/user_model.dart';
+import 'package:shartflix/domain/entities/user_entity.dart'; // Import UserEntity
 import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
 import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_info_widget.dart';
@@ -52,19 +52,12 @@ class ProfilePage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          debugPrint('ProfilePage: Current AuthState is $state');
           if (state is AuthAuthenticated) {
-            final UserModel user = state.user;
-            debugPrint(
-              'ProfilePage: Building with user: ${user.toJson()}',
-            ); // Added for debugging
+            final UserEntity user = state.user;
             return ProfileInfoWidget(user: user);
           } else if (state is AuthRegistrationSuccess) {
             // Handle AuthRegistrationSuccess
-            final UserModel user = state.user;
-            debugPrint(
-              'ProfilePage: Building with user (from registration success): ${user.toJson()}',
-            ); // Added for debugging
+            final UserEntity user = state.user;
             return ProfileInfoWidget(user: user);
           } else if (state is AuthLoading) {
             return const Center(child: CircularProgressIndicator());

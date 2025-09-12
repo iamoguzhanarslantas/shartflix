@@ -1,4 +1,4 @@
-import 'package:shartflix/data/models/movie_model.dart';
+import 'package:shartflix/domain/entities/movie_entity.dart';
 import 'package:shartflix/domain/repositories/movie_repository.dart';
 
 class GetFavoriteMovieList {
@@ -6,7 +6,7 @@ class GetFavoriteMovieList {
 
   GetFavoriteMovieList(this.repository);
 
-  Future<List<MovieModel>> call() {
+  Future<List<MovieEntity>> call() {
     return repository.getFavoriteMovieList();
   }
 }

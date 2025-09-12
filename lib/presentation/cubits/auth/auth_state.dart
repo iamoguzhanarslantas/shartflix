@@ -1,5 +1,6 @@
 part of 'auth_cubit.dart';
 
+
 abstract class AuthState extends Equatable {
   const AuthState();
 
@@ -12,7 +13,7 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthAuthenticated extends AuthState {
-  final UserModel user;
+  final UserEntity user;
 
   const AuthAuthenticated(this.user);
 
@@ -32,7 +33,7 @@ class AuthError extends AuthState {
 }
 
 class AuthRegistrationSuccess extends AuthState {
-  final UserModel user;
+  final UserEntity user;
 
   const AuthRegistrationSuccess(this.user);
 

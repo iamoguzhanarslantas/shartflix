@@ -1,5 +1,6 @@
 part of 'movie_cubit.dart';
 
+
 abstract class MovieState extends Equatable {
   const MovieState();
 
@@ -12,7 +13,7 @@ class MovieInitial extends MovieState {}
 class MovieLoading extends MovieState {}
 
 class MovieLoaded extends MovieState {
-  final MovieListResponseModel movieResponse;
+  final MovieResponseEntity movieResponse;
 
   const MovieLoaded(this.movieResponse);
 

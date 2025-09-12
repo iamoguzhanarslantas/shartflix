@@ -148,19 +148,14 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
             _passwordController.text,
             _nameController.text,
           );
-          debugPrint(
-            'Registration initiated with Name: ${_nameController.text}, Email: ${_emailController.text}',
-          );
         } else {
           // Call the login method of AuthCubit
           context.read<AuthCubit>().login(
             _emailController.text,
             _passwordController.text,
           );
-          debugPrint('Login initiated with Email: ${_emailController.text}');
         }
       } catch (e) {
-        debugPrint('AuthFormValidator caught error: $e');
         // Error handling is now done by BlocListener in RegisterPage/LoginPage
       } finally {
         setState(() {

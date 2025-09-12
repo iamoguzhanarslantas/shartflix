@@ -117,11 +117,12 @@ class _CustomTextInputState extends State<CustomTextInput> {
                     border: InputBorder.none, // Remove default TextField border
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     isDense: true, // Reduce vertical space
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 0.h,
-                    ), // Adjust vertical padding
+                    contentPadding: EdgeInsets.zero, // Adjust vertical padding
                     errorText: null, // Explicitly set errorText to null
-                    errorStyle: const TextStyle(height: 0, fontSize: 0), // Hide internal error text
+                    errorStyle: TextStyle(
+                      height: 1.h,
+                      fontSize: 0,
+                    ), // Hide internal error text
                     suffixIcon: widget.isPassword
                         ? GestureDetector(
                             onTap: _toggleObscureText,

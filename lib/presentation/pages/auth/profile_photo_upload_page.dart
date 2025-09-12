@@ -29,9 +29,6 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
     setState(() {
       _selectedImage = image;
     });
-    debugPrint(
-      'Selected image: ${_selectedImage?.path}',
-    ); // Added for debugging
   }
 
   Future<void> _navigateToHome() async {
@@ -75,9 +72,6 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
                     onContinue: _selectedImage != null
                         ? () async {
                             // Made async
-                            debugPrint(
-                              'Attempting to upload photo: ${_selectedImage!.path}',
-                            ); // Debug print
                             // Call uploadUserPhoto and then navigate on success
                             await context.read<AuthCubit>().uploadUserPhoto(
                               _selectedImage!.path,
