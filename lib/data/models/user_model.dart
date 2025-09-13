@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:shartflix/domain/entities/user_entity.dart';
 
 class UserModel {

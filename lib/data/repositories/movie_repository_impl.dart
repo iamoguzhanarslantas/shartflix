@@ -1,6 +1,4 @@
 import 'package:shartflix/data/datasources/remote_data_source.dart';
-import 'package:shartflix/data/models/movie_list_response_model.dart';
-import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/domain/repositories/movie_repository.dart';
 import 'package:shartflix/domain/entities/movie_entity.dart';
 import 'package:shartflix/domain/entities/movie_response_entity.dart';

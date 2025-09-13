@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 
 class BackButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -22,7 +23,7 @@ class BackButtonWidget extends StatelessWidget {
           border: Border.all(color: AppColors.white20, width: 1.w),
         ),
         child: SvgPicture.asset(
-          'assets/icon/Arrow.svg',
+          AppIcons.arrow,
           width: 24.w,
           height: 24.h,
           colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 
 class PhotoDeleteButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -26,7 +27,7 @@ class PhotoDeleteButton extends StatelessWidget {
           child: GestureDetector(
             onTap: onTap, // Clear selected image
             child: SvgPicture.asset(
-              'assets/icon/Photo-delete.svg', // Assuming photo-delete.svg is the icon
+              AppIcons.photoDelete, // Assuming photo-delete.svg is the icon
               width: 24.w,
               height: 24.h,
               // Removed colorFilter to keep original color

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 
 class AuthHeader extends StatelessWidget {
@@ -28,10 +29,10 @@ class AuthHeader extends StatelessWidget {
             height: hasError
                 ? MediaQuery.of(context).size.height < 800
                       ? 15.h
-                      : 45.h
+                      : 50.h
                 : 76.h,
           ), // Adjust height based on error state
-        SvgPicture.asset('assets/icon/Icon.svg', width: 78.w, height: 78.h),
+        SvgPicture.asset(AppIcons.icon, width: 78.w, height: 78.h),
         SizedBox(height: 12.h),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),
         SizedBox(height: 10.h),

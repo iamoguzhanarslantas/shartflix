@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_gradients.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 
 class ProfileAvatarWidget extends StatelessWidget {
   const ProfileAvatarWidget({super.key});
@@ -26,7 +27,7 @@ class ProfileAvatarWidget extends StatelessWidget {
                   AppGradients.iconLinearGradient.createShader(bounds),
               blendMode: BlendMode.srcIn,
               child: SvgPicture.asset(
-                'assets/icon/Vector.svg',
+                AppIcons.vector,
                 width: 32.w,
                 height: 40.h,
               ),

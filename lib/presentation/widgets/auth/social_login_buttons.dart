@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:shartflix/core/constants/app_icons.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final String iconPath;
@@ -41,21 +42,21 @@ class SocialLoginButtonsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialLoginButton(
-          iconPath: 'assets/icon/Google.svg', // Changed to .svg
+          iconPath: AppIcons.google, // Changed to .svg
           onPressed: () {
             // Handle Google login
           },
         ),
         SizedBox(width: 8.w), // Fixed gap between buttons
         SocialLoginButton(
-          iconPath: 'assets/icon/Apple.svg', // Changed to .svg
+          iconPath: AppIcons.apple, // Changed to .svg
           onPressed: () {
             // Handle Apple login
           },
         ),
         SizedBox(width: 8.w), // Fixed gap between buttons
         SocialLoginButton(
-          iconPath: 'assets/icon/Facebook.svg', // Changed to .svg
+          iconPath: AppIcons.facebook, // Changed to .svg
           onPressed: () {
             // Handle Facebook login
           },

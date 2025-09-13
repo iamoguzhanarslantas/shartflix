@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import for screenutil extensions
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/domain/entities/movie_entity.dart'; // Import MovieEntity
@@ -44,15 +45,7 @@ class HomePage extends StatelessWidget {
           ),
           backgroundColor: AppColors.black,
           elevation: 0,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.person, color: AppColors.white),
-              onPressed: () {
-                // Navigate to the profile page
-                context.push(ProfilePage.routeName); // Changed to push
-              },
-            ),
-          ],
+          // actions removed as navigation is handled by BottomNavigationBar
         ),
         body: SafeArea(
           child: BlocBuilder<MovieCubit, MovieState>(

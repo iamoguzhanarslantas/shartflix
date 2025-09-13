@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:shartflix/core/constants/app_icons.dart';
 
 class CustomTextInput extends StatefulWidget {
   final String labelText;
@@ -127,9 +128,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
                         ? GestureDetector(
                             onTap: _toggleObscureText,
                             child: SvgPicture.asset(
-                              _obscureText
-                                  ? 'assets/icon/Hide.svg'
-                                  : 'assets/icon/See.svg',
+                              _obscureText ? AppIcons.hide : AppIcons.see,
                               width: 24.w,
                               height: 24.h,
                               colorFilter: const ColorFilter.mode(

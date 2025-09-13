@@ -16,34 +16,13 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BlocBuilder<AuthCubit, AuthState>(
-          builder: (context, authState) {
-            if (authState is AuthAuthenticated) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.white),
-                onPressed: () {
-                  context.pop();
-                },
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
-        ),
         title: Text(
           'Profile',
           style: AppTextStyles.h5.copyWith(color: AppColors.white),
         ),
         backgroundColor: AppColors.black,
-        iconTheme: const IconThemeData(color: AppColors.white),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: AppColors.white),
-            onPressed: () {
-              BlocProvider.of<AuthCubit>(context).logout();
-            },
-          ),
-        ],
+        elevation: 0,
+        // leading and actions removed as navigation is handled by BottomNavigationBar
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

@@ -36,4 +36,7 @@ class AppColors {
 
   // Icon Gradient Colors
   static const Color pinkLight = Color(0xFFF8C6C6);
+
+  // Button Gradient Colors
+  static const Color buttonActive = Color(0xFF7F050B);
 }

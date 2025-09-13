@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/presentation/widgets/common/dashed_border_painter.dart';
 
 class DashedBorderPhotoUpload extends StatelessWidget {
@@ -46,7 +47,7 @@ class DashedBorderPhotoUpload extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/icon/Plus.svg', // Assuming Plus.svg is the icon
+                      AppIcons.plus, // Assuming Plus.svg is the icon
                       width: 32.w, // Example size, adjust as needed
                       height: 32.h, // Example size, adjust as needed
                       colorFilter: const ColorFilter.mode(

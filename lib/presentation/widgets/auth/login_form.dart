@@ -6,6 +6,7 @@ import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
 import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
+import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/presentation/widgets/auth/custom_text_input.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
@@ -87,7 +88,7 @@ class _LoginFormState extends State<LoginForm> {
                     formFields: [
                       CustomTextInput(
                         labelText: 'Email',
-                        iconPath: 'assets/icon/Mail.svg',
+                        iconPath: AppIcons.mail,
                         controller: emailController,
                         errorText: emailErrorText,
                         validator: validateEmail, // Pass the validator
@@ -95,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                       SizedBox(height: 10.h),
                       CustomTextInput(
                         labelText: 'Password',
-                        iconPath: 'assets/icon/Lock.svg',
+                        iconPath: AppIcons.lock,
                         isPassword: true,
                         controller: passwordController,
                         errorText: passwordErrorText,
