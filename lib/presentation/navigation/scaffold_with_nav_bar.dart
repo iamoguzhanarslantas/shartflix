@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_gradients.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/presentation/widgets/common/gradient_button.dart';
-import 'package:shartflix/presentation/widgets/movie/movie_info_box.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.navigationShell, Key? key})
@@ -26,40 +25,42 @@ class ScaffoldWithNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          Expanded(child: navigationShell),
-          MovieInfoBox(
-            movieTitle: 'The Movie Title', // Placeholder
-            movieDescription:
-                'A brief description of the movieaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.', // Placeholder
-            iconPath: AppIcons.iconNoBackground,
+          navigationShell,
+          Container(
+            width: 402.w, // Apply specified width
+            height: 100.h, // Apply specified height
+            // Apply specified padding
+            decoration: BoxDecoration(
+              gradient:
+                  AppGradients.navBarBackgroundGradient, // Apply new gradient
+              // The border on top is now part of the gradient effect, or can be added as a separate border if needed
+              // For now, I'll remove the explicit top border as the gradient handles the transition.
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildNavItem(
+                  context,
+                  0,
+                  'Home',
+                  AppIcons.home,
+                  AppIcons.homeFill,
+                ),
+                _buildNavItem(
+                  context,
+                  1,
+                  'Profile',
+                  AppIcons.profile,
+                  AppIcons.profileFill,
+                ),
+              ],
+            ),
           ),
         ],
-      ),
-      bottomNavigationBar: Container(
-        width: 402.w, // Apply specified width
-        height: 100.h, // Apply specified height
-        // Apply specified padding
-        decoration: BoxDecoration(
-          gradient: AppGradients.navBarBackgroundGradient, // Apply new gradient
-          // The border on top is now part of the gradient effect, or can be added as a separate border if needed
-          // For now, I'll remove the explicit top border as the gradient handles the transition.
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildNavItem(context, 0, 'Home', AppIcons.home, AppIcons.homeFill),
-            _buildNavItem(
-              context,
-              1,
-              'Profile',
-              AppIcons.profile,
-              AppIcons.profileFill,
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -70,7 +70,7 @@ class MovieCubit extends Cubit<MovieState> {
       id: movieToUpdate.id,
       title: movieToUpdate.title,
       description: movieToUpdate.description,
-      posterUrl: movieToUpdate.posterUrl,
+      images: movieToUpdate.images,
       releaseDate: movieToUpdate.releaseDate,
       voteAverage: movieToUpdate.voteAverage,
       isFavorite: !(movieToUpdate.isFavorite ?? false), // Toggle favorite status
