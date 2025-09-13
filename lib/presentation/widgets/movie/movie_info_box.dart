@@ -9,12 +9,16 @@ class MovieInfoBox extends StatefulWidget {
   final String movieTitle;
   final String movieDescription;
   final String iconPath; // Path to the icon
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
   const MovieInfoBox({
     super.key,
     required this.movieTitle,
     required this.movieDescription,
     required this.iconPath,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
   });
 
   @override
@@ -139,6 +143,8 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
                 ],
               ),
             ),
+
+            // Favorite Button
           ],
         ),
       ),
