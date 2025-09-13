@@ -12,6 +12,7 @@ class AppIcons {
   static const String homeFill = 'assets/icon/Home-fill.svg';
   static const String home = 'assets/icon/Home.svg';
   static const String icon = 'assets/icon/Icon.svg';
+  static const String iconNoBackground = 'assets/icon/Icon-no-background.svg';
   static const String lock = 'assets/icon/Lock.svg';
   static const String mail = 'assets/icon/Mail.svg';
   static const String photoDelete = 'assets/icon/Photo-delete.svg';

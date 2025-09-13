@@ -36,7 +36,7 @@ class TermsAndConditionsCheckbox extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: value
                         ? AppColors.primary
-                        : AppColors.white05, // Example checked color
+                        : AppColors.white05,
                     borderRadius: BorderRadius.circular(6.r),
                     border: Border.all(color: AppColors.white20, width: 1.w),
                   ),

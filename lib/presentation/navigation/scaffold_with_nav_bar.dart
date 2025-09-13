@@ -32,8 +32,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
           MovieInfoBox(
             movieTitle: 'The Movie Title', // Placeholder
             movieDescription:
-                'A brief description of the movie.', // Placeholder
-            iconPath: AppIcons.gem, // Example icon
+                'A brief description of the movieaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.', // Placeholder
+            iconPath: AppIcons.iconNoBackground,
           ),
         ],
       ),

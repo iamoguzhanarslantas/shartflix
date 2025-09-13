@@ -48,8 +48,8 @@ class DashedBorderPhotoUpload extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       AppIcons.plus, // Assuming Plus.svg is the icon
-                      width: 32.w, // Example size, adjust as needed
-                      height: 32.h, // Example size, adjust as needed
+                      width: 32.w,
+                      height: 32.h,
                       colorFilter: const ColorFilter.mode(
                         AppColors.white,
                         BlendMode.srcIn,
