@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/domain/entities/movie_entity.dart'; // Import MovieEntity
 import 'package:shartflix/di.dart';
 import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_card.dart'; // Import MovieCard
 
@@ -37,17 +39,32 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final MovieEntity movie = state.movieResponse.movies[index];
                     if (index + 1 < state.movieResponse.movies.length) {
+                      final imageUrl =
+                          state.movieResponse.movies[index + 1].images!.last;
                       precacheImage(
-                        NetworkImage(
-                          state.movieResponse.movies[index + 1].images!.last,
-                        ),
+                        NetworkImage(imageUrl),
                         context,
+                        onError: (exception, stackTrace) {
+                          log(
+                            'Network Image Load Exception: Image precaching failed for: $imageUrl. \n Error: $exception',
+                            error: exception,
+                            stackTrace: stackTrace,
+                            name: 'HomePage',
+                          );
+                        },
                       );
                     }
                     return MovieCard(
                       movie: movie,
-                      onFavoriteToggle: () {
-                        context.read<MovieCubit>().toggleFavorite(movie.id!);
+                      onFavoriteToggle: () async {
+                        await context.read<MovieCubit>().toggleFavorite(
+                          movie.id!,
+                        );
+                        if (context.mounted) {
+                          context
+                              .read<FavoriteMovieCubit>()
+                              .fetchFavoriteMovies();
+                        }
                       },
                     );
                   },
@@ -56,13 +73,16 @@ class HomePage extends StatelessWidget {
             } else if (state is MovieError) {
               String errorMessage = 'Bir hata oluştu.';
               if (state.failure is NetworkFailure) {
-                errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.';
+                errorMessage =
+                    'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.';
               } else if (state.failure is ServerFailure) {
                 errorMessage = 'Sunucu hatası: ${state.failure.message}';
               } else if (state.failure is CacheFailure) {
-                errorMessage = 'Veri yüklenirken hata oluştu: ${state.failure.message}';
+                errorMessage =
+                    'Veri yüklenirken hata oluştu: ${state.failure.message}';
               } else if (state.failure is UnknownFailure) {
-                errorMessage = 'Beklenmedik bir hata oluştu: ${state.failure.message}';
+                errorMessage =
+                    'Beklenmedik bir hata oluştu: ${state.failure.message}';
               }
 
               return Center(

@@ -52,8 +52,10 @@ class MovieCubit extends Cubit<MovieState> {
     emit(MovieLoading());
     try {
       final movies = await _getFavoriteMovieList();
+      // Filter movies to ensure only those explicitly marked as favorite are included
+      final favoriteMovies = movies.where((movie) => movie.isFavorite == true).toList();
       // For favorite list, we wrap it in a MovieResponseEntity
-      emit(MovieLoaded(MovieResponseEntity(movies: movies, totalPages: 1, currentPage: 0)));
+      emit(MovieLoaded(MovieResponseEntity(movies: favoriteMovies, totalPages: 1, currentPage: 0)));
     } on Failure catch (e) {
       emit(MovieError(e));
     } catch (e) {

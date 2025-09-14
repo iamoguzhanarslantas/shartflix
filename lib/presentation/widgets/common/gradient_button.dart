@@ -31,32 +31,34 @@ class GradientButton extends StatelessWidget {
         height: AppDimensions.gradientButtonHeight.h,
         decoration: BoxDecoration(
           gradient: isActive ? AppGradients.buttonRadialGradient : null,
-          borderRadius: BorderRadius.circular(AppDimensions.gradientButtonBorderRadius.r),
-          border: Border.all(color: AppColors.white30, width: AppDimensions.gradientButtonBorderWidth.w),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.gradientButtonBorderRadius.r,
+          ),
+          border: Border.all(
+            color: AppColors.white30,
+            width: AppDimensions.gradientButtonBorderWidth.w,
+          ),
           color: isActive ? null : AppColors.black,
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimensions.gradientButtonPaddingHorizontal.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                isActive ? activeIconPath : inactiveIconPath,
-                colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-                width: AppDimensions.gradientButtonIconSize.w,
-                height: AppDimensions.gradientButtonIconSize.h,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              isActive ? activeIconPath : inactiveIconPath,
+              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+              width: AppDimensions.gradientButtonIconSize.w,
+              height: AppDimensions.gradientButtonIconSize.h,
+            ),
+            SizedBox(width: AppDimensions.gradientButtonTextSpacing.w),
+            Text(
+              text,
+              style: AppTextStyles.bodyNormalMedium.copyWith(
+                color: AppColors.white,
+                fontSize: AppDimensions.gradientButtonFontSize.sp,
               ),
-              SizedBox(width: AppDimensions.gradientButtonTextSpacing.w),
-              Text(
-                text,
-                style: AppTextStyles.bodyNormalMedium.copyWith(
-                  color: AppColors.white,
-                  fontSize: AppDimensions.gradientButtonFontSize.sp,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

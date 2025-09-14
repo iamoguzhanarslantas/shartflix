@@ -53,19 +53,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<UserModel> register(
-    String email,
-    String password,
-    String name,
-  ) async {
+  Future<UserModel> register(String email, String password, String name) async {
     try {
       final response = await _dioClient.dio.post(
         '/user/register',
-        data: {
-          'email': email,
-          'password': password,
-          'name': name,
-        },
+        data: {'email': email, 'password': password, 'name': name},
       );
       if (kDebugMode) {
         debugPrint('Raw Register Response Data: ${response.data}');
@@ -130,8 +122,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
       if (kDebugMode) {
         debugPrint('Raw Movie list Response Data: ${response.data}');
-        final movieListResponse = MovieListResponseModel.fromJson(response.data);
-        debugPrint('Parsed MovieListResponseModel: movies.length=${movieListResponse.movies.length}, totalPages=${movieListResponse.totalPages}, currentPage=${movieListResponse.currentPage}');
+        final movieListResponse = MovieListResponseModel.fromJson(
+          response.data,
+        );
+        debugPrint(
+          'Parsed MovieListResponseModel: movies.length=${movieListResponse.movies.length}, totalPages=${movieListResponse.totalPages}, currentPage=${movieListResponse.currentPage}',
+        );
       }
       return MovieListResponseModel.fromJson(response.data);
     } on DioException catch (e) {
@@ -165,7 +161,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           debugPrint('Response data: ${e.response?.data}');
           debugPrint('Response status code: ${e.response?.statusCode}');
         }
-        throw _handleDioException(e, 'Failed to get all movies', 'Get all movies');
+        throw _handleDioException(
+          e,
+          'Failed to get all movies',
+          'Get all movies',
+        );
       } on Exception catch (e) {
         throw UnknownFailure(e.toString());
       }
@@ -216,7 +216,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         'Invalid response format for favorite movie list: No list found in response.',
       );
     } on DioException catch (e) {
-      throw _handleDioException(e, 'Failed to get favorite movie list', 'Favorite movie list');
+      throw _handleDioException(
+        e,
+        'Failed to get favorite movie list',
+        'Favorite movie list',
+      );
     } on Exception catch (e) {
       throw UnknownFailure(e.toString());
     }
@@ -227,7 +231,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     try {
       await _dioClient.dio.post('/movie/favorite/$movieId');
     } on DioException catch (e) {
-      throw _handleDioException(e, 'Failed to favorite/unfavorite movie', 'Favorite/Unfavorite');
+      throw _handleDioException(
+        e,
+        'Failed to favorite/unfavorite movie',
+        'Favorite/Unfavorite',
+      );
     } on Exception catch (e) {
       throw UnknownFailure(e.toString());
     }
@@ -241,13 +249,21 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         data: {'photoUrl': photoUrl},
       );
     } on DioException catch (e) {
-      throw _handleDioException(e, 'Failed to update profile photo', 'Update Profile Photo');
+      throw _handleDioException(
+        e,
+        'Failed to update profile photo',
+        'Update Profile Photo',
+      );
     } on Exception catch (e) {
       throw UnknownFailure(e.toString());
     }
   }
 
-  Failure _handleDioException(DioException e, String defaultMessage, String logTag) {
+  Failure _handleDioException(
+    DioException e,
+    String defaultMessage,
+    String logTag,
+  ) {
     if (kDebugMode) {
       debugPrint('$logTag DioException: ${e.message}');
       debugPrint('Response data: ${e.response?.data}');
@@ -257,7 +273,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     String errorMessage = defaultMessage;
     if (e.response?.data is Map) {
       if (e.response?.data['response'] is Map) {
-        errorMessage = e.response?.data['response']['message'] ?? defaultMessage;
+        errorMessage =
+            e.response?.data['response']['message'] ?? defaultMessage;
       } else {
         errorMessage = e.response?.data['message'] ?? defaultMessage;
       }

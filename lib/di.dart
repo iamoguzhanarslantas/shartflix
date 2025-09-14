@@ -14,6 +14,7 @@ import 'package:shartflix/application/usecases/movie/get_favorite_movie_list.dar
 import 'package:shartflix/application/usecases/movie/get_movie_list.dart';
 import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Import AuthBloc
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
 import 'package:shartflix/core/services/local_storage_service.dart';
 
 final GetIt sl = GetIt.instance;
@@ -55,6 +56,12 @@ Future<void> init() async {
   sl.registerFactory<MovieCubit>(
     () => MovieCubit(
       getMovieList: sl(),
+      getFavoriteMovieList: sl(),
+      favoriteUnfavoriteMovie: sl(),
+    ),
+  );
+  sl.registerFactory<FavoriteMovieCubit>(
+    () => FavoriteMovieCubit(
       getFavoriteMovieList: sl(),
       favoriteUnfavoriteMovie: sl(),
     ),

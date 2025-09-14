@@ -39,4 +39,7 @@ class AppColors {
 
   // Button Gradient Colors
   static const Color buttonActive = Color(0xFF7F050B);
+
+  //Limited Offer Colors
+  static const Color buttonLimited = Color(0xFFB2040C);
 }

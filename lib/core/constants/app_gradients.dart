@@ -68,4 +68,11 @@ class AppGradients {
     end: Alignment.bottomCenter,
     stops: [0.0, 0.29],
   );
+
+  // Limited Offer Button Background Gradient
+  static const LinearGradient limitedOfferButtonGradient = LinearGradient(
+    colors: [AppColors.primary, AppColors.buttonLimited],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
