@@ -7,6 +7,6 @@ class GetUserProfile {
   GetUserProfile(this.repository);
 
   Future<UserEntity> call() {
-    return repository.getUserProfile().then((userModel) => userModel.toEntity());
+    return repository.getUserProfile();
   }
 }

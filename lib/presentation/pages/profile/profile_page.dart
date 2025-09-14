@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:go_router/go_router.dart'; // Import for GoRouter
-import 'package:shartflix/domain/entities/user_entity.dart'; // Import UserEntity
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shartflix/domain/entities/user_entity.dart';
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
 import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_info_widget.dart';
 
@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
         elevation: 0,
         // leading and actions removed as navigation is handled by BottomNavigationBar
       ),
-      body: BlocConsumer<AuthCubit, AuthState>(
+      body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthUnauthenticated) {
             context.go(LoginPage.routeName);
@@ -32,10 +32,6 @@ class ProfilePage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is AuthAuthenticated) {
-            final UserEntity user = state.user;
-            return ProfileInfoWidget(user: user);
-          } else if (state is AuthRegistrationSuccess) {
-            // Handle AuthRegistrationSuccess
             final UserEntity user = state.user;
             return ProfileInfoWidget(user: user);
           } else if (state is AuthLoading) {

@@ -1,0 +1,126 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:shartflix/domain/entities/user_entity.dart';
+import 'package:shartflix/domain/repositories/auth_repository.dart';
+import 'package:shartflix/application/usecases/auth/auth_event.dart';
+
+part 'auth_state.dart';
+
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final AuthRepository _authRepository;
+
+  AuthBloc({
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
+        super(AuthInitial()) {
+    on<AuthCheckStatus>(_onAuthCheckStatus);
+    on<AuthLogin>(_onAuthLogin);
+    on<AuthRegister>(_onAuthRegister);
+    on<AuthGetUserProfile>(_onAuthGetUserProfile);
+    on<AuthUploadUserPhoto>(_onAuthUploadUserPhoto);
+    on<AuthLogout>(_onAuthLogout);
+    on<AuthUpdateUserPhotoUrl>(_onAuthUpdateUserPhotoUrl); // New event handler
+
+    add(AuthCheckStatus()); // Initial check
+  }
+
+  Future<void> _onAuthCheckStatus(
+      AuthCheckStatus event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      final token = await _authRepository.getAuthToken();
+      if (token != null && token.isNotEmpty) {
+        final UserEntity? userEntity = await _authRepository.getUser();
+
+        if (userEntity != null &&
+            (userEntity.id != null || userEntity.email != null)) {
+          emit(AuthAuthenticated(userEntity));
+        } else {
+          final UserEntity fetchedUserEntity =
+              await _authRepository.getUserProfile();
+          await _authRepository.saveUser(fetchedUserEntity);
+          emit(AuthAuthenticated(fetchedUserEntity));
+        }
+      } else {
+        emit(AuthUnauthenticated());
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      await _authRepository.removeAuthToken();
+    }
+  }
+
+  Future<void> _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      final UserEntity userEntity =
+          await _authRepository.login(event.email, event.password);
+      // The token is saved by the AuthRepositoryImpl during login
+      await _authRepository.saveUser(userEntity);
+      await _authRepository.setIsNewUser(false);
+      add(AuthCheckStatus()); // Re-check status to emit AuthAuthenticated
+    } catch (e) {
+      String errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(AuthError(errorMessage));
+    }
+  }
+
+  Future<void> _onAuthRegister(
+      AuthRegister event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      final UserEntity userEntity = await _authRepository.register(
+          event.email, event.password, event.name);
+      // The token is saved by the AuthRepositoryImpl during registration
+      await _authRepository.saveUser(userEntity);
+      await _authRepository.setIsNewUser(true);
+      emit(AuthRegistrationSuccess(userEntity));
+    } catch (e) {
+      String errorMessage = 'Kayıt başarısız. Lütfen tekrar deneyin.';
+      if (e.toString().contains('USER_EXISTS')) {
+        errorMessage = 'Bu email adresi zaten kayıtlı.';
+      }
+      emit(AuthError(errorMessage));
+    }
+  }
+
+  Future<void> _onAuthGetUserProfile(
+      AuthGetUserProfile event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      final UserEntity userEntity = await _authRepository.getUserProfile();
+      await _authRepository.saveUser(userEntity);
+      emit(AuthAuthenticated(userEntity));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
+  Future<void> _onAuthUploadUserPhoto(
+      AuthUploadUserPhoto event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      await _authRepository.uploadUserPhoto(event.imagePath);
+      add(AuthGetUserProfile()); // Refresh profile after upload
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
+  Future<void> _onAuthLogout(AuthLogout event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    await _authRepository.removeAuthToken();
+    emit(AuthUnauthenticated());
+  }
+
+  Future<void> _onAuthUpdateUserPhotoUrl(
+      AuthUpdateUserPhotoUrl event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      await _authRepository.updateUserProfilePhoto(event.photoUrl);
+      add(AuthGetUserProfile()); // Refresh profile after update
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+}

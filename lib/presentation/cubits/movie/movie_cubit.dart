@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
 import 'package:shartflix/domain/entities/movie_entity.dart';
 import 'package:shartflix/domain/entities/movie_response_entity.dart';
 import 'package:shartflix/application/usecases/movie/favorite_unfavorite_movie.dart';
@@ -28,8 +29,10 @@ class MovieCubit extends Cubit<MovieState> {
       final allMovies = await _getMovieList.callGetAllMovies();
       // Wrap the list of all movies in a MovieResponseEntity for consistency
       emit(MovieLoaded(MovieResponseEntity(movies: allMovies, totalPages: 1, currentPage: 0)));
+    } on Failure catch (e) {
+      emit(MovieError(e));
     } catch (e) {
-      emit(MovieError(e.toString()));
+      emit(MovieError(UnknownFailure(e.toString())));
     }
   }
 
@@ -38,8 +41,10 @@ class MovieCubit extends Cubit<MovieState> {
     try {
       final movieResponse = await _getMovieList();
       emit(MovieLoaded(movieResponse));
+    } on Failure catch (e) {
+      emit(MovieError(e));
     } catch (e) {
-      emit(MovieError(e.toString()));
+      emit(MovieError(UnknownFailure(e.toString())));
     }
   }
 
@@ -49,8 +54,10 @@ class MovieCubit extends Cubit<MovieState> {
       final movies = await _getFavoriteMovieList();
       // For favorite list, we wrap it in a MovieResponseEntity
       emit(MovieLoaded(MovieResponseEntity(movies: movies, totalPages: 1, currentPage: 0)));
+    } on Failure catch (e) {
+      emit(MovieError(e));
     } catch (e) {
-      emit(MovieError(e.toString()));
+      emit(MovieError(UnknownFailure(e.toString())));
     }
   }
 
@@ -87,7 +94,7 @@ class MovieCubit extends Cubit<MovieState> {
       await _favoriteUnfavoriteMovie(movieId);
       // If API call succeeds, the optimistic update is confirmed.
       // No need to re-fetch the entire list.
-    } catch (e) {
+    } on Failure catch (e) {
       // If API call fails, revert the optimistic update
       updatedMovies[movieIndex] = movieToUpdate; // Revert to original state
       emit(MovieLoaded(MovieResponseEntity(
@@ -95,7 +102,15 @@ class MovieCubit extends Cubit<MovieState> {
         totalPages: (state as MovieLoaded).movieResponse.totalPages,
         currentPage: (state as MovieLoaded).movieResponse.currentPage,
       ))); // Emit the reverted list
-      emit(MovieError(e.toString())); // Also emit an error
+      emit(MovieError(e)); // Also emit an error
+    } catch (e) {
+      updatedMovies[movieIndex] = movieToUpdate; // Revert to original state
+      emit(MovieLoaded(MovieResponseEntity(
+        movies: updatedMovies,
+        totalPages: (state as MovieLoaded).movieResponse.totalPages,
+        currentPage: (state as MovieLoaded).movieResponse.currentPage,
+      ))); // Emit the reverted list
+      emit(MovieError(UnknownFailure(e.toString()))); // Also emit an error
     }
   }
 

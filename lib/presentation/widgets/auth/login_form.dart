@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
 import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
@@ -26,7 +26,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
           ScaffoldMessenger.of(
@@ -35,20 +35,19 @@ class _LoginFormState extends State<LoginForm> {
           widget.hasErrorNotifier.value = true;
         } else if (state is AuthAuthenticated) {
           widget.hasErrorNotifier.value = false;
-          // Check if it's a new user after registration
           sl<LocalStorageService>().getIsNewUser().then((isNewUser) {
-            if (isNewUser && context.mounted) {
+            if (isNewUser == true && context.mounted) {
               GoRouter.of(context).go(
                 ProfilePhotoUploadPage.routeName,
-              ); // Redirect to photo upload page
+              );
             } else if (context.mounted) {
               GoRouter.of(
                 context,
-              ).go(HomePage.routeName); // Redirect to home page
+              ).go(HomePage.routeName);
             }
           });
         } else if (state is AuthLoading) {
-          widget.hasErrorNotifier.value = false; // Clear previous errors
+          widget.hasErrorNotifier.value = false;
         }
       },
       builder: (context, state) {
@@ -57,23 +56,22 @@ class _LoginFormState extends State<LoginForm> {
               (
                 context,
                 formKey,
-                nameController, // Not used in login
+                nameController,
                 emailController,
                 passwordController,
-                confirmPasswordController, // Not used in login
-                nameErrorText, // Not used in login
+                confirmPasswordController,
+                nameErrorText,
                 emailErrorText,
                 passwordErrorText,
-                confirmPasswordErrorText, // Not used in login
-                termsErrorText, // Not used in login
-                validateName, // Not used in login
+                confirmPasswordErrorText,
+                termsErrorText,
+                validateName,
                 validateEmail,
                 validatePassword,
-                validateConfirmPassword, // Not used in login
+                validateConfirmPassword,
                 onSubmit,
                 isLoading,
               ) {
-                // Update the hasErrorNotifier based on the presence of error texts
                 final bool currentHasError =
                     emailErrorText != null || passwordErrorText != null;
                 if (widget.hasErrorNotifier.value != currentHasError) {
@@ -91,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
                         iconPath: AppIcons.mail,
                         controller: emailController,
                         errorText: emailErrorText,
-                        validator: validateEmail, // Pass the validator
+                        validator: validateEmail,
                       ),
                       SizedBox(height: 10.h),
                       CustomTextInput(
@@ -100,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
                         isPassword: true,
                         controller: passwordController,
                         errorText: passwordErrorText,
-                        validator: validatePassword, // Pass the validator
+                        validator: validatePassword,
                       ),
                       SizedBox(height: 10.h),
                       Align(
@@ -116,11 +114,11 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                     ],
-                    buttonText: state is AuthLoading
+                    buttonText: isLoading
                         ? 'Giriş Yapılıyor...'
                         : 'Giriş Yap',
-                    onButtonPressed: onSubmit, // Use the onSubmit callback from AuthFormValidator
-                    isButtonLoading: state is AuthLoading,
+                    onButtonPressed: onSubmit,
+                    isButtonLoading: isLoading,
                   ),
                 );
               },

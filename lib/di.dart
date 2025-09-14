@@ -12,7 +12,7 @@ import 'package:shartflix/application/usecases/auth/upload_user_photo.dart';
 import 'package:shartflix/application/usecases/movie/favorite_unfavorite_movie.dart';
 import 'package:shartflix/application/usecases/movie/get_favorite_movie_list.dart';
 import 'package:shartflix/application/usecases/movie/get_movie_list.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Import AuthBloc
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 
@@ -27,7 +27,8 @@ Future<void> init() async {
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(sl()));
 
   // Repositories
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+  sl.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(remoteDataSource: sl(), localStorageService: sl()));
   sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(sl()));
 
   // Use cases - Auth
@@ -45,14 +46,10 @@ Future<void> init() async {
     () => FavoriteUnfavoriteMovie(sl()),
   );
 
-  // Cubits
-  sl.registerFactory<AuthCubit>(
-    () => AuthCubit(
-      loginUser: sl(),
-      registerUser: sl(),
-      getUserProfile: sl(),
-      uploadUserPhoto: sl(),
-      localStorageService: sl(),
+  // Blocs
+  sl.registerFactory<AuthBloc>(
+    () => AuthBloc(
+      authRepository: sl(),
     ),
   );
   sl.registerFactory<MovieCubit>(

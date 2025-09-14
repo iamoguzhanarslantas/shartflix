@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc
 import 'package:shartflix/core/theme/app_theme.dart';
 import 'package:shartflix/di.dart'; // Import di for sl
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart'; // Import AuthCubit
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Import AuthBloc
 import 'package:shartflix/presentation/navigation/app_router.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider<AuthCubit>(create: (_) => sl<AuthCubit>())],
+      providers: [BlocProvider<AuthBloc>(create: (_) => sl<AuthBloc>())],
       child: ScreenUtilInit(
         designSize: const Size(402, 874),
         minTextAdapt: true,

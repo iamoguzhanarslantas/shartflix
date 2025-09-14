@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
+import 'package:shartflix/core/constants/app_dimensions.dart';
 import 'package:shartflix/core/constants/app_gradients.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GradientButton extends StatelessWidget {
   final String text;
@@ -26,33 +27,32 @@ class GradientButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 169.w,
-        height: 48.h,
+        width: AppDimensions.gradientButtonWidth.w,
+        height: AppDimensions.gradientButtonHeight.h,
         decoration: BoxDecoration(
           gradient: isActive ? AppGradients.buttonRadialGradient : null,
-          borderRadius: BorderRadius.circular(42.r),
-          border: Border.all(color: AppColors.white30, width: 1.w),
+          borderRadius: BorderRadius.circular(AppDimensions.gradientButtonBorderRadius.r),
+          border: Border.all(color: AppColors.white30, width: AppDimensions.gradientButtonBorderWidth.w),
           color: isActive ? null : AppColors.black,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 37.w),
+          padding: EdgeInsets.symmetric(horizontal: AppDimensions.gradientButtonPaddingHorizontal.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                // Changed to SvgPicture.asset
                 isActive ? activeIconPath : inactiveIconPath,
                 colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-                width: 24.w, // Changed size to width
-                height: 24.h, // Added height
+                width: AppDimensions.gradientButtonIconSize.w,
+                height: AppDimensions.gradientButtonIconSize.h,
               ),
-              SizedBox(width: 10.w),
+              SizedBox(width: AppDimensions.gradientButtonTextSpacing.w),
               Text(
                 text,
                 style: AppTextStyles.bodyNormalMedium.copyWith(
                   color: AppColors.white,
-                  fontSize: 14.sp,
+                  fontSize: AppDimensions.gradientButtonFontSize.sp,
                 ),
               ),
             ],

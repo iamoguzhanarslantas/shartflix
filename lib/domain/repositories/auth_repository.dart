@@ -1,8 +1,16 @@
-import 'package:shartflix/data/models/user_model.dart';
+import 'package:shartflix/domain/entities/user_entity.dart';
 
 abstract class AuthRepository {
-  Future<UserModel> login(String email, String password);
-  Future<UserModel> register(String email, String password, String username);
-  Future<UserModel> getUserProfile();
-  Future<void> uploadPhoto(String imagePath);
+  Future<UserEntity> login(String email, String password);
+  Future<UserEntity> register(String email, String password, String name);
+  Future<UserEntity> getUserProfile();
+  Future<void> uploadUserPhoto(String imagePath);
+  Future<void> saveAuthToken(String token);
+  Future<String?> getAuthToken();
+  Future<void> removeAuthToken();
+  Future<void> saveUser(UserEntity user);
+  Future<UserEntity?> getUser();
+  Future<void> setIsNewUser(bool isNewUser);
+  Future<bool?> getIsNewUser();
+  Future<void> updateUserProfilePhoto(String? photoUrl); // New method
 }

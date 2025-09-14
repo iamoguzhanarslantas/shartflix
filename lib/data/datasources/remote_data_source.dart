@@ -1,19 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart'; // Import for debugPrint
 import 'package:shartflix/core/network/dio_client.dart';
+import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
 import 'package:shartflix/data/models/movie_list_response_model.dart';
 import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/data/models/user_model.dart';
 
 abstract class RemoteDataSource {
   Future<UserModel> login(String email, String password);
-  Future<UserModel> register(String email, String password, String username);
+  Future<UserModel> register(String email, String password, String name);
   Future<UserModel> getUserProfile();
-  Future<void> uploadPhoto(String imagePath);
+  Future<void> uploadUserPhoto(String imagePath);
   Future<MovieListResponseModel> getMovieList({int page = 1});
   Future<List<MovieModel>> getAllMovies(); // New method to fetch all movies
   Future<List<MovieModel>> getFavoriteMovieList();
   Future<void> favoriteUnfavoriteMovie(String movieId);
+  Future<void> updateUserProfilePhoto(String? photoUrl); // New method
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -33,24 +35,20 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Login DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
       String errorMessage = 'Login failed';
       if (e.response?.data is Map && e.response?.data['response'] is Map) {
         final responseData = e.response?.data['response'];
         if (responseData['message'] == 'INVALID_CREDENTIALS') {
-          errorMessage =
-              'Kullanıcı bulunamadı veya şifre yanlış.'; // Translated message
+          errorMessage = 'Kullanıcı bulunamadı veya şifre yanlış.';
         } else {
           errorMessage = responseData['message'] ?? errorMessage;
         }
       } else {
         errorMessage = e.response?.data['message'] ?? errorMessage;
       }
-      throw Exception(errorMessage);
+      throw _handleDioException(e, errorMessage, 'Login');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
@@ -58,7 +56,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<UserModel> register(
     String email,
     String password,
-    String username,
+    String name,
   ) async {
     try {
       final response = await _dioClient.dio.post(
@@ -66,26 +64,23 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         data: {
           'email': email,
           'password': password,
-          'name': username,
-        }, // Assuming 'name' is the correct field for the API
+          'name': name,
+        },
       );
       if (kDebugMode) {
         debugPrint('Raw Register Response Data: ${response.data}');
       }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Registration DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
       String errorMessage = 'Registration failed';
       if (e.response?.data is Map && e.response?.data['response'] is Map) {
         errorMessage = e.response?.data['response']['message'] ?? errorMessage;
       } else {
         errorMessage = e.response?.data['message'] ?? errorMessage;
       }
-      throw Exception(errorMessage);
+      throw _handleDioException(e, errorMessage, 'Registration');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
@@ -98,17 +93,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       }
       return UserModel.fromJson(response.data);
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('User Profile DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
-      throw Exception(e.response?.data['message'] ?? 'Failed to get profile');
+      throw _handleDioException(e, 'Failed to get profile', 'User Profile');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
   @override
-  Future<void> uploadPhoto(String imagePath) async {
+  Future<void> uploadUserPhoto(String imagePath) async {
     try {
       String fileName = imagePath.split('/').last;
       FormData formData = FormData.fromMap({
@@ -123,12 +115,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       );
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Photo upload DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
-      throw Exception(e.response?.data['message'] ?? 'Failed to upload photo');
+      throw _handleDioException(e, 'Failed to upload photo', 'Photo upload');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
@@ -146,14 +135,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       }
       return MovieListResponseModel.fromJson(response.data);
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Movie list DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
-      throw Exception(
-        e.response?.data['message'] ?? 'Failed to get movie list',
-      );
+      throw _handleDioException(e, 'Failed to get movie list', 'Movie list');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
@@ -181,9 +165,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           debugPrint('Response data: ${e.response?.data}');
           debugPrint('Response status code: ${e.response?.statusCode}');
         }
-        throw Exception(
-          e.response?.data['message'] ?? 'Failed to get all movies',
-        );
+        throw _handleDioException(e, 'Failed to get all movies', 'Get all movies');
+      } on Exception catch (e) {
+        throw UnknownFailure(e.toString());
       }
     }
     return allMovies;
@@ -232,14 +216,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         'Invalid response format for favorite movie list: No list found in response.',
       );
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Favorite movie list DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
-      throw Exception(
-        e.response?.data['message'] ?? 'Failed to get favorite movie list',
-      );
+      throw _handleDioException(e, 'Failed to get favorite movie list', 'Favorite movie list');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
     }
   }
 
@@ -248,14 +227,56 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     try {
       await _dioClient.dio.post('/movie/favorite/$movieId');
     } on DioException catch (e) {
-      if (kDebugMode) {
-        debugPrint('Favorite/Unfavorite DioException: ${e.message}');
-        debugPrint('Response data: ${e.response?.data}');
-        debugPrint('Response status code: ${e.response?.statusCode}');
-      }
-      throw Exception(
-        e.response?.data['message'] ?? 'Failed to favorite/unfavorite movie',
+      throw _handleDioException(e, 'Failed to favorite/unfavorite movie', 'Favorite/Unfavorite');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateUserProfilePhoto(String? photoUrl) async {
+    try {
+      await _dioClient.dio.put(
+        '/user/profile/photo', // Assuming an endpoint to update photo URL
+        data: {'photoUrl': photoUrl},
       );
+    } on DioException catch (e) {
+      throw _handleDioException(e, 'Failed to update profile photo', 'Update Profile Photo');
+    } on Exception catch (e) {
+      throw UnknownFailure(e.toString());
+    }
+  }
+
+  Failure _handleDioException(DioException e, String defaultMessage, String logTag) {
+    if (kDebugMode) {
+      debugPrint('$logTag DioException: ${e.message}');
+      debugPrint('Response data: ${e.response?.data}');
+      debugPrint('Response status code: ${e.response?.statusCode}');
+    }
+
+    String errorMessage = defaultMessage;
+    if (e.response?.data is Map) {
+      if (e.response?.data['response'] is Map) {
+        errorMessage = e.response?.data['response']['message'] ?? defaultMessage;
+      } else {
+        errorMessage = e.response?.data['message'] ?? defaultMessage;
+      }
+    }
+
+    if (e.type == DioExceptionType.connectionError ||
+        e.type == DioExceptionType.receiveTimeout ||
+        e.type == DioExceptionType.sendTimeout) {
+      return NetworkFailure(errorMessage);
+    } else if (e.response?.statusCode != null &&
+        e.response!.statusCode! >= 500) {
+      return ServerFailure(errorMessage);
+    } else if (e.response?.statusCode != null &&
+        e.response!.statusCode! >= 400) {
+      // For 4xx errors, it's often a client-side issue or specific API error
+      // We can refine this further if needed, but for now, treat as server failure
+      return ServerFailure(errorMessage);
+    } else {
+      return UnknownFailure(errorMessage);
     }
   }
 }

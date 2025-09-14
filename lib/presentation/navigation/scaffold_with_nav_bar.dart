@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shartflix/core/constants/app_dimensions.dart';
 import 'package:shartflix/core/constants/app_gradients.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
+import 'package:shartflix/core/constants/app_strings.dart';
 import 'package:shartflix/presentation/widgets/common/gradient_button.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
@@ -30,14 +32,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
         children: [
           navigationShell,
           Container(
-            width: 402.w, // Apply specified width
-            height: 100.h, // Apply specified height
-            // Apply specified padding
+            width: AppDimensions.navBarWidth.w,
+            height: AppDimensions.navBarHeight.h,
             decoration: BoxDecoration(
-              gradient:
-                  AppGradients.navBarBackgroundGradient, // Apply new gradient
-              // The border on top is now part of the gradient effect, or can be added as a separate border if needed
-              // For now, I'll remove the explicit top border as the gradient handles the transition.
+              gradient: AppGradients.navBarBackgroundGradient,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,14 +44,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
                 _buildNavItem(
                   context,
                   0,
-                  'Home',
+                  AppStrings.home,
                   AppIcons.home,
                   AppIcons.homeFill,
                 ),
                 _buildNavItem(
                   context,
                   1,
-                  'Profile',
+                  AppStrings.profile,
                   AppIcons.profile,
                   AppIcons.profileFill,
                 ),
@@ -75,14 +73,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
     final bool isActive = navigationShell.currentIndex == index;
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: 8.w,
-        vertical: 8.h,
-      ), // Margin for the button
+        horizontal: AppDimensions.navItemHorizontalMargin.w,
+        vertical: AppDimensions.navItemVerticalMargin.h,
+      ),
       child: GradientButton(
         onPressed: () => _goBranch(index),
         text: label,
-        inactiveIconPath: inactiveIconPath, // Changed to path
-        activeIconPath: activeIconPath, // Changed to path
+        inactiveIconPath: inactiveIconPath,
+        activeIconPath: activeIconPath,
         isActive: isActive,
       ),
     );

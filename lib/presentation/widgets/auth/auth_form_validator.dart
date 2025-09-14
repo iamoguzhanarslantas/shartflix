@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import Bloc
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart'; // Import AuthCubit
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/application/usecases/auth/auth_event.dart'; // Import AuthEvent
 
 class AuthFormValidator extends StatefulWidget {
   final Widget Function(
@@ -142,18 +143,20 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
       try {
         // All fields are valid, perform submission logic
         if (widget.isRegisterForm) {
-          // Call the register method of AuthCubit
-          context.read<AuthCubit>().register(
-            _emailController.text,
-            _passwordController.text,
-            _nameController.text,
-          );
+          context.read<AuthBloc>().add(
+                AuthRegister(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                  name: _nameController.text,
+                ),
+              );
         } else {
-          // Call the login method of AuthCubit
-          context.read<AuthCubit>().login(
-            _emailController.text,
-            _passwordController.text,
-          );
+          context.read<AuthBloc>().add(
+                AuthLogin(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                ),
+              );
         }
       } catch (e) {
         // Error handling is now done by BlocListener in RegisterPage/LoginPage

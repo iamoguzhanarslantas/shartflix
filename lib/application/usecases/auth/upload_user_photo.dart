@@ -6,6 +6,6 @@ class UploadUserPhoto {
   UploadUserPhoto(this.repository);
 
   Future<void> call(String imagePath) {
-    return repository.uploadPhoto(imagePath);
+    return repository.uploadUserPhoto(imagePath);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:shartflix/data/models/user_model.dart';
+import 'package:shartflix/domain/entities/user_entity.dart';
 import 'package:shartflix/domain/repositories/auth_repository.dart';
 
 class RegisterUser {
@@ -6,7 +6,7 @@ class RegisterUser {
 
   RegisterUser(this.repository);
 
-  Future<UserModel> call(String email, String password, String username) {
-    return repository.register(email, password, username);
+  Future<UserEntity> call(String email, String password, String name) {
+    return repository.register(email, password, name);
   }
 }

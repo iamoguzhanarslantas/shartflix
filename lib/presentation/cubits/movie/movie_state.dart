@@ -1,6 +1,5 @@
 part of 'movie_cubit.dart';
 
-
 abstract class MovieState extends Equatable {
   const MovieState();
 
@@ -22,10 +21,10 @@ class MovieLoaded extends MovieState {
 }
 
 class MovieError extends MovieState {
-  final String message;
+  final Failure failure;
 
-  const MovieError(this.message);
+  const MovieError(this.failure);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [failure];
 }

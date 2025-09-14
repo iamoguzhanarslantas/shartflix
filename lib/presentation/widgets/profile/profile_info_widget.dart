@@ -25,37 +25,66 @@ class ProfileInfoWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 50.r,
-                backgroundColor: AppColors.primary,
-                backgroundImage: user.photoUrl != null && user.photoUrl!.isNotEmpty
-                    ? NetworkImage(user.photoUrl!)
-                    : null,
-                child: user.photoUrl == null || user.photoUrl!.isEmpty
-                    ? Icon(
-                        Icons.person,
-                        size: 50.r,
-                        color: AppColors.white,
+                child: user.photoUrl != null && user.photoUrl!.isNotEmpty
+                    ? ClipOval(
+                        child: Image.network(
+                          user.photoUrl!,
+                          fit: BoxFit.cover,
+                          width: 100.r, // Match CircleAvatar radius * 2
+                          height: 100.r, // Match CircleAvatar radius * 2
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value:
+                                    loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                    : null,
+                                color: AppColors.white,
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(
+                              Icons.person,
+                              size: 50.r,
+                              color: AppColors.white,
+                            );
+                          },
+                        ),
                       )
-                    : null,
+                    : Icon(Icons.person, size: 50.r, color: AppColors.white),
               ),
             ),
           ),
           SizedBox(height: 24.h),
           Text(
             'Name:',
-            style: AppTextStyles.bodyNormalSemiBold.copyWith(color: AppColors.white60),
+            style: AppTextStyles.bodyNormalSemiBold.copyWith(
+              color: AppColors.white60,
+            ),
           ),
           Text(
             user.name ?? 'N/A',
-            style: AppTextStyles.bodyLargeRegular.copyWith(color: AppColors.white),
+            style: AppTextStyles.bodyLargeRegular.copyWith(
+              color: AppColors.white,
+            ),
           ),
           SizedBox(height: 16.h),
           Text(
             'Email:',
-            style: AppTextStyles.bodyNormalSemiBold.copyWith(color: AppColors.white60),
+            style: AppTextStyles.bodyNormalSemiBold.copyWith(
+              color: AppColors.white60,
+            ),
           ),
           Text(
             user.email ?? 'N/A',
-            style: AppTextStyles.bodyLargeRegular.copyWith(color: AppColors.white),
+            style: AppTextStyles.bodyLargeRegular.copyWith(
+              color: AppColors.white,
+            ),
           ),
           SizedBox(height: 16.h),
           // Add more profile fields as needed

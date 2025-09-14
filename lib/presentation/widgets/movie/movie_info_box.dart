@@ -38,12 +38,6 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
         width: 402.w,
         height: _isExpanded ? null : 87.h,
         color: Colors.transparent, // Set background to transparent
-        padding: EdgeInsets.only(
-          top: 16.h,
-          right: 24.w,
-          bottom: 16.h,
-          left: 24.w,
-        ),
         child: Row(
           children: [
             // Icon Container

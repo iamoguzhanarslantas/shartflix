@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_cubit.dart';
+import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/application/usecases/auth/auth_event.dart'; // Import AuthEvent
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
@@ -34,25 +35,21 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
   Future<void> _navigateToHome() async {
     sl<LocalStorageService>().setIsNewUser(false);
     context.go(HomePage.routeName);
-    await _fetchUserProfile(); // Navigate back to home page
-  }
-
-  Future<void> _fetchUserProfile() async {
-    await context.read<AuthCubit>().getUserProfile();
+    // No need to fetch user profile here, AuthBloc will handle it
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is AuthAuthenticated) {
+          // If authenticated after photo upload, navigate to home
+          _navigateToHome();
         }
-        // Navigation to home is now handled by _navigateToHome() called from onContinue/onSkip
-        // and not directly from AuthAuthenticated state to prevent immediate redirection
-        // after initial token check.
       },
       builder: (context, state) {
         return Scaffold(
@@ -70,17 +67,20 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
                   ProfileFooterButtons(
                     imageFile: _selectedImage,
                     onContinue: _selectedImage != null
-                        ? () async {
-                            // Made async
-                            // Call uploadUserPhoto and then navigate on success
-                            await context.read<AuthCubit>().uploadUserPhoto(
-                              _selectedImage!.path,
-                            );
-                            // After successful upload (AuthCubit will emit AuthAuthenticated), navigate to home
-                            _navigateToHome();
+                        ? () {
+                            context.read<AuthBloc>().add(
+                                  AuthUploadUserPhoto(
+                                      imagePath: _selectedImage!.path),
+                                );
                           }
                         : null,
-                    onSkip: _navigateToHome,
+                    onSkip: () {
+                      // If user skips, set photoUrl to null (or a default URL)
+                      context.read<AuthBloc>().add(
+                            const AuthUpdateUserPhotoUrl(photoUrl: null),
+                          );
+                      _navigateToHome();
+                    },
                     isLoading: state is AuthLoading,
                   ),
                 ],
