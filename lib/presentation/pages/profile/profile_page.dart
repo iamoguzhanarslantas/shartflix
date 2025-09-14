@@ -6,15 +6,17 @@ import 'package:shartflix/core/constants/app_dimensions.dart'; // Import AppDime
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/core/constants/app_strings.dart'; // Import AppStrings
 import 'package:go_router/go_router.dart';
-import 'package:shartflix/domain/entities/user_entity.dart';
-import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/data/entities/user_entity.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
 import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
-import 'package:shartflix/presentation/widgets/profile/limited_offer_button.dart';
 import 'package:shartflix/presentation/widgets/profile/add_photo_button.dart';
 import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
-import 'package:shartflix/presentation/widgets/profile/liked_movie_card.dart'; // Import LikedMovieCard
+import 'package:shartflix/presentation/widgets/profile/liked_movie_card.dart';
+import 'package:shartflix/presentation/widgets/profile/profile_page_app_bar.dart';
+import 'package:shartflix/presentation/widgets/profile/profile_page_user_info.dart';
+import 'package:shartflix/presentation/widgets/profile/profile_page_user_photo.dart'; // Import LikedMovieCard
 
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile';
@@ -41,28 +43,7 @@ class ProfilePage extends StatelessWidget {
             return SafeArea(
               child: Column(
                 children: [
-                  Container(
-                    width: AppDimensions.navBarWidth.w,
-                    height: AppDimensions.profileAppBarHeight.h,
-                    padding: EdgeInsets.only(
-                      top: AppDimensions.profileAppBarPaddingTop.h,
-                      right: AppDimensions.profileAppBarPaddingRight.w,
-                      bottom: AppDimensions.profileAppBarPaddingBottom.h,
-                      left: AppDimensions.profileAppBarPaddingLeft.w,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppStrings.profile,
-                          style: AppTextStyles.h5.copyWith(
-                            color: AppColors.white,
-                          ),
-                        ),
-                        const LimitedOfferButton(), // Use the extracted widget
-                      ],
-                    ),
-                  ),
+                  ProfilePageAppBar(),
                   // New Profile Info Row
                   Container(
                     width: AppDimensions
@@ -91,109 +72,12 @@ class ProfilePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // Profile Image
-                              CircleAvatar(
-                                radius: AppDimensions.profileAvatarRadius.r,
-                                child:
-                                    user.photoUrl != null &&
-                                        user.photoUrl!.isNotEmpty
-                                    ? ClipOval(
-                                        child: Image.network(
-                                          user.photoUrl!,
-                                          fit: BoxFit.cover,
-                                          width:
-                                              AppDimensions
-                                                  .profileAvatarRadius
-                                                  .r *
-                                              2,
-                                          height:
-                                              AppDimensions
-                                                  .profileAvatarRadius
-                                                  .r *
-                                              2,
-                                          loadingBuilder: (context, child, loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            }
-                                            return Center(
-                                              child: CircularProgressIndicator(
-                                                value:
-                                                    loadingProgress
-                                                            .expectedTotalBytes !=
-                                                        null
-                                                    ? loadingProgress
-                                                              .cumulativeBytesLoaded /
-                                                          loadingProgress
-                                                              .expectedTotalBytes!
-                                                    : null,
-                                                color: AppColors.white,
-                                              ),
-                                            );
-                                          },
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                                return Icon(
-                                                  Icons.person,
-                                                  size: AppDimensions
-                                                      .profileAvatarRadius
-                                                      .r,
-                                                  color: AppColors.white,
-                                                );
-                                              },
-                                        ),
-                                      )
-                                    : Icon(
-                                        Icons.person,
-                                        size:
-                                            AppDimensions.profileAvatarRadius.r,
-                                        color: AppColors.white,
-                                      ),
-                              ),
+                              ProfilePageUserPhoto(user: user),
                               SizedBox(
                                 width: AppDimensions.profileInfoRowGap.w,
                               ),
                               // Name and Email Column
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  user.name!.length > 13
-                                      ? Text(
-                                          user.name?.substring(0, 13) ?? 'N/A',
-                                          style: AppTextStyles.bodyLargeSemiBold
-                                              .copyWith(
-                                                color: AppColors.white,
-                                                fontSize: AppDimensions
-                                                    .profileNameFontSize
-                                                    .sp,
-                                              ),
-                                        )
-                                      : Text(
-                                          user.name ?? 'N/A',
-                                          style: AppTextStyles.bodyLargeSemiBold
-                                              .copyWith(
-                                                color: AppColors.white,
-                                                fontSize: AppDimensions
-                                                    .profileNameFontSize
-                                                    .sp,
-                                              ),
-                                        ),
-                                  SizedBox(
-                                    height: AppDimensions
-                                        .profileNameEmailColumnGap
-                                        .h,
-                                  ),
-                                  Text(
-                                    "ID: ${user.id?.substring(0, 6) ?? 'N/A'}",
-                                    style: AppTextStyles.bodyNormalMedium
-                                        .copyWith(
-                                          color: AppColors.white60,
-                                          fontSize: AppDimensions
-                                              .profileEmailFontSize
-                                              .sp,
-                                        ),
-                                  ),
-                                ],
-                              ),
+                              ProfilePageUserInfo(user: user),
                               const Spacer(), // Pushes the button to the right
                               // Add Photo Button
                               AddPhotoButton(
@@ -264,11 +148,13 @@ class ProfilePage extends StatelessWidget {
                                     ), // Reusing horizontal padding
                                     child: BlocBuilder<FavoriteMovieCubit, FavoriteMovieState>(
                                       builder: (context, movieState) {
-                                        if (movieState is FavoriteMovieLoading) {
+                                        if (movieState
+                                            is FavoriteMovieLoading) {
                                           return const Center(
                                             child: CircularProgressIndicator(),
                                           );
-                                        } else if (movieState is FavoriteMovieLoaded) {
+                                        } else if (movieState
+                                            is FavoriteMovieLoaded) {
                                           final likedMovies = movieState.movies;
                                           if (likedMovies.isEmpty) {
                                             return Center(
@@ -309,7 +195,8 @@ class ProfilePage extends StatelessWidget {
                                               );
                                             },
                                           );
-                                        } else if (movieState is FavoriteMovieError) {
+                                        } else if (movieState
+                                            is FavoriteMovieError) {
                                           return Center(
                                             child: Text(
                                               'Beğenilen filmler yüklenirken hata oluştu: ${movieState.failure.message}',

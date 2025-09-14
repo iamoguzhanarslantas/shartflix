@@ -1,24 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart'; // Import for debugPrint
-import 'package:shartflix/core/network/dio_client.dart';
+import 'package:shartflix/core/services/dio_client.dart';
 import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
 import 'package:shartflix/data/models/movie_list_response_model.dart';
 import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/data/models/user_model.dart';
+import 'package:shartflix/data/repositories/i_remote_data_source.dart';
 
-abstract class RemoteDataSource {
-  Future<UserModel> login(String email, String password);
-  Future<UserModel> register(String email, String password, String name);
-  Future<UserModel> getUserProfile();
-  Future<void> uploadUserPhoto(String imagePath);
-  Future<MovieListResponseModel> getMovieList({int page = 1});
-  Future<List<MovieModel>> getAllMovies(); // New method to fetch all movies
-  Future<List<MovieModel>> getFavoriteMovieList();
-  Future<void> favoriteUnfavoriteMovie(String movieId);
-  Future<void> updateUserProfilePhoto(String? photoUrl); // New method
-}
-
-class RemoteDataSourceImpl implements RemoteDataSource {
+class RemoteDataSourceImpl implements IRemoteDataSource {
   final DioClient _dioClient;
 
   RemoteDataSourceImpl(this._dioClient);

@@ -1,11 +1,11 @@
 import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
-import 'package:shartflix/data/datasources/remote_data_source.dart';
-import 'package:shartflix/domain/repositories/movie_repository.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart';
-import 'package:shartflix/domain/entities/movie_response_entity.dart';
+import 'package:shartflix/data/repositories/i_remote_data_source.dart';
+import 'package:shartflix/data/repositories/i_movie_repository.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
+import 'package:shartflix/data/entities/movie_response_entity.dart';
 
-class MovieRepositoryImpl implements MovieRepository {
-  final RemoteDataSource remoteDataSource;
+class MovieRepositoryImpl implements IMovieRepository {
+  final IRemoteDataSource remoteDataSource;
 
   MovieRepositoryImpl(this.remoteDataSource);
 

@@ -1,18 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shartflix/domain/entities/user_entity.dart';
-import 'package:shartflix/domain/repositories/auth_repository.dart';
-import 'package:shartflix/application/usecases/auth/auth_event.dart';
+import 'package:shartflix/data/entities/user_entity.dart';
+import 'package:shartflix/data/repositories/i_auth_repository.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_event.dart';
 
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authRepository;
+  final IAuthRepository _authRepository;
 
-  AuthBloc({
-    required AuthRepository authRepository,
-  })  : _authRepository = authRepository,
-        super(AuthInitial()) {
+  AuthBloc({required IAuthRepository authRepository})
+    : _authRepository = authRepository,
+      super(AuthInitial()) {
     on<AuthCheckStatus>(_onAuthCheckStatus);
     on<AuthLogin>(_onAuthLogin);
     on<AuthRegister>(_onAuthRegister);
@@ -25,7 +24,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onAuthCheckStatus(
-      AuthCheckStatus event, Emitter<AuthState> emit) async {
+    AuthCheckStatus event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
     try {
       final token = await _authRepository.getAuthToken();
@@ -36,8 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             (userEntity.id != null || userEntity.email != null)) {
           emit(AuthAuthenticated(userEntity));
         } else {
-          final UserEntity fetchedUserEntity =
-              await _authRepository.getUserProfile();
+          final UserEntity fetchedUserEntity = await _authRepository
+              .getUserProfile();
           await _authRepository.saveUser(fetchedUserEntity);
           emit(AuthAuthenticated(fetchedUserEntity));
         }
@@ -53,8 +54,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final UserEntity userEntity =
-          await _authRepository.login(event.email, event.password);
+      final UserEntity userEntity = await _authRepository.login(
+        event.email,
+        event.password,
+      );
       // The token is saved by the AuthRepositoryImpl during login
       await _authRepository.saveUser(userEntity);
       await _authRepository.setIsNewUser(false);
@@ -66,11 +69,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onAuthRegister(
-      AuthRegister event, Emitter<AuthState> emit) async {
+    AuthRegister event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
     try {
       final UserEntity userEntity = await _authRepository.register(
-          event.email, event.password, event.name);
+        event.email,
+        event.password,
+        event.name,
+      );
       // The token is saved by the AuthRepositoryImpl during registration
       await _authRepository.saveUser(userEntity);
       await _authRepository.setIsNewUser(true);
@@ -85,7 +93,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onAuthGetUserProfile(
-      AuthGetUserProfile event, Emitter<AuthState> emit) async {
+    AuthGetUserProfile event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
     try {
       final UserEntity userEntity = await _authRepository.getUserProfile();
@@ -97,7 +107,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onAuthUploadUserPhoto(
-      AuthUploadUserPhoto event, Emitter<AuthState> emit) async {
+    AuthUploadUserPhoto event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
     try {
       await _authRepository.uploadUserPhoto(event.imagePath);
@@ -114,7 +126,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onAuthUpdateUserPhotoUrl(
-      AuthUpdateUserPhotoUrl event, Emitter<AuthState> emit) async {
+    AuthUpdateUserPhotoUrl event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
     try {
       await _authRepository.updateUserProfilePhoto(event.photoUrl);

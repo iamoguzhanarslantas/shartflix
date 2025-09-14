@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/application/usecases/auth/auth_event.dart'; // Import AuthEvent
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/presentation/cubits/auth/auth_event.dart'; // Import AuthEvent
 
 class AuthFormValidator extends StatefulWidget {
   final Widget Function(

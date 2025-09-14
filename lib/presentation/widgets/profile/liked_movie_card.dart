@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_dimensions.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
 
 class LikedMovieCard extends StatelessWidget {
   final MovieEntity movie;

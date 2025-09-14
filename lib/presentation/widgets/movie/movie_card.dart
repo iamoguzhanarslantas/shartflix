@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
 import 'package:shartflix/presentation/widgets/common/favorite_button_with_blur.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_info_box.dart';
 

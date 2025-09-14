@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
-import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/application/usecases/auth/auth_event.dart'; // Import AuthEvent
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/presentation/cubits/auth/auth_event.dart'; // Import AuthEvent
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';

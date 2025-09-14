@@ -1,8 +1,8 @@
-import 'package:shartflix/domain/entities/user_entity.dart';
-import 'package:shartflix/domain/repositories/auth_repository.dart';
+import 'package:shartflix/data/entities/user_entity.dart';
+import 'package:shartflix/data/repositories/i_auth_repository.dart';
 
 class RegisterUser {
-  final AuthRepository repository;
+  final IAuthRepository repository;
 
   RegisterUser(this.repository);
 

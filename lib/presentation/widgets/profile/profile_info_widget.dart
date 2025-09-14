@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart'; // Import go_router
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/domain/entities/user_entity.dart'; // Import UserEntity
+import 'package:shartflix/data/entities/user_entity.dart'; // Import UserEntity
 import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart'; // Import ProfilePhotoUploadPage
 
 class ProfileInfoWidget extends StatelessWidget {

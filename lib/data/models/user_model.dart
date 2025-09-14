@@ -1,4 +1,4 @@
-import 'package:shartflix/domain/entities/user_entity.dart';
+import 'package:shartflix/data/entities/user_entity.dart';
 
 class UserModel {
   final String? id;

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart'; // Import MovieEntity
+import 'package:shartflix/data/entities/movie_entity.dart'; // Import MovieEntity
 import 'package:shartflix/di.dart';
 import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';

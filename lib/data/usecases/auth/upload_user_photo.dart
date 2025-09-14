@@ -1,7 +1,7 @@
-import 'package:shartflix/domain/repositories/auth_repository.dart';
+import 'package:shartflix/data/repositories/i_auth_repository.dart';
 
 class UploadUserPhoto {
-  final AuthRepository repository;
+  final IAuthRepository repository;
 
   UploadUserPhoto(this.repository);
 

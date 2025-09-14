@@ -1,12 +1,12 @@
 import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
 import 'package:shartflix/core/services/local_storage_service.dart';
-import 'package:shartflix/data/datasources/remote_data_source.dart';
+import 'package:shartflix/data/repositories/i_remote_data_source.dart';
 import 'package:shartflix/data/models/user_model.dart';
-import 'package:shartflix/domain/entities/user_entity.dart';
-import 'package:shartflix/domain/repositories/auth_repository.dart';
+import 'package:shartflix/data/entities/user_entity.dart';
+import 'package:shartflix/data/repositories/i_auth_repository.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
-  final RemoteDataSource remoteDataSource;
+class AuthRepositoryImpl implements IAuthRepository {
+  final IRemoteDataSource remoteDataSource;
   final LocalStorageService localStorageService;
 
   AuthRepositoryImpl({

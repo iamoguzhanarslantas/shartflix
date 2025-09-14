@@ -1,18 +1,19 @@
 import 'package:get_it/get_it.dart';
-import 'package:shartflix/core/network/dio_client.dart';
-import 'package:shartflix/data/datasources/remote_data_source.dart';
+import 'package:shartflix/core/services/dio_client.dart';
+import 'package:shartflix/data/repositories/i_remote_data_source.dart';
+import 'package:shartflix/data/repositories/remote_data_source_impl.dart';
 import 'package:shartflix/data/repositories/auth_repository_impl.dart';
 import 'package:shartflix/data/repositories/movie_repository_impl.dart';
-import 'package:shartflix/domain/repositories/auth_repository.dart';
-import 'package:shartflix/domain/repositories/movie_repository.dart';
-import 'package:shartflix/application/usecases/auth/get_user_profile.dart';
-import 'package:shartflix/application/usecases/auth/login_user.dart';
-import 'package:shartflix/application/usecases/auth/register_user.dart';
-import 'package:shartflix/application/usecases/auth/upload_user_photo.dart';
-import 'package:shartflix/application/usecases/movie/favorite_unfavorite_movie.dart';
-import 'package:shartflix/application/usecases/movie/get_favorite_movie_list.dart';
-import 'package:shartflix/application/usecases/movie/get_movie_list.dart';
-import 'package:shartflix/application/usecases/auth/auth_bloc.dart'; // Import AuthBloc
+import 'package:shartflix/data/repositories/i_auth_repository.dart';
+import 'package:shartflix/data/repositories/i_movie_repository.dart';
+import 'package:shartflix/data/usecases/auth/get_user_profile.dart';
+import 'package:shartflix/data/usecases/auth/login_user.dart';
+import 'package:shartflix/data/usecases/auth/register_user.dart';
+import 'package:shartflix/data/usecases/auth/upload_user_photo.dart';
+import 'package:shartflix/data/usecases/movie/favorite_unfavorite_movie.dart';
+import 'package:shartflix/data/usecases/movie/get_favorite_movie_list.dart';
+import 'package:shartflix/data/usecases/movie/get_movie_list.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Import AuthBloc
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
 import 'package:shartflix/core/services/local_storage_service.dart';
@@ -25,12 +26,13 @@ Future<void> init() async {
   sl.registerLazySingleton<DioClient>(() => DioClient(sl()));
 
   // Data sources
-  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<IRemoteDataSource>(() => RemoteDataSourceImpl(sl()));
 
   // Repositories
-  sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(remoteDataSource: sl(), localStorageService: sl()));
-  sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(sl()));
+  sl.registerLazySingleton<IAuthRepository>(
+    () => AuthRepositoryImpl(remoteDataSource: sl(), localStorageService: sl()),
+  );
+  sl.registerLazySingleton<IMovieRepository>(() => MovieRepositoryImpl(sl()));
 
   // Use cases - Auth
   sl.registerLazySingleton<LoginUser>(() => LoginUser(sl()));
@@ -48,11 +50,7 @@ Future<void> init() async {
   );
 
   // Blocs
-  sl.registerFactory<AuthBloc>(
-    () => AuthBloc(
-      authRepository: sl(),
-    ),
-  );
+  sl.registerFactory<AuthBloc>(() => AuthBloc(authRepository: sl()));
   sl.registerFactory<MovieCubit>(
     () => MovieCubit(
       getMovieList: sl(),

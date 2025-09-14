@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
 
 class MovieResponseEntity extends Equatable {
   final List<MovieEntity> movies;

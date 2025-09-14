@@ -1,7 +1,7 @@
-import 'package:shartflix/domain/repositories/movie_repository.dart';
+import 'package:shartflix/data/repositories/i_movie_repository.dart';
 
 class FavoriteUnfavoriteMovie {
-  final MovieRepository repository;
+  final IMovieRepository repository;
 
   FavoriteUnfavoriteMovie(this.repository);
 

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shartflix/core/errors/failures.dart';
-import 'package:shartflix/domain/entities/movie_entity.dart';
-import 'package:shartflix/application/usecases/movie/favorite_unfavorite_movie.dart';
-import 'package:shartflix/application/usecases/movie/get_favorite_movie_list.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
+import 'package:shartflix/data/usecases/movie/favorite_unfavorite_movie.dart';
+import 'package:shartflix/data/usecases/movie/get_favorite_movie_list.dart';
 
 part 'favorite_movie_state.dart';
 

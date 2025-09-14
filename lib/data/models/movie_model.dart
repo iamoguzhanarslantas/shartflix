@@ -1,4 +1,4 @@
-import 'package:shartflix/domain/entities/movie_entity.dart';
+import 'package:shartflix/data/entities/movie_entity.dart';
 
 class MovieModel {
   final String? id;
