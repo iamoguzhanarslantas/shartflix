@@ -36,10 +36,10 @@ class _LoginLottieState extends State<LoginLottie>
         onLoaded: (composition) {
           _lottieController
             ..duration = composition.duration
-            ..repeat(); // Loop the animation
+            ..repeat(); 
         },
         addRepaintBoundary:
-            true, // Improve performance by adding a repaint boundary
+            true, 
       ),
     );
   }

@@ -32,7 +32,7 @@ class PrimaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
           ),
           padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 8.h),
-          elevation: 0, // No shadow
+          elevation: 0, 
         ),
         child: isLoading
             ? SizedBox(

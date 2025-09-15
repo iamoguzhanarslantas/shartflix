@@ -18,8 +18,7 @@ class ProfileAvatarWidget extends StatelessWidget {
           height: 76.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
-            // ignore: deprecated_member_use
-            color: AppColors.black.withOpacity(0.25),
+            color: AppColors.black.withValues(alpha: 0.25),
           ),
           child: Center(
             child: ShaderMask(

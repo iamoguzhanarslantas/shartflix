@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'dart:ui'; // Required for ImageFilter
+import 'dart:ui'; 
 
 class FavoriteButtonWithBlur extends StatelessWidget {
   final bool isFavorite;
@@ -16,11 +16,11 @@ class FavoriteButtonWithBlur extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 24.w),
+      padding: EdgeInsets.only(right: 8.w),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(
           50.r,
-        ), // Clips the blur effect to a rounded rectangle.
+        ), 
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
           child: Container(
@@ -38,7 +38,7 @@ class FavoriteButtonWithBlur extends StatelessWidget {
                   : AppColors.black.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(
                 50.r,
-              ), // Defines the rounded corners for the container's background and border.
+              ), 
               border: Border.all(
                 color: isFavorite
                     ? AppColors.white.withValues(alpha: 0.6)

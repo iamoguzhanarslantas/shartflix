@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import for .w and .h
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:shartflix/core/constants/app_dimensions.dart'; // Import AppDimensions
+import 'package:shartflix/core/constants/app_dimensions.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/core/constants/app_strings.dart'; // Import AppStrings
+import 'package:shartflix/core/constants/app_strings.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/data/entities/user_entity.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
 import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/profile/add_photo_button.dart';
 import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
-import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/widgets/profile/liked_movie_card.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_page_app_bar.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_page_user_info.dart';
-import 'package:shartflix/presentation/widgets/profile/profile_page_user_photo.dart'; // Import LikedMovieCard
+import 'package:shartflix/presentation/widgets/profile/profile_page_user_photo.dart';
 
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile';
@@ -32,7 +32,7 @@ class ProfilePage extends StatelessWidget {
             if (state is AuthUnauthenticated) {
               context.go(LoginPage.routeName);
             } else if (state is AuthAuthenticated) {
-              // Fetch favorite movies when authenticated and ProfilePage is built
+             
               context.read<FavoriteMovieCubit>().fetchFavoriteMovies();
             }
           },
@@ -44,11 +44,11 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   ProfilePageAppBar(),
-                  // New Profile Info Row
+                  
                   Container(
                     width: AppDimensions
                         .navBarWidth
-                        .w, // Assuming same width as navBar
+                        .w, 
                     height: AppDimensions.profileInfoRowHeight.h,
                     padding: EdgeInsets.only(
                       top: AppDimensions.profileInfoRowPaddingTop.h,
@@ -71,15 +71,15 @@ class ProfilePage extends StatelessWidget {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Profile Image
+                              
                               ProfilePageUserPhoto(user: user),
                               SizedBox(
                                 width: AppDimensions.profileInfoRowGap.w,
                               ),
-                              // Name and Email Column
+                            
                               ProfilePageUserInfo(user: user),
-                              const Spacer(), // Pushes the button to the right
-                              // Add Photo Button
+                              const Spacer(), 
+                            
                               AddPhotoButton(
                                 onPressed: () {
                                   context.go(ProfilePhotoUploadPage.routeName);
@@ -104,7 +104,7 @@ class ProfilePage extends StatelessWidget {
                       },
                     ),
                   ),
-                  // The rest of the profile content will go here, currently empty
+                  
                   Expanded(
                     child: Builder(
                       builder: (context) {
@@ -117,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                                     .likedMoviesSectionTopPadding
                                     .h,
                               ),
-                              // Liked Movies Section Title (fixed)
+                              
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal:
@@ -137,7 +137,7 @@ class ProfilePage extends StatelessWidget {
                               SizedBox(
                                 height: AppDimensions.likedMoviesSectionGap.h,
                               ),
-                              // Liked Movies Grid (scrollable)
+                              
                               Expanded(
                                 child: SingleChildScrollView(
                                   child: Padding(
@@ -145,7 +145,7 @@ class ProfilePage extends StatelessWidget {
                                       horizontal: AppDimensions
                                           .profileAppBarPaddingLeft
                                           .w,
-                                    ), // Reusing horizontal padding
+                                    ), 
                                     child: BlocBuilder<FavoriteMovieCubit, FavoriteMovieState>(
                                       builder: (context, movieState) {
                                         if (movieState

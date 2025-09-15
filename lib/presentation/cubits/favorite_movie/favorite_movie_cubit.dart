@@ -35,7 +35,7 @@ class FavoriteMovieCubit extends Cubit<FavoriteMovieState> {
 
     try {
       await _favoriteUnfavoriteMovie(movieId);
-      // After successful toggle, re-fetch the favorite list to ensure it's up-to-date.
+      
       await fetchFavoriteMovies();
     } on Failure catch (e) {
       emit(FavoriteMovieError(e));

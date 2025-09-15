@@ -13,10 +13,10 @@ class LimitedOfferTokenPackages extends StatelessWidget {
       width: 354.w,
       height: 238.h,
       decoration: BoxDecoration(
-        color: Colors.transparent, // Placeholder color
+        color: Colors.transparent, 
         borderRadius: BorderRadius.circular(
           8.r,
-        ), // Placeholder border radius
+        ), 
       ),
       child: Column(
         children: [
@@ -28,19 +28,19 @@ class LimitedOfferTokenPackages extends StatelessWidget {
               textAlign: TextAlign.center,
               style: AppTextStyles.bodyLargeMedium.copyWith(
                 color: AppColors.white,
-                height: 1.0, // 100% line-height
+                height: 1.0, 
               ),
             ),
           ),
-          SizedBox(height: 32.h), // 32px spacing
+          SizedBox(height: 32.h), 
           Container(
             width: 354.w,
             height: 186.h,
             decoration: BoxDecoration(
-              color: Colors.transparent, // Placeholder color
+              color: Colors.transparent, 
               borderRadius: BorderRadius.circular(
                 8.r,
-              ), // Placeholder border radius
+              ), 
             ),
             child: Column(
               children: [
@@ -60,7 +60,7 @@ class LimitedOfferTokenPackages extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 12.w,
-                    ), // 12px gap
+                    ), 
                     const TokenPackageCard(
                       oldPrice: '2000',
                       newPrice: '3.375',
@@ -74,7 +74,7 @@ class LimitedOfferTokenPackages extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 12.w,
-                    ), // 12px gap
+                    ), 
                     const TokenPackageCard(
                       oldPrice: '1000',
                       newPrice: '1.350',

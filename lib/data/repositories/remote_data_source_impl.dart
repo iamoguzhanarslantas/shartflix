@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart'; // Import for debugPrint
+import 'package:flutter/foundation.dart';
 import 'package:shartflix/core/services/dio_client.dart';
-import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/data/models/movie_list_response_model.dart';
 import 'package:shartflix/data/models/movie_model.dart';
 import 'package:shartflix/data/models/user_model.dart';
@@ -130,7 +130,7 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
   Future<List<MovieModel>> getAllMovies() async {
     List<MovieModel> allMovies = [];
     int currentPage = 1;
-    int totalPages = 1; // Initialize to 1 to enter the loop
+    int totalPages = 1; 
 
     while (currentPage <= totalPages) {
       try {
@@ -234,7 +234,7 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
   Future<void> updateUserProfilePhoto(String? photoUrl) async {
     try {
       await _dioClient.dio.put(
-        '/user/profile/photo', // Assuming an endpoint to update photo URL
+        '/user/profile/photo', 
         data: {'photoUrl': photoUrl},
       );
     } on DioException catch (e) {
@@ -278,8 +278,7 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
       return ServerFailure(errorMessage);
     } else if (e.response?.statusCode != null &&
         e.response!.statusCode! >= 400) {
-      // For 4xx errors, it's often a client-side issue or specific API error
-      // We can refine this further if needed, but for now, treat as server failure
+      
       return ServerFailure(errorMessage);
     } else {
       return UnknownFailure(errorMessage);

@@ -50,15 +50,15 @@ class AppGradients {
 
   // Button Radial Gradient
   static final RadialGradient buttonRadialGradient = RadialGradient(
-    center: Alignment.center, // Default center
+    center: Alignment.center,
     focal: Alignment(
       0.0,
       -0.66,
-    ), // 50% 16.67% -> x=0.5 (center), y=0.1667 (from top) -> Alignment(0.0, -0.6666)
+    ),
     colors: [AppColors.primary, AppColors.buttonActive],
     stops: [0.0, 1.0],
     radius:
-        0.84, // Adjusted based on common button gradients, can be fine-tuned
+        0.84,
   );
 
   // Navigation Bar Background Gradient

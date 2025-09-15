@@ -18,7 +18,7 @@ class LimitedOfferBonusSection extends StatelessWidget {
         border: Border.all(
           color: AppColors.white.withValues(
             alpha: 0.2,
-          ), // 20% white
+          ), 
           width: 1.w,
         ),
       ),
@@ -26,7 +26,7 @@ class LimitedOfferBonusSection extends StatelessWidget {
         children: [
           SizedBox(
             height: 16.h,
-          ), // 16px top spacing
+          ), 
           SizedBox(
             height: 20.h,
             child: Text(
@@ -37,7 +37,7 @@ class LimitedOfferBonusSection extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 14.h), // 14px spacing
+          SizedBox(height: 14.h), 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

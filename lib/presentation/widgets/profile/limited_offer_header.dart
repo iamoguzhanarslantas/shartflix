@@ -18,11 +18,11 @@ class LimitedOfferHeader extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTextStyles.h4.copyWith(
               color: AppColors.white,
-              height: 1.0, // 100% line-height
+              height: 1.0, 
             ),
           ),
         ),
-        SizedBox(height: 8.h), // 8px spacing
+        SizedBox(height: 8.h), 
         SizedBox(
           width: 298.w,
           height: 34.h,
@@ -32,8 +32,8 @@ class LimitedOfferHeader extends StatelessWidget {
             style: AppTextStyles.bodyNormalRegular.copyWith(
               color: AppColors.white.withValues(
                 alpha: 0.9,
-              ), // 90% white
-              height: 1.0, // 100% line-height
+              ), 
+              height: 1.0, 
             ),
           ),
         ),

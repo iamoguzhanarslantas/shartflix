@@ -19,11 +19,11 @@ class MovieListResponseModel {
           (data?['movies'] as List?)
               ?.map((e) => MovieModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [], // Provide an empty list if 'movies' is null
+          [], 
       totalPages:
-          pagination?['maxPage'] as int? ?? 0, // totalPages is under 'pagination'
+          pagination?['maxPage'] as int? ?? 0, 
       currentPage:
-          pagination?['currentPage'] as int? ?? 0, // currentPage is under 'pagination'
+          pagination?['currentPage'] as int? ?? 0, 
     );
   }
 

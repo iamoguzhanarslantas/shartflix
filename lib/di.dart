@@ -13,9 +13,9 @@ import 'package:shartflix/data/usecases/auth/upload_user_photo.dart';
 import 'package:shartflix/data/usecases/movie/favorite_unfavorite_movie.dart';
 import 'package:shartflix/data/usecases/movie/get_favorite_movie_list.dart';
 import 'package:shartflix/data/usecases/movie/get_movie_list.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Import AuthBloc
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
-import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 
 final GetIt sl = GetIt.instance;

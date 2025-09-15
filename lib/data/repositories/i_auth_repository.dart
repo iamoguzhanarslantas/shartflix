@@ -12,5 +12,5 @@ abstract class IAuthRepository {
   Future<UserEntity?> getUser();
   Future<void> setIsNewUser(bool isNewUser);
   Future<bool?> getIsNewUser();
-  Future<void> updateUserProfilePhoto(String? photoUrl); // New method
+  Future<void> updateUserProfilePhoto(String? photoUrl); 
 }

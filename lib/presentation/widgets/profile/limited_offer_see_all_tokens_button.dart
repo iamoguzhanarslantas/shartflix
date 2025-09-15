@@ -16,14 +16,14 @@ class LimitedOfferSeeAllTokensButton extends StatelessWidget {
         horizontal: 32.w,
       ),
       decoration: BoxDecoration(
-        color: AppColors.primary, // buttonColor: primary
+        color: AppColors.primary, 
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Center(
         child: Text(
           'Tüm Jetonları Gör',
           style: AppTextStyles.bodyLargeSemiBold.copyWith(
-            // Assuming a bold style for primary button
+            
             color: AppColors.white,
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
 
 class CustomTextInput extends StatefulWidget {
@@ -10,7 +10,7 @@ class CustomTextInput extends StatefulWidget {
   final String? iconPath;
   final bool isPassword;
   final TextEditingController? controller;
-  final FormFieldValidator<String>? validator; // Changed to FormFieldValidator
+  final FormFieldValidator<String>? validator; 
   final String? errorText;
 
   const CustomTextInput({
@@ -65,7 +65,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
     if (_isFocused) {
       borderColor = AppColors.primary;
     }
-    // The errorText from the parent widget takes precedence for border color
+    
     if (widget.errorText != null && widget.errorText!.isNotEmpty) {
       borderColor = AppColors.error;
     }
@@ -88,7 +88,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
                 Padding(
                   padding: EdgeInsets.only(
                     right: 10.w,
-                  ), // Gap between icon and text field
+                  ), 
                   child: SvgPicture.asset(
                     widget.iconPath!,
                     width: 24.w,
@@ -96,34 +96,34 @@ class _CustomTextInputState extends State<CustomTextInput> {
                     colorFilter: const ColorFilter.mode(
                       AppColors.white,
                       BlendMode.srcIn,
-                    ), // Apply color filter
+                    ), 
                   ),
                 ),
               Expanded(
                 child: TextFormField(
-                  // Changed to TextFormField
+                  
                   controller: widget.controller,
                   focusNode: _focusNode,
                   obscureText: _obscureText,
-                  validator: widget.validator, // Pass the validator here
+                  validator: widget.validator, 
                   style: AppTextStyles.bodyNormalRegular.copyWith(
                     color: AppColors.white,
                   ),
                   decoration: InputDecoration(
-                    hintText: widget.labelText, // Always use labelText as hint
+                    hintText: widget.labelText, 
                     hintStyle: AppTextStyles.bodyNormalRegular.copyWith(
                       color: AppColors.white50,
                       height: 1.h,
                     ),
-                    border: InputBorder.none, // Remove default TextField border
+                    border: InputBorder.none, 
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    isDense: true, // Reduce vertical space
-                    contentPadding: EdgeInsets.zero, // Adjust vertical padding
-                    errorText: null, // Explicitly set errorText to null
+                    isDense: true, 
+                    contentPadding: EdgeInsets.zero, 
+                    errorText: null, 
                     errorStyle: TextStyle(
                       height: 1.h,
                       fontSize: 0,
-                    ), // Hide internal error text
+                    ), 
                     suffixIcon: widget.isPassword
                         ? GestureDetector(
                             onTap: _toggleObscureText,
@@ -134,7 +134,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
                               colorFilter: const ColorFilter.mode(
                                 AppColors.white30,
                                 BlendMode.srcIn,
-                              ), // Apply color filter
+                              ), 
                             ),
                           )
                         : null,

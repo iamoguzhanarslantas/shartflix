@@ -8,8 +8,8 @@ abstract class IRemoteDataSource {
   Future<UserModel> getUserProfile();
   Future<void> uploadUserPhoto(String imagePath);
   Future<MovieListResponseModel> getMovieList({int page = 1});
-  Future<List<MovieModel>> getAllMovies(); // New method to fetch all movies
+  Future<List<MovieModel>> getAllMovies(); 
   Future<List<MovieModel>> getFavoriteMovieList();
   Future<void> favoriteUnfavoriteMovie(String movieId);
-  Future<void> updateUserProfilePhoto(String? photoUrl); // New method
+  Future<void> updateUserProfilePhoto(String? photoUrl); 
 }

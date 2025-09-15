@@ -3,24 +3,24 @@ import 'package:shartflix/data/entities/user_entity.dart';
 class UserModel {
   final String? id;
   final String? email;
-  final String? name; // Changed from username to name
+  final String? name; 
   final String? photoUrl;
-  final String? token; // Add token field
+  final String? token; 
 
   UserModel({
     this.id,
     this.email,
-    this.name, // Initialize name
+    this.name, 
     this.photoUrl,
-    this.token, // Initialize token
+    this.token, 
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    // First, try to parse from a nested 'data' map (typical for API responses)
+    
     Map<String, dynamic>? data = json['data'];
     if (data != null) {
       return UserModel(
-        id: data['id'] ?? data['_id'], // API might use '_id' or 'id'
+        id: data['id'] ?? data['_id'], 
         email: data['email'],
         name: data['name'],
         photoUrl: data['photoUrl'],
@@ -28,7 +28,7 @@ class UserModel {
       );
     }
 
-    // If no nested 'data' map, try to parse directly from the top-level JSON (typical for local storage)
+    
     return UserModel(
       id: json['id'] ?? json['_id'],
       email: json['email'],
@@ -42,9 +42,9 @@ class UserModel {
     return {
       'id': id,
       'email': email,
-      'name': name, // Include name in JSON
+      'name': name, 
       'photoUrl': photoUrl,
-      'token': token, // Include token in JSON
+      'token': token, 
     };
   }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart'; // Import go_router
+import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/data/entities/user_entity.dart'; // Import UserEntity
-import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart'; // Import ProfilePhotoUploadPage
+import 'package:shartflix/data/entities/user_entity.dart';
+import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
 
 class ProfileInfoWidget extends StatelessWidget {
   final UserEntity user;
@@ -30,8 +30,8 @@ class ProfileInfoWidget extends StatelessWidget {
                         child: Image.network(
                           user.photoUrl!,
                           fit: BoxFit.cover,
-                          width: 100.r, // Match CircleAvatar radius * 2
-                          height: 100.r, // Match CircleAvatar radius * 2
+                          width: 100.r, 
+                          height: 100.r, 
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) {
                               return child;
@@ -87,7 +87,7 @@ class ProfileInfoWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-          // Add more profile fields as needed
+          
         ],
       ),
     );

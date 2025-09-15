@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
 
 class SocialLoginButton extends StatelessWidget {
@@ -27,7 +27,9 @@ class SocialLoginButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(color: AppColors.white20, width: 1.w),
         ),
-        child: Center(child: SvgPicture.asset(iconPath, width: 24.w, height: 24.h)),
+        child: Center(
+          child: SvgPicture.asset(iconPath, width: 24.w, height: 24.h),
+        ),
       ),
     );
   }
@@ -42,23 +44,23 @@ class SocialLoginButtonsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialLoginButton(
-          iconPath: AppIcons.google, // Changed to .svg
+          iconPath: AppIcons.google, 
           onPressed: () {
-            // Handle Google login
+            
           },
         ),
-        SizedBox(width: 8.w), // Fixed gap between buttons
+        SizedBox(width: 8.w), 
         SocialLoginButton(
-          iconPath: AppIcons.apple, // Changed to .svg
+          iconPath: AppIcons.apple, 
           onPressed: () {
-            // Handle Apple login
+            
           },
         ),
-        SizedBox(width: 8.w), // Fixed gap between buttons
+        SizedBox(width: 8.w), 
         SocialLoginButton(
-          iconPath: AppIcons.facebook, // Changed to .svg
+          iconPath: AppIcons.facebook, 
           onPressed: () {
-            // Handle Facebook login
+            
           },
         ),
       ],

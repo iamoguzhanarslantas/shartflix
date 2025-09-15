@@ -20,10 +20,10 @@ class MovieModel {
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    final id = (json['id'] ?? json['_id'])?.toString(); // Ensure ID is a string
-    final title = json['Title']?.toString() ?? 'No Title'; // Provide default
+    final id = (json['id'] ?? json['_id'])?.toString(); 
+    final title = json['Title']?.toString() ?? 'No Title'; 
     final description =
-        json['Plot']?.toString() ?? 'No Description'; // Provide default
+        json['Plot']?.toString() ?? 'No Description'; 
     final List<String> images =
         (json['Images'] as List<dynamic>?)
             ?.map((e) => e.toString())
@@ -42,7 +42,7 @@ class MovieModel {
         double.tryParse(json['imdbRating']?.toString() ?? '') ?? 0.0;
     final isFavorite =
         json['isFavorite'] as bool? ??
-        false; // Ensure type safety and default to false
+        false; 
 
     return MovieModel(
       id: id,

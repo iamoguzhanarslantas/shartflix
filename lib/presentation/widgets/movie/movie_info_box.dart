@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons
+import 'package:flutter_svg/flutter_svg.dart'; 
 
 class MovieInfoBox extends StatefulWidget {
   final String movieTitle;
   final String movieDescription;
-  final String iconPath; // Path to the icon
+  final String iconPath; 
   final bool isFavorite;
   final VoidCallback onFavoriteToggle;
 
@@ -37,10 +37,10 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
       child: Container(
         width: 402.w,
         height: _isExpanded ? null : 87.h,
-        color: Colors.transparent, // Set background to transparent
+        color: Colors.transparent, 
         child: Row(
           children: [
-            // Icon Container
+            
             Container(
               width: 40.w,
               height: 40.h,
@@ -55,13 +55,13 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
                     AppColors.white,
                     BlendMode.srcIn,
                   ),
-                  width: 20.w, // Updated icon size inside the container
-                  height: 17.h, // Updated icon size inside the container
+                  width: 20.w, 
+                  height: 17.h, 
                 ),
               ),
             ),
-            SizedBox(width: 16.w), // Gap between icon and text
-            // Movie Title and Description
+            SizedBox(width: 16.w), 
+            
             SizedBox(
               width: 278.w,
               height: _isExpanded ? null : 55.h,
@@ -86,7 +86,7 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
                     child: RichText(
                       maxLines: _isExpanded
                           ? 100
-                          : 2, // Show all lines when expanded
+                          : 2, 
                       overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         children: [
@@ -102,9 +102,9 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
                           ),
                           if (!_isExpanded &&
                               widget.movieDescription.length >
-                                  50) // Only show "Devamı Oku" if not expanded and description is long
+                                  50) 
                             TextSpan(
-                              text: ' Devamı Oku', // "Read More" part
+                              text: ' Devamı Oku', 
                               style: AppTextStyles.bodyNormalSemiBold.copyWith(
                                 color: AppColors.white,
                               ),
@@ -115,13 +115,13 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
                                   });
                                 },
                             ),
-                          if (_isExpanded) // Show "Daha Az Oku" if expanded
+                          if (_isExpanded) 
                             TextSpan(
-                              text: ' Daha Az Oku', // "Read Less" part
+                              text: ' Daha Az Oku', 
                               style: AppTextStyles.bodyNormalSemiBold.copyWith(
                                 color: AppColors.white,
-                                height: 1.0, // 100% line-height
-                                letterSpacing: 0.0, // 0% letter-spacing
+                                height: 1.0, 
+                                letterSpacing: 0.0, 
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
@@ -138,7 +138,7 @@ class _MovieInfoBoxState extends State<MovieInfoBox>
               ),
             ),
 
-            // Favorite Button
+            
           ],
         ),
       ),

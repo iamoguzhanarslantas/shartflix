@@ -31,8 +31,8 @@ class _AuthScreenWrapperState extends State<AuthScreenWrapper> {
       body: AppLayout(
         child: SingleChildScrollView(
           physics: MediaQuery.of(context).viewInsets.bottom == 0
-              ? const NeverScrollableScrollPhysics() // Klavye kapalı → scroll yok
-              : const BouncingScrollPhysics(), // Klavye açık → scroll var
+              ? const NeverScrollableScrollPhysics() 
+              : const BouncingScrollPhysics(), 
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

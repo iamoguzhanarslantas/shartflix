@@ -16,7 +16,7 @@ class TokenPackageBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: -11.5.h, // (23.h / 2)
+      top: -11.5.h, 
       left: 0,
       right: 0,
       child: Center(
@@ -35,7 +35,7 @@ class TokenPackageBadge extends StatelessWidget {
               BoxShadow(
                 color: AppColors.white.withValues(
                   alpha: 0.3,
-                ), // Inset effect approximation
+                ), 
                 blurRadius: 8.33.r,
                 spreadRadius: 0,
                 blurStyle: BlurStyle.inner,

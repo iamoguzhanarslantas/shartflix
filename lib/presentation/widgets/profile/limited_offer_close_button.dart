@@ -14,27 +14,22 @@ class LimitedOfferCloseButton extends StatelessWidget {
     return Positioned(
       right: 16.w,
       top: 16.h,
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
-          Navigator.pop(
-            context,
-          ); // Close the bottom sheet
+          Navigator.pop(context); 
         },
         child: ClipOval(
-          // Use ClipOval for perfect circle with blur
+          
           child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 20,
-              sigmaY: 20,
-            ),
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
             child: Container(
               width: 36.w,
               height: 36.h,
               decoration: BoxDecoration(
-                color: AppColors.black10, // #0000001A (10% black)
+                color: AppColors.black10, 
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.white50, // #FFFFFF80 (50% white)
+                  color: AppColors.white50, 
                   width: 1.w,
                 ),
               ),

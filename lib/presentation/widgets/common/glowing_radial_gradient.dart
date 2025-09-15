@@ -19,8 +19,8 @@ class GlowingRadialGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scaleX: 0.8.w, // yatayda uzatma
-      scaleY: 0.8.h, // dikey sabit
+      scaleX: 0.8.w, 
+      scaleY: 0.8.h, 
       child: Container(
         width: width.w,
         height: height.h,

@@ -5,7 +5,7 @@ import 'package:shartflix/presentation/pages/auth/register_page.dart';
 import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/presentation/pages/profile/profile_page.dart';
-import 'package:shartflix/presentation/navigation/scaffold_with_nav_bar.dart'; // Import ScaffoldWithNavBar
+import 'package:shartflix/presentation/navigation/scaffold_with_nav_bar.dart';
 
 class AppRouter {
   AppRouter._();
@@ -31,11 +31,16 @@ class AppRouter {
           return const ProfilePhotoUploadPage();
         },
       ),
-      // StatefulShellRoute for BottomNavigationBar
+     
       StatefulShellRoute.indexedStack(
-        builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
-          return ScaffoldWithNavBar(navigationShell: navigationShell);
-        },
+        builder:
+            (
+              BuildContext context,
+              GoRouterState state,
+              StatefulNavigationShell navigationShell,
+            ) {
+              return ScaffoldWithNavBar(navigationShell: navigationShell);
+            },
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
             routes: <RouteBase>[

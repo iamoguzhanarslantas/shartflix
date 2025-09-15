@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/presentation/cubits/auth/auth_event.dart'; // Import AuthEvent
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
+import 'package:shartflix/presentation/cubits/auth/auth_event.dart';
 
 class AuthFormValidator extends StatefulWidget {
   final Widget Function(
@@ -10,30 +10,30 @@ class AuthFormValidator extends StatefulWidget {
     TextEditingController? nameController,
     TextEditingController? emailController,
     TextEditingController? passwordController,
-    TextEditingController? confirmPasswordController, // Made nullable
+    TextEditingController? confirmPasswordController, 
     String? nameErrorText,
     String? emailErrorText,
     String? passwordErrorText,
     String? confirmPasswordErrorText,
-    String? termsErrorText, // New parameter
-    FormFieldValidator<String>? validateName, // Made nullable
+    String? termsErrorText, 
+    FormFieldValidator<String>? validateName, 
     FormFieldValidator<String>? validateEmail,
     FormFieldValidator<String>? validatePassword,
     FormFieldValidator<String?>?
-    validateConfirmPassword, // Made nullable, adjusted type
+    validateConfirmPassword, 
     VoidCallback onSubmit,
     bool isLoading,
   )
   builder;
 
   final bool isRegisterForm;
-  final bool termsAccepted; // New parameter
+  final bool termsAccepted; 
 
   const AuthFormValidator({
     super.key,
     required this.builder,
     this.isRegisterForm = false,
-    this.termsAccepted = false, // Default value
+    this.termsAccepted = false, 
   });
 
   @override
@@ -52,7 +52,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
   String? _emailErrorText;
   String? _passwordErrorText;
   String? _confirmPasswordErrorText;
-  String? _termsErrorText; // New error text for terms and conditions
+  String? _termsErrorText; 
   bool _isLoading = false;
 
   void clearControllers() {
@@ -65,7 +65,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
       _emailErrorText = null;
       _passwordErrorText = null;
       _confirmPasswordErrorText = null;
-      _termsErrorText = null; // Clear terms error as well
+      _termsErrorText = null; 
     });
   }
 
@@ -109,12 +109,12 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
   }
 
   String? _validateConfirmPassword(String? value) {
-    // Modified to take only one argument
+    
     if (value == null || value.isEmpty) {
       return 'Şifre tekrar boş bırakılamaz';
     }
     if (value != _passwordController.text) {
-      // Compare with _passwordController.text
+      
       return 'Şifreler eşleşmiyor';
     }
     return null;
@@ -141,25 +141,25 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
         _isLoading = true;
       });
       try {
-        // All fields are valid, perform submission logic
+        
         if (widget.isRegisterForm) {
           context.read<AuthBloc>().add(
-                AuthRegister(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                  name: _nameController.text,
-                ),
-              );
+            AuthRegister(
+              email: _emailController.text,
+              password: _passwordController.text,
+              name: _nameController.text,
+            ),
+          );
         } else {
           context.read<AuthBloc>().add(
-                AuthLogin(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                ),
-              );
+            AuthLogin(
+              email: _emailController.text,
+              password: _passwordController.text,
+            ),
+          );
         }
       } catch (e) {
-        // Error handling is now done by BlocListener in RegisterPage/LoginPage
+        
       } finally {
         setState(() {
           _isLoading = false;
@@ -181,7 +181,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
       _emailErrorText,
       _passwordErrorText,
       _confirmPasswordErrorText,
-      _termsErrorText, // Pass new terms error text
+      _termsErrorText, 
       _validateName,
       _validateEmail,
       _validatePassword,

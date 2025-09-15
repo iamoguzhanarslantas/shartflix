@@ -26,7 +26,7 @@ class ProfileFooterButtons extends StatelessWidget {
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height < 800 ? 66.h : 132.h,
-        ), // Top gap
+        ), 
         Opacity(
           opacity: imageFile != null ? 1.0 : 0.5,
           child: PrimaryButton(

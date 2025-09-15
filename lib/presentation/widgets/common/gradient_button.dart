@@ -8,16 +8,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class GradientButton extends StatelessWidget {
   final String text;
-  final String inactiveIconPath; // Changed to String path
-  final String activeIconPath; // Changed to String path
+  final String inactiveIconPath; 
+  final String activeIconPath; 
   final bool isActive;
   final VoidCallback onPressed;
 
   const GradientButton({
     super.key,
     required this.text,
-    required this.inactiveIconPath, // Changed to path
-    required this.activeIconPath, // Changed to path
+    required this.inactiveIconPath, 
+    required this.activeIconPath, 
     required this.isActive,
     required this.onPressed,
   });

@@ -1,4 +1,4 @@
-import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/data/repositories/i_remote_data_source.dart';
 import 'package:shartflix/data/repositories/i_movie_repository.dart';
 import 'package:shartflix/data/entities/movie_entity.dart';

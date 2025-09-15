@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/data/entities/movie_entity.dart';
 import 'package:shartflix/data/entities/movie_response_entity.dart';
 import 'package:shartflix/data/usecases/movie/favorite_unfavorite_movie.dart';
@@ -18,17 +18,21 @@ class MovieCubit extends Cubit<MovieState> {
     required GetMovieList getMovieList,
     required GetFavoriteMovieList getFavoriteMovieList,
     required FavoriteUnfavoriteMovie favoriteUnfavoriteMovie,
-  })  : _getMovieList = getMovieList,
-        _getFavoriteMovieList = getFavoriteMovieList,
-        _favoriteUnfavoriteMovie = favoriteUnfavoriteMovie,
-        super(MovieInitial());
+  }) : _getMovieList = getMovieList,
+       _getFavoriteMovieList = getFavoriteMovieList,
+       _favoriteUnfavoriteMovie = favoriteUnfavoriteMovie,
+       super(MovieInitial());
 
   Future<void> fetchAllMovies() async {
     emit(MovieLoading());
     try {
       final allMovies = await _getMovieList.callGetAllMovies();
-      // Wrap the list of all movies in a MovieResponseEntity for consistency
-      emit(MovieLoaded(MovieResponseEntity(movies: allMovies, totalPages: 1, currentPage: 0)));
+
+      emit(
+        MovieLoaded(
+          MovieResponseEntity(movies: allMovies, totalPages: 1, currentPage: 0),
+        ),
+      );
     } on Failure catch (e) {
       emit(MovieError(e));
     } catch (e) {
@@ -52,10 +56,20 @@ class MovieCubit extends Cubit<MovieState> {
     emit(MovieLoading());
     try {
       final movies = await _getFavoriteMovieList();
-      // Filter movies to ensure only those explicitly marked as favorite are included
-      final favoriteMovies = movies.where((movie) => movie.isFavorite == true).toList();
-      // For favorite list, we wrap it in a MovieResponseEntity
-      emit(MovieLoaded(MovieResponseEntity(movies: favoriteMovies, totalPages: 1, currentPage: 0)));
+
+      final favoriteMovies = movies
+          .where((movie) => movie.isFavorite == true)
+          .toList();
+
+      emit(
+        MovieLoaded(
+          MovieResponseEntity(
+            movies: favoriteMovies,
+            totalPages: 1,
+            currentPage: 0,
+          ),
+        ),
+      );
     } on Failure catch (e) {
       emit(MovieError(e));
     } catch (e) {
@@ -69,12 +83,11 @@ class MovieCubit extends Cubit<MovieState> {
     final currentMovies = (state as MovieLoaded).movieResponse.movies;
     final movieIndex = currentMovies.indexWhere((movie) => movie.id == movieId);
 
-    if (movieIndex == -1) return; // Movie not found in the current list
+    if (movieIndex == -1) return;
 
     final updatedMovies = List<MovieEntity>.from(currentMovies);
     final movieToUpdate = updatedMovies[movieIndex];
 
-    // Optimistically update the favorite status
     updatedMovies[movieIndex] = MovieEntity(
       id: movieToUpdate.id,
       title: movieToUpdate.title,
@@ -82,37 +95,45 @@ class MovieCubit extends Cubit<MovieState> {
       images: movieToUpdate.images,
       releaseDate: movieToUpdate.releaseDate,
       voteAverage: movieToUpdate.voteAverage,
-      isFavorite: !(movieToUpdate.isFavorite ?? false), // Toggle favorite status
+      isFavorite: !(movieToUpdate.isFavorite ?? false),
     );
 
-    // Emit the optimistically updated list wrapped in MovieResponseEntity
-    emit(MovieLoaded(MovieResponseEntity(
-      movies: updatedMovies,
-      totalPages: (state as MovieLoaded).movieResponse.totalPages,
-      currentPage: (state as MovieLoaded).movieResponse.currentPage,
-    )));
+    emit(
+      MovieLoaded(
+        MovieResponseEntity(
+          movies: updatedMovies,
+          totalPages: (state as MovieLoaded).movieResponse.totalPages,
+          currentPage: (state as MovieLoaded).movieResponse.currentPage,
+        ),
+      ),
+    );
 
     try {
       await _favoriteUnfavoriteMovie(movieId);
-      // If API call succeeds, the optimistic update is confirmed.
-      // No need to re-fetch the entire list.
     } on Failure catch (e) {
-      // If API call fails, revert the optimistic update
-      updatedMovies[movieIndex] = movieToUpdate; // Revert to original state
-      emit(MovieLoaded(MovieResponseEntity(
-        movies: updatedMovies,
-        totalPages: (state as MovieLoaded).movieResponse.totalPages,
-        currentPage: (state as MovieLoaded).movieResponse.currentPage,
-      ))); // Emit the reverted list
-      emit(MovieError(e)); // Also emit an error
+      updatedMovies[movieIndex] = movieToUpdate;
+      emit(
+        MovieLoaded(
+          MovieResponseEntity(
+            movies: updatedMovies,
+            totalPages: (state as MovieLoaded).movieResponse.totalPages,
+            currentPage: (state as MovieLoaded).movieResponse.currentPage,
+          ),
+        ),
+      );
+      emit(MovieError(e));
     } catch (e) {
-      updatedMovies[movieIndex] = movieToUpdate; // Revert to original state
-      emit(MovieLoaded(MovieResponseEntity(
-        movies: updatedMovies,
-        totalPages: (state as MovieLoaded).movieResponse.totalPages,
-        currentPage: (state as MovieLoaded).movieResponse.currentPage,
-      ))); // Emit the reverted list
-      emit(MovieError(UnknownFailure(e.toString()))); // Also emit an error
+      updatedMovies[movieIndex] = movieToUpdate;
+      emit(
+        MovieLoaded(
+          MovieResponseEntity(
+            movies: updatedMovies,
+            totalPages: (state as MovieLoaded).movieResponse.totalPages,
+            currentPage: (state as MovieLoaded).movieResponse.currentPage,
+          ),
+        ),
+      );
+      emit(MovieError(UnknownFailure(e.toString())));
     }
   }
 
@@ -120,13 +141,13 @@ class MovieCubit extends Cubit<MovieState> {
     if (state is MovieLoaded) {
       return (state as MovieLoaded).movieResponse.totalPages;
     }
-    return 0; // Default value if not loaded
+    return 0;
   }
 
   int getCurrentPage() {
     if (state is MovieLoaded) {
       return (state as MovieLoaded).movieResponse.currentPage;
     }
-    return 0; // Default value if not loaded
+    return 0;
   }
 }

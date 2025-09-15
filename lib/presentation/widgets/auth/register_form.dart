@@ -21,14 +21,14 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  bool _termsAccepted = false; // State for the checkbox
+  bool _termsAccepted = false; 
 
   @override
   Widget build(BuildContext context) {
     return AuthFormValidator(
-      key: widget.formValidatorKey, // Pass the key here
+      key: widget.formValidatorKey, 
       isRegisterForm: true,
-      termsAccepted: _termsAccepted, // Pass checkbox state
+      termsAccepted: _termsAccepted, 
       builder:
           (
             context,
@@ -41,7 +41,7 @@ class _RegisterFormState extends State<RegisterForm> {
             emailErrorText,
             passwordErrorText,
             confirmPasswordErrorText,
-            termsErrorText, // New parameter for terms error
+            termsErrorText, 
             validateName,
             validateEmail,
             validatePassword,
@@ -49,13 +49,13 @@ class _RegisterFormState extends State<RegisterForm> {
             onSubmit,
             isLoading,
           ) {
-            // Update the hasErrorNotifier based on the presence of error texts
+            
             final bool currentHasError =
                 nameErrorText != null ||
                 emailErrorText != null ||
                 passwordErrorText != null ||
                 confirmPasswordErrorText != null ||
-                termsErrorText != null; // Include terms error
+                termsErrorText != null; 
             if (widget.hasErrorNotifier.value != currentHasError) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 widget.hasErrorNotifier.value = currentHasError;

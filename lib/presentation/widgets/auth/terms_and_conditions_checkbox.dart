@@ -53,27 +53,27 @@ class TermsAndConditionsCheckbox extends StatelessWidget {
                       TextSpan(
                         text: 'Kullanıcı sözleşmesini ',
                         style: AppTextStyles.bodySmallRegular.copyWith(
-                          color: AppColors.white60, // #FFFFFF99 is white60
+                          color: AppColors.white60, 
                         ),
                       ),
                       TextSpan(
                         text: 'Okudum ve Kabul ediyorum.',
                         style: AppTextStyles.bodySmallSemiBold.copyWith(
-                          color: AppColors.white, // White color
-                          decoration: TextDecoration.underline, // Underlined
+                          color: AppColors.white, 
+                          decoration: TextDecoration.underline, 
                           decorationStyle: TextDecorationStyle.solid,
-                          decorationThickness: 1, // Default thickness
+                          decorationThickness: 1, 
                         ),
                       ),
                       TextSpan(
                         text: ' Bu sözleşmeyi okuyarak devam ediniz lütfen.',
                         style: AppTextStyles.bodySmallRegular.copyWith(
-                          color: AppColors.white60, // #FFFFFF99 is white60
+                          color: AppColors.white60, 
                         ),
                       ),
                     ],
                   ),
-                  textAlign: TextAlign.left, // Align text to left
+                  textAlign: TextAlign.left, 
                 ),
               ),
             ],

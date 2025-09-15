@@ -24,7 +24,7 @@ class DashedBorderPhotoUpload extends StatelessWidget {
       child: CustomPaint(
         painter: DashedBorderPainter(
           strokeWidth: 1.w,
-          color: AppColors.white20, // 20% white for border
+          color: AppColors.white20, 
           dashes: const [4, 4],
           radius: 32.r,
         ),
@@ -47,13 +47,13 @@ class DashedBorderPhotoUpload extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      AppIcons.plus, // Assuming Plus.svg is the icon
+                      AppIcons.plus, 
                       width: 32.w,
                       height: 32.h,
                       colorFilter: const ColorFilter.mode(
                         AppColors.white,
                         BlendMode.srcIn,
-                      ), // Adjust color as needed
+                      ), 
                     ),
                   ],
                 )

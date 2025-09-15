@@ -31,7 +31,7 @@ class TokenPackageContent extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           16.r,
-        ), // Updated from 8.r to 16.r
+        ), 
         gradient: RadialGradient(
           colors: [gradientColor1, gradientColor2],
           center: Alignment(2 * 26.44 / 100 - 1, 2 * 15.22 / 100 - 1),
@@ -40,17 +40,17 @@ class TokenPackageContent extends StatelessWidget {
         border: Border.all(
           color: AppColors.white.withValues(
             alpha: 0.4,
-          ), // #FFFFFF66 (40% white)
+          ), 
           width: 1.w,
         ),
         boxShadow: [
           BoxShadow(
             color: AppColors.white.withValues(
               alpha: 0.3,
-            ), // #FFFFFF4D (30% white) inset approximation
+            ), 
             blurRadius: 15.r,
             spreadRadius: 0,
-            offset: const Offset(4, 4), // Simulating inset with offset
+            offset: const Offset(4, 4), 
           ),
         ],
       ),
@@ -60,7 +60,7 @@ class TokenPackageContent extends StatelessWidget {
             height: 124.h,
             child: Column(
               children: [
-                SizedBox(height: 32.5.h), // 32.5px top spacing
+                SizedBox(height: 32.5.h), 
                 SizedBox(
                   height: 19.h,
                   child: Text(
@@ -69,7 +69,7 @@ class TokenPackageContent extends StatelessWidget {
                     style: AppTextStyles.limitedOfferBonusText.copyWith(
                       color: AppColors.white.withValues(
                         alpha: 0.9,
-                      ), // 90% white
+                      ), 
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
@@ -99,7 +99,7 @@ class TokenPackageContent extends StatelessWidget {
           ),
           SizedBox(
             height: 14.h,
-          ), // 14px spacing between the two inner containers
+          ), 
           SizedBox(
             height: 36.h,
             child: Column(
@@ -114,7 +114,7 @@ class TokenPackageContent extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 1.h), // 1px spacing
+                SizedBox(height: 1.h), 
                 SizedBox(
                   height: 15.h,
                   child: Text(
@@ -123,7 +123,7 @@ class TokenPackageContent extends StatelessWidget {
                     style: AppTextStyles.bodySmallMedium.copyWith(
                       color: AppColors.white.withValues(
                         alpha: 0.8,
-                      ), // 80% white
+                      ), 
                     ),
                   ),
                 ),

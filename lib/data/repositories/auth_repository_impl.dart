@@ -1,4 +1,4 @@
-import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/data/repositories/i_remote_data_source.dart';
 import 'package:shartflix/data/models/user_model.dart';
@@ -94,14 +94,14 @@ class AuthRepositoryImpl implements IAuthRepository {
 
   @override
   Future<void> saveUser(UserEntity user) async {
-    // Convert UserEntity to UserModel for local storage
+    
     final userModel = UserModel(
       id: user.id,
       email: user.email,
       name: user.name,
       photoUrl: user.photoUrl,
       token: await localStorageService
-          .getAuthToken(), // Preserve existing token
+          .getAuthToken(), 
     );
     try {
       await localStorageService.saveUser(userModel);
@@ -142,14 +142,14 @@ class AuthRepositoryImpl implements IAuthRepository {
   Future<void> updateUserProfilePhoto(String? photoUrl) async {
     try {
       await remoteDataSource.updateUserProfilePhoto(photoUrl);
-      // After updating on remote, update local storage as well
+      
       final currentUser = await localStorageService.getUser();
       if (currentUser != null) {
         final updatedUser = UserModel(
           id: currentUser.id,
           email: currentUser.email,
           name: currentUser.name,
-          photoUrl: photoUrl, // Update with the new photoUrl
+          photoUrl: photoUrl, 
           token: currentUser.token,
         );
         await localStorageService.saveUser(updatedUser);

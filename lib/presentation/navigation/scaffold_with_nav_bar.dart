@@ -16,10 +16,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
   void _goBranch(int index) {
     navigationShell.goBranch(
       index,
-      // A common pattern when using bottom navigation bars is to ensure the
-      // user returns to the top of a branch when tapping an already selected
-      // tab. This is done by setting `popToRootEnabled` to true for all
-      // branches, but only doing it if a new tab is selected.
+      
       initialLocation: index == navigationShell.currentIndex,
     );
   }
@@ -67,8 +64,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
     BuildContext context,
     int index,
     String label,
-    String inactiveIconPath, // Changed to String path
-    String activeIconPath, // Changed to String path
+    String inactiveIconPath, 
+    String activeIconPath, 
   ) {
     final bool isActive = navigationShell.currentIndex == index;
     return Container(

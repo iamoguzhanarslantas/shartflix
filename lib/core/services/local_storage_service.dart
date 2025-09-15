@@ -1,12 +1,12 @@
-import 'dart:convert'; // Import for json encoding/decoding
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/foundation.dart'; // Keep for kDebugMode
-import 'package:shartflix/data/models/user_model.dart'; // Import UserModel
+import 'package:flutter/foundation.dart'; 
+import 'package:shartflix/data/models/user_model.dart';
 
 class LocalStorageService {
   static const String _authTokenKey = 'authToken';
   static const String _isNewUserKey = 'isNewUser';
-  static const String _userModelKey = 'userModel'; // New key for UserModel
+  static const String _userModelKey = 'userModel'; 
 
   Future<void> saveAuthToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -41,7 +41,9 @@ class LocalStorageService {
       final decodedJson = json.decode(userJson);
       final userModel = UserModel.fromJson(decodedJson);
       if (kDebugMode) {
-        debugPrint('LocalStorageService: User model retrieved and parsed: ${userModel.toJson()}');
+        debugPrint(
+          'LocalStorageService: User model retrieved and parsed: ${userModel.toJson()}',
+        );
       }
       return userModel;
     }
@@ -54,7 +56,7 @@ class LocalStorageService {
   Future<void> removeAuthToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_authTokenKey);
-    await prefs.remove(_userModelKey); // Also remove user model
+    await prefs.remove(_userModelKey);
     if (kDebugMode) {
       debugPrint('LocalStorageService: Auth token and user model removed.');
     }
@@ -67,7 +69,7 @@ class LocalStorageService {
 
   Future<bool> getIsNewUser() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_isNewUserKey) ?? true; // Default to true if not set
+    return prefs.getBool(_isNewUserKey) ?? true; 
   }
 
   Future<void> clearAll() async {

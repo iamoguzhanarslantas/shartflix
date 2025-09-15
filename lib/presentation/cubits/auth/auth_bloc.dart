@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    add(AuthCheckStatus()); // Initial check
+    add(AuthCheckStatus()); 
   }
 
   Future<void> _onAuthCheckStatus(
@@ -67,10 +67,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.email,
         event.password,
       );
-      // The token is saved by the AuthRepositoryImpl during login
+    
       await _authRepository.saveUser(userEntity);
       await _authRepository.setIsNewUser(false);
-      add(AuthCheckStatus()); // Re-check status to emit AuthAuthenticated
+      add(AuthCheckStatus()); 
     } catch (e) {
       String errorMessage = e.toString().replaceFirst('Exception: ', '');
       emit(AuthError(errorMessage));
@@ -88,7 +88,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.password,
         event.name,
       );
-      // The token is saved by the AuthRepositoryImpl during registration
+      
       await _authRepository.saveUser(userEntity);
       await _authRepository.setIsNewUser(true);
       emit(AuthRegistrationSuccess(userEntity));
@@ -122,7 +122,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       await _authRepository.uploadUserPhoto(event.imagePath);
-      add(AuthGetUserProfile()); // Refresh profile after upload
+      add(AuthGetUserProfile()); 
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -141,7 +141,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       await _authRepository.updateUserProfilePhoto(event.photoUrl);
-      add(AuthGetUserProfile()); // Refresh profile after update
+      add(AuthGetUserProfile()); 
     } catch (e) {
       emit(AuthError(e.toString()));
     }

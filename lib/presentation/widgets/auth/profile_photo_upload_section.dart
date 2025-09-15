@@ -22,7 +22,7 @@ class ProfilePhotoUploadSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ImagePickerWidget(
       builder: (context, selectedImage, onPickImage, onClearImage) {
-        // Update the parent's state with the selected image
+        
         if (selectedImage != imageFile) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             onImageSelected(selectedImage);
@@ -48,7 +48,7 @@ class ProfilePhotoUploadSection extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height < 800 ? 26.h : 52.h,
-              ), // Spacing between text and photo upload
+              ), 
               Center(
                 child: DashedBorderPhotoUpload(
                   onTap: onPickImage,

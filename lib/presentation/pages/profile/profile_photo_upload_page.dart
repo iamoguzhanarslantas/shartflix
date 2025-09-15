@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
-import 'package:shartflix/data/models/user_model.dart'; // Import UserModel
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/presentation/cubits/auth/auth_event.dart'; // Import AuthEvent
+import 'package:shartflix/data/models/user_model.dart';
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
+import 'package:shartflix/presentation/cubits/auth/auth_event.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/auth/profile_header_widget.dart';
@@ -37,7 +37,7 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
   Future<void> _navigateToHome() async {
     sl<LocalStorageService>().setIsNewUser(false);
     context.go(HomePage.routeName);
-    // No need to fetch user profile here, AuthBloc will handle it
+    
   }
 
   @override
@@ -49,7 +49,7 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
         } else if (state is AuthAuthenticated) {
-          // If authenticated after photo upload, navigate to home
+          
           _navigateToHome();
         }
       },
@@ -90,17 +90,17 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
                           ),
                         );
 
-                        // AuthBloc'un AuthAuthenticated state’ini bekle
+                        
                         await authBloc.stream.firstWhere(
                           (state) => state is AuthAuthenticated,
                         );
 
                         if (widget.fromProfile) {
                           if (context.mounted) {
-                            Navigator.of(context).pop(); // Profil senaryosu
+                            Navigator.of(context).pop(); 
                           }
                         } else {
-                          _navigateToHome(); // Yeni kullanıcı senaryosu
+                          _navigateToHome(); 
                         }
                       }
                     },

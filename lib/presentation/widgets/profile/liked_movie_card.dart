@@ -13,13 +13,13 @@ class LikedMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // Changed from Container to SizedBox
+      
       width: AppDimensions.likedMovieCardWidth.w,
       height: AppDimensions.likedMovieCardHeight.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Movie Image
+          
           ClipRRect(
             borderRadius: BorderRadius.circular(
               AppDimensions.likedMovieCardImageBorderRadius.r,
@@ -67,7 +67,7 @@ class LikedMovieCard extends StatelessWidget {
                   ),
           ),
           SizedBox(height: AppDimensions.likedMovieCardImageTextGap.h),
-          // Movie Title
+          
           SizedBox(
             height: AppDimensions.likedMovieTitleHeight.h,
             child: Text(
@@ -81,16 +81,16 @@ class LikedMovieCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppDimensions.likedMovieIdTextGap.h),
-          // Movie ID (or Release Date, using ID for now as per request)
+          
           SizedBox(
             height: AppDimensions.likedMovieIdHeight.h,
             child: Text(
               movie.id?.substring(0, 5) ??
-                  'N/A', // Using ID as per request, could be releaseDate
+                  'N/A', 
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.bodyNormalRegular.copyWith(
-                color: AppColors.white50, // 50% white
+                color: AppColors.white50, 
                 fontSize: AppDimensions.likedMovieIdFontSize.sp,
               ),
             ),

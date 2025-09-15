@@ -44,9 +44,9 @@ class LimitedOfferBonusCard extends StatelessWidget {
               colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
             ),
           ),
-          SizedBox(height: 10.h), // Gap between icon and text
+          SizedBox(height: 10.h), 
           Transform.rotate(
-            angle: -0.09 * (3.1415926535 / 180), // Convert degrees to radians
+            angle: -0.09 * (3.1415926535 / 180), 
             child: SizedBox(
               width: 80.5.w,
               height: 30.0.h,
@@ -55,7 +55,7 @@ class LimitedOfferBonusCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular.copyWith(
                   color: AppColors.white,
-                  height: 1.0, // 100% line-height
+                  height: 1.0, 
                 ),
               ),
             ),

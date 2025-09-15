@@ -5,17 +5,16 @@ import 'package:shartflix/core/constants/app_text_styles.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
-    // Renamed to lightTheme
     return ThemeData(
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.black,
-      fontFamily: AppTextStyles.h1.fontFamily, // Use Instrument Sans as default
+      fontFamily: AppTextStyles.h1.fontFamily, 
       colorScheme: const ColorScheme(
         primary: AppColors.primary,
         primaryContainer: AppColors.primaryDark,
         secondary: AppColors.secondary,
         secondaryContainer:
-            AppColors.secondary, // Using secondary for container as well
+            AppColors.secondary, 
         surface: AppColors.black,
         error: AppColors.error,
         onPrimary: AppColors.white90,
@@ -23,7 +22,7 @@ class AppTheme {
         onSurface: AppColors.white90,
         onError: AppColors.white90,
         brightness:
-            Brightness.dark, // Assuming a dark theme based on background
+            Brightness.dark, 
       ),
       textTheme: TextTheme(
         // Headings
@@ -50,8 +49,8 @@ class AppTheme {
           color: AppColors.white90,
         ),
       ),
-      // Add other theme properties as needed
-      // For example, AppBarTheme, ButtonTheme, etc.
+     
+     
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.black,
         foregroundColor: AppColors.white90,
@@ -64,8 +63,6 @@ class AppTheme {
           borderRadius: BorderRadius.all(Radius.circular(8.r)),
         ),
       ),
-      // You can add custom extensions for gradients if needed,
-      // but for now, we'll use them directly where needed.
     );
   }
 }

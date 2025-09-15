@@ -44,8 +44,6 @@ class AppDimensions {
   static const double profileNameEmailColumnWidth = 145.0;
   static const double profileNameEmailColumnHeight = 46.0;
   static const double profileNameEmailColumnGap = 8.0;
-  static const double profileNameFontSize = 16.0;
-  static const double profileEmailFontSize = 14.0;
 
   // Add Photo Button Dimensions
   static const double addPhotoButtonWidth = 129.0;

@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/data/entities/movie_entity.dart'; // Import MovieEntity
+import 'package:shartflix/data/entities/movie_entity.dart';
 import 'package:shartflix/di.dart';
-import 'package:shartflix/core/errors/failures.dart'; // Import Failure types
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
-import 'package:shartflix/presentation/widgets/movie/movie_card.dart'; // Import MovieCard
+import 'package:shartflix/presentation/widgets/movie/movie_card.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          sl<MovieCubit>()..fetchAllMovies(), // Changed to fetchAllMovies
+          sl<MovieCubit>()..fetchAllMovies(), 
       child: Scaffold(
         backgroundColor: AppColors.black,
         body: BlocBuilder<MovieCubit, MovieState>(
@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
                 onRefresh: () async {
                   await context
                       .read<MovieCubit>()
-                      .fetchAllMovies(); // Changed to fetchAllMovies
+                      .fetchAllMovies(); 
                 },
                 child: PageView.builder(
                   scrollDirection:
-                      Axis.vertical, // Added for vertical scrolling
+                      Axis.vertical, 
                   itemCount: state.movieResponse.movies.length,
                   itemBuilder: (context, index) {
                     final MovieEntity movie = state.movieResponse.movies[index];

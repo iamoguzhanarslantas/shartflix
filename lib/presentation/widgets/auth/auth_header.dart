@@ -31,7 +31,7 @@ class AuthHeader extends StatelessWidget {
                       ? 15.h
                       : 50.h
                 : 76.h,
-          ), // Adjust height based on error state
+          ), 
         SvgPicture.asset(AppIcons.icon, width: 78.w, height: 78.h),
         SizedBox(height: 12.h),
         Text(title, style: AppTextStyles.h4.copyWith(color: AppColors.white)),

@@ -16,7 +16,7 @@ class PhotoDeleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 24.h + 12.h, // Height of the icon + padding
+      height: 36.h, 
       child: Visibility(
         visible: isVisible,
         maintainSize: true,
@@ -25,12 +25,12 @@ class PhotoDeleteButton extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(top: 12.h),
           child: GestureDetector(
-            onTap: onTap, // Clear selected image
+            onTap: onTap, 
             child: SvgPicture.asset(
-              AppIcons.photoDelete, // Assuming photo-delete.svg is the icon
+              AppIcons.photoDelete, 
               width: 24.w,
               height: 24.h,
-              // Removed colorFilter to keep original color
+              
             ),
           ),
         ),

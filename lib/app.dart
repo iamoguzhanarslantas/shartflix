@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shartflix/core/theme/app_theme.dart';
-import 'package:shartflix/di.dart'; // Import di for sl
+import 'package:shartflix/di.dart';
 import 'package:shartflix/core/services/locale_provider.dart';
 import 'package:shartflix/l10n/app_localizations.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Import AuthBloc
-import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart'; // Import MovieCubit
-import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
+import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart'; 
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/navigation/app_router.dart';
 
 class App extends StatelessWidget {

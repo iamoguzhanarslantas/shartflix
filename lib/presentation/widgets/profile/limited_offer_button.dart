@@ -28,6 +28,8 @@ class LimitedOfferButton extends StatelessWidget {
         child: InkWell(
           onTap: () {
             showModalBottomSheet(
+              enableDrag: false,
+              isDismissible: false,
               useRootNavigator: true,
               context: context,
               isScrollControlled: true,

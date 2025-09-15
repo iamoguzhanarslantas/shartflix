@@ -27,7 +27,7 @@ class ProfilePageAppBar extends StatelessWidget {
             AppStrings.profile,
             style: AppTextStyles.h5.copyWith(color: AppColors.white),
           ),
-          const LimitedOfferButton(), // Use the extracted widget
+          const LimitedOfferButton(), 
         ],
       ),
     );
