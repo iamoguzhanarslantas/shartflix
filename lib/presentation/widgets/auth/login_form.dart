@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
+import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/pages/home/home_page.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/presentation/widgets/auth/custom_text_input.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_icons.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
-import 'package:shartflix/presentation/widgets/limited_offer_bonus_card.dart';
+import 'package:shartflix/presentation/widgets/profile/limited_offer_bonus_card.dart';
 
 class LimitedOfferBonusSection extends StatelessWidget {
   const LimitedOfferBonusSection({super.key});

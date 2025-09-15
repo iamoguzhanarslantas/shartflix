@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/core/services/local_storage_service.dart';
 import 'package:shartflix/di.dart';
+import 'package:shartflix/data/models/user_model.dart'; // Import UserModel
 import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
 import 'package:shartflix/presentation/cubits/auth/auth_event.dart'; // Import AuthEvent
 import 'package:shartflix/presentation/pages/home/home_page.dart';
@@ -16,8 +17,9 @@ import 'package:shartflix/presentation/widgets/auth/profile_footer_buttons.dart'
 
 class ProfilePhotoUploadPage extends StatefulWidget {
   static const String routeName = '/profile-photo-upload';
+  final bool fromProfile;
 
-  const ProfilePhotoUploadPage({super.key});
+  const ProfilePhotoUploadPage({super.key, this.fromProfile = false});
 
   @override
   State<ProfilePhotoUploadPage> createState() => _ProfilePhotoUploadPageState();
@@ -69,17 +71,38 @@ class _ProfilePhotoUploadPageState extends State<ProfilePhotoUploadPage> {
                     onContinue: _selectedImage != null
                         ? () {
                             context.read<AuthBloc>().add(
-                                  AuthUploadUserPhoto(
-                                      imagePath: _selectedImage!.path),
-                                );
+                              AuthUploadUserPhoto(
+                                imagePath: _selectedImage!.path,
+                              ),
+                            );
                           }
                         : null,
-                    onSkip: () {
-                      // If user skips, set photoUrl to null (or a default URL)
-                      context.read<AuthBloc>().add(
-                            const AuthUpdateUserPhotoUrl(photoUrl: null),
-                          );
-                      _navigateToHome();
+                    onSkip: () async {
+                      final authBloc = context.read<AuthBloc>();
+                      final authState = authBloc.state;
+
+                      if (authState is AuthAuthenticated) {
+                        authBloc.add(
+                          AuthSkipPhotoUpload(
+                            user: UserModel.fromJson(
+                              authState.user.toModelJson(),
+                            ),
+                          ),
+                        );
+
+                        // AuthBloc'un AuthAuthenticated state’ini bekle
+                        await authBloc.stream.firstWhere(
+                          (state) => state is AuthAuthenticated,
+                        );
+
+                        if (widget.fromProfile) {
+                          if (context.mounted) {
+                            Navigator.of(context).pop(); // Profil senaryosu
+                          }
+                        } else {
+                          _navigateToHome(); // Yeni kullanıcı senaryosu
+                        }
+                      }
                     },
                     isLoading: state is AuthLoading,
                   ),

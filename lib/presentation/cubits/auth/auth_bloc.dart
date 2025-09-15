@@ -18,7 +18,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthGetUserProfile>(_onAuthGetUserProfile);
     on<AuthUploadUserPhoto>(_onAuthUploadUserPhoto);
     on<AuthLogout>(_onAuthLogout);
-    on<AuthUpdateUserPhotoUrl>(_onAuthUpdateUserPhotoUrl); // New event handler
+    on<AuthUpdateUserPhotoUrl>(_onAuthUpdateUserPhotoUrl);
+    on<AuthSkipPhotoUpload>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        await _authRepository.saveUser(event.user.toEntity());
+        emit(AuthAuthenticated(event.user.toEntity()));
+      } catch (e) {
+        emit(AuthError(e.toString()));
+      }
+    });
 
     add(AuthCheckStatus()); // Initial check
   }

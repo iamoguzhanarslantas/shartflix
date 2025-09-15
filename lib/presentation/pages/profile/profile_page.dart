@@ -11,7 +11,7 @@ import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthB
 import 'package:shartflix/presentation/pages/auth/login_page.dart';
 import 'package:shartflix/presentation/widgets/common/app_layout.dart';
 import 'package:shartflix/presentation/widgets/profile/add_photo_button.dart';
-import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
+import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
 import 'package:shartflix/presentation/widgets/profile/liked_movie_card.dart';
 import 'package:shartflix/presentation/widgets/profile/profile_page_app_bar.dart';

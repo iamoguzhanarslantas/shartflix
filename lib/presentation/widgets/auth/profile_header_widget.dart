@@ -19,9 +19,7 @@ class ProfileHeaderWidget extends StatelessWidget {
               if (context.canPop()) {
                 context.pop();
               } else {
-                context.go(
-                  ProfilePage.routeName,
-                ); // Navigate to home if nothing to pop
+                context.go(ProfilePage.routeName);
               }
             },
           ),

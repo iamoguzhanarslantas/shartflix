@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:shartflix/data/models/user_model.dart'; // Import UserModel
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
@@ -50,4 +51,12 @@ class AuthUpdateUserPhotoUrl extends AuthEvent {
 
   @override
   List<Object?> get props => [photoUrl];
+}
+
+class AuthSkipPhotoUpload extends AuthEvent {
+  final UserModel user; // mevcut user modelim
+  AuthSkipPhotoUpload({required this.user});
+
+  @override
+  List<Object> get props => [user];
 }

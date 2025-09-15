@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Use AuthBloc
-import 'package:shartflix/presentation/pages/auth/profile_photo_upload_page.dart';
+import 'package:shartflix/presentation/pages/profile/profile_photo_upload_page.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_form_validator.dart';
 import 'package:shartflix/presentation/widgets/auth/auth_screen_wrapper.dart';
 import 'package:shartflix/presentation/widgets/auth/register_header.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shartflix/presentation/widgets/token_package_badge.dart';
-import 'package:shartflix/presentation/widgets/token_package_content.dart';
+import 'package:shartflix/presentation/widgets/profile/token_package_badge.dart';
+import 'package:shartflix/presentation/widgets/profile/token_package_content.dart';
 
 class TokenPackageCard extends StatelessWidget {
   final String oldPrice;
