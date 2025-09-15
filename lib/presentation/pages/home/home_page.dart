@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/data/entities/movie_entity.dart';
+import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
-import 'package:shartflix/presentation/widgets/movie/movie_cache_and_favorite.dart';
+import 'package:shartflix/presentation/widgets/movie/movie_cache.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_fetch_widget.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_card.dart';
 import 'package:shartflix/di.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = MovieCacheAndFavorite(context);
+    final controller = MovieCache(context);
     return BlocProvider(
       create: (context) => sl<MovieCubit>()..fetchAllMovies(),
       child: Scaffold(
@@ -39,7 +40,16 @@ class HomePage extends StatelessWidget {
                     }
                     return MovieCard(
                       movie: movie,
-                      onFavoriteToggle: () => controller.toggleFavorite(movie),
+                      onFavoriteToggle: () async {
+                        await context.read<MovieCubit>().toggleFavorite(
+                          movie.id!,
+                        );
+                        if (context.mounted) {
+                          context
+                              .read<FavoriteMovieCubit>()
+                              .fetchFavoriteMovies();
+                        }
+                      },
                     );
                   },
                 ),
