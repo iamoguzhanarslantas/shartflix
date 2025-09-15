@@ -55,7 +55,7 @@ class AuthUpdateUserPhotoUrl extends AuthEvent {
 
 class AuthSkipPhotoUpload extends AuthEvent {
   final UserModel user; // mevcut user modelim
-  AuthSkipPhotoUpload({required this.user});
+  const AuthSkipPhotoUpload({required this.user});
 
   @override
   List<Object> get props => [user];

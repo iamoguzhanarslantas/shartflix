@@ -11,7 +11,6 @@ import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; // Import Au
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart'; // Import MovieCubit
 import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart'; // Import FavoriteMovieCubit
 import 'package:shartflix/presentation/navigation/app_router.dart';
-import 'package:shartflix/presentation/pages/home/home_page.dart'; // Import the example home page
 
 class App extends StatelessWidget {
   const App({super.key});
