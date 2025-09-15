@@ -7,6 +7,7 @@ class AppTextStyles {
   // Font Families
   static const String _fontFamilyInstrumentSans = 'Instrument Sans';
   static const String _fontFamilyMontserrat = 'Montserrat';
+  static const String _fontFamilyEuclidCircularA = 'Euclid Circular A';
 
   // Font Weights
   static const FontWeight bold = FontWeight.w700;
@@ -159,5 +160,11 @@ class AppTextStyles {
     fontFamily: _fontFamilyMontserrat,
     fontSize: 12.sp,
     fontWeight: semiBold,
+  );
+
+  static final TextStyle limitedOfferBonusText = TextStyle(
+    fontFamily: _fontFamilyEuclidCircularA,
+    fontSize: 15.sp,
+    fontWeight: medium,
   );
 }

@@ -15,11 +15,15 @@ class AppIcons {
   static const String iconNoBackground = 'assets/icon/Icon-no-background.svg';
   static const String lock = 'assets/icon/Lock.svg';
   static const String mail = 'assets/icon/Mail.svg';
+  static const String moreLikes = 'assets/icon/More-likes.svg';
+  static const String moreMatches = 'assets/icon/More-matches.svg';
   static const String photoDelete = 'assets/icon/Photo-delete.svg';
   static const String plus = 'assets/icon/Plus.svg';
+  static const String premium = 'assets/icon/Premium.svg';
   static const String profileFill = 'assets/icon/Profile-fill.svg';
   static const String profile = 'assets/icon/Profile.svg';
   static const String see = 'assets/icon/See.svg';
+  static const String upFront = 'assets/icon/Up-front.svg';
   static const String user = 'assets/icon/User.svg';
   static const String vector = 'assets/icon/Vector.svg';
   static const String x = 'assets/icon/X.svg';

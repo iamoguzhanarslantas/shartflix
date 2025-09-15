@@ -26,6 +26,18 @@ class AppColors {
   static const Color white10 = Color(0x1AFFFFFF); // 10% opacity
   static const Color white05 = Color(0x0DFFFFFF); // 5% opacity
 
+  // Black Shades
+  static const Color black90 = Color(0xE6000000); // 90% opacity
+  static const Color black80 = Color(0xCC000000); // 80% opacity
+  static const Color black70 = Color(0xB3000000); // 70% opacity
+  static const Color black60 = Color(0x99000000); // 60% opacity
+  static const Color black50 = Color(0x80000000); // 50% opacity
+  static const Color black40 = Color(0x66000000); // 40% opacity
+  static const Color black30 = Color(0x4D000000); // 30% opacity
+  static const Color black20 = Color(0x33000000); // 20% opacity
+  static const Color black10 = Color(0x1A000000); // 10% opacity
+  static const Color black05 = Color(0x0D000000); // 5% opacity
+
   // Radial Gradient Colors
   static const Color radialStart = Color(0xFFFF1B1B);
   static const Color radialEnd = Color(0x008D0000);
@@ -42,4 +54,5 @@ class AppColors {
 
   //Limited Offer Colors
   static const Color buttonLimited = Color(0xFFB2040C);
+  static const Color bonusCard = Color(0xFF6F060B);
 }
