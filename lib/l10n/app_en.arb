@@ -1,0 +1,229 @@
+{
+  "hello": "Hello",
+  "@hello": {
+    "description": "A greeting message"
+  },
+  "welcome": "Welcome {name}",
+  "@welcome": {
+    "description": "A welcome message with a name parameter",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "takePhoto": "Take a photo",
+  "@takePhoto": {
+    "description": "Option to take a photo"
+  },
+  "chooseFromGallery": "Choose from gallery",
+  "@chooseFromGallery": {
+    "description": "Option to choose a photo from gallery"
+  },
+  "registrationSuccess": "Registration successful!",
+  "@registrationSuccess": {
+    "description": "Message for successful registration"
+  },
+  "registrationFailed": "Registration failed: {message}",
+  "@registrationFailed": {
+    "description": "Message for failed registration with error message",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "loginTitle": "Login",
+  "@loginTitle": {
+    "description": "Title for login page"
+  },
+  "loginSubtitle": "Login with your user information",
+  "@loginSubtitle": {
+    "description": "Subtitle for login page"
+  },
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Button text to try again"
+  },
+  "createAccountTitle": "Create Account",
+  "@createAccountTitle": {
+    "description": "Title for create account page"
+  },
+  "createAccountSubtitle": "Register by entering your user information",
+  "@createAccountSubtitle": {
+    "description": "Subtitle for create account page"
+  },
+  "appTitle": "Shartflix",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "noTitle": "No Title",
+  "@noTitle": {
+    "description": "Placeholder for missing title"
+  },
+  "notAvailable": "N/A",
+  "@notAvailable": {
+    "description": "Not available abbreviation"
+  },
+  "bonusesYouWillReceive": "Bonuses You Will Receive",
+  "@bonusesYouWillReceive": {
+    "description": "Title for bonuses section"
+  },
+  "premiumAccount": "Premium Account",
+  "@premiumAccount": {
+    "description": "Premium account feature"
+  },
+  "moreMatches": "More Matches",
+  "@moreMatches": {
+    "description": "More matches feature"
+  },
+  "highlighting": "Highlighting",
+  "@highlighting": {
+    "description": "Highlighting feature"
+  },
+  "moreLikes": "More Likes",
+  "@moreLikes": {
+    "description": "More likes feature"
+  },
+  "id": "ID: {idValue}",
+  "@id": {
+    "description": "User ID display",
+    "placeholders": {
+      "idValue": {
+        "type": "String"
+      }
+    }
+  },
+  "nameLabel": "Name:",
+  "@nameLabel": {
+    "description": "Label for name field"
+  },
+  "emailLabel": "Email:",
+  "@emailLabel": {
+    "description": "Label for email field"
+  },
+  "selectTokenPackageToUnlock": "Select a token package to unlock",
+  "@selectTokenPackageToUnlock": {
+    "description": "Instruction for selecting token package"
+  },
+  "token": "Token",
+  "@token": {
+    "description": "Token unit"
+  },
+  "perWeek": "Per week",
+  "@perWeek": {
+    "description": "Frequency for pricing"
+  },
+  "seeAllTokens": "See All Tokens",
+  "@seeAllTokens": {
+    "description": "Button to see all tokens"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "skipButton": "Skip",
+  "@skipButton": {
+    "description": "Skip button text"
+  },
+  "userAgreementPrefix": "User agreement ",
+  "@userAgreementPrefix": {
+    "description": "Prefix for user agreement text"
+  },
+  "readAndAccept": "I have read and accept.",
+  "@readAndAccept": {
+    "description": "User agreement acceptance text"
+  },
+  "pleaseReadAgreement": " Please read this agreement to continue.",
+  "@pleaseReadAgreement": {
+    "description": "Instruction to read agreement"
+  },
+  "profileDetail": "Profile Detail",
+  "@profileDetail": {
+    "description": "Title for profile detail page"
+  },
+  "noAccountPrompt": "Don't have an account?",
+  "@noAccountPrompt": {
+    "description": "Prompt for users without an account"
+  },
+  "registerAction": "Register",
+  "@registerAction": {
+    "description": "Action text to register"
+  },
+  "uploadPhoto": "Upload Photo",
+  "@uploadPhoto": {
+    "description": "Title for photo upload section"
+  },
+  "uploadProfilePhotoDescription": "You can upload an image for your profile photo",
+  "@uploadProfilePhotoDescription": {
+    "description": "Description for profile photo upload"
+  },
+  "haveAccountPrompt": "Already have an account?",
+  "@haveAccountPrompt": {
+    "description": "Prompt for users with an account"
+  },
+  "loginAction": "Login",
+  "@loginAction": {
+    "description": "Action text to login"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for password field"
+  },
+  "forgotPassword": "Forgot password",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+  "loggingIn": "Logging In...",
+  "@loggingIn": {
+    "description": "Loading text for login process"
+  },
+  "loginButton": "Login",
+  "@loginButton": {
+    "description": "Login button text"
+  },
+  "passwordConfirmLabel": "Confirm Password",
+  "@passwordConfirmLabel": {
+    "description": "Label for password confirmation field"
+  },
+  "registerButton": "Register",
+  "@registerButton": {
+    "description": "Register button text"
+  },
+  "fullNameEmptyError": "Full name cannot be empty",
+  "@fullNameEmptyError": {
+    "description": "Error message for empty full name"
+  },
+  "fullNameMinLengthError": "Full name must be at least 3 characters",
+  "@fullNameMinLengthError": {
+    "description": "Error message for full name minimum length"
+  },
+  "emailEmptyError": "Email cannot be empty",
+  "@emailEmptyError": {
+    "description": "Error message for empty email"
+  },
+  "emailInvalidError": "Enter a valid email address",
+  "@emailInvalidError": {
+    "description": "Error message for invalid email format"
+  },
+  "passwordEmptyError": "Password cannot be empty",
+  "@passwordEmptyError": {
+    "description": "Error message for empty password"
+  },
+  "passwordMinLengthError": "Password must be at least 6 characters",
+  "@passwordMinLengthError": {
+    "description": "Error message for password minimum length"
+  },
+  "passwordConfirmEmptyError": "Confirm password cannot be empty",
+  "@passwordConfirmEmptyError": {
+    "description": "Error message for empty password confirmation"
+  },
+  "passwordsDoNotMatchError": "Passwords do not match",
+  "@passwordsDoNotMatchError": {
+    "description": "Error message when passwords do not match"
+  },
+  "termsNotAcceptedError": "You must accept the user agreement.",
+  "@termsNotAcceptedError": {
+    "description": "Error message when terms are not accepted"
+  }
+}

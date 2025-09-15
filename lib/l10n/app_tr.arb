@@ -1,0 +1,229 @@
+{
+  "hello": "Merhaba",
+  "@hello": {
+    "description": "Bir selamlama mesajı"
+  },
+  "welcome": "Hoş geldin {name}",
+  "@welcome": {
+    "description": "İsim parametresi içeren bir karşılama mesajı",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "takePhoto": "Fotoğraf Çek",
+  "@takePhoto": {
+    "description": "Fotoğraf çekme seçeneği"
+  },
+  "chooseFromGallery": "Galeriden Seç",
+  "@chooseFromGallery": {
+    "description": "Galeriden fotoğraf seçme seçeneği"
+  },
+  "registrationSuccess": "Kayıt başarılı!",
+  "@registrationSuccess": {
+    "description": "Başarılı kayıt mesajı"
+  },
+  "registrationFailed": "Kayıt başarısız: {message}",
+  "@registrationFailed": {
+    "description": "Hata mesajı ile başarısız kayıt mesajı",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "loginTitle": "Giriş Yap",
+  "@loginTitle": {
+    "description": "Giriş sayfası başlığı"
+  },
+  "loginSubtitle": "Kullanıcı bilgilerinizle giriş yapın",
+  "@loginSubtitle": {
+    "description": "Giriş sayfası alt başlığı"
+  },
+  "tryAgain": "Yeniden Dene",
+  "@tryAgain": {
+    "description": "Tekrar deneme butonu metni"
+  },
+  "createAccountTitle": "Hesap Oluştur",
+  "@createAccountTitle": {
+    "description": "Hesap oluşturma sayfası başlığı"
+  },
+  "createAccountSubtitle": "Kullanıcı bilgilerinizi girerek kaydolun",
+  "@createAccountSubtitle": {
+    "description": "Hesap oluşturma sayfası alt başlığı"
+  },
+  "appTitle": "Shartflix",
+  "@appTitle": {
+    "description": "Uygulama başlığı"
+  },
+  "noTitle": "Başlık Yok",
+  "@noTitle": {
+    "description": "Eksik başlık için yer tutucu"
+  },
+  "notAvailable": "Mevcut Değil",
+  "@notAvailable": {
+    "description": "Mevcut değil kısaltması"
+  },
+  "bonusesYouWillReceive": "Alacağınız Bonuslar",
+  "@bonusesYouWillReceive": {
+    "description": "Bonuslar bölümü başlığı"
+  },
+  "premiumAccount": "Premium Hesap",
+  "@premiumAccount": {
+    "description": "Premium hesap özelliği"
+  },
+  "moreMatches": "Daha Fazla Eşleşme",
+  "@moreMatches": {
+    "description": "Daha fazla eşleşme özelliği"
+  },
+  "highlighting": "Öne Çıkarma",
+  "@highlighting": {
+    "description": "Öne çıkarma özelliği"
+  },
+  "moreLikes": "Daha Fazla Beğeni",
+  "@moreLikes": {
+    "description": "Daha fazla beğeni özelliği"
+  },
+  "id": "ID: {idValue}",
+  "@id": {
+    "description": "Kullanıcı ID'si gösterimi",
+    "placeholders": {
+      "idValue": {
+        "type": "String"
+      }
+    }
+  },
+  "nameLabel": "Ad:",
+  "@nameLabel": {
+    "description": "Ad alanı etiketi"
+  },
+  "emailLabel": "E-posta:",
+  "@emailLabel": {
+    "description": "E-posta alanı etiketi"
+  },
+  "selectTokenPackageToUnlock": "Kilidi açmak için bir jeton paketi seçin",
+  "@selectTokenPackageToUnlock": {
+    "description": "Jeton paketi seçme talimatı"
+  },
+  "token": "Jeton",
+  "@token": {
+    "description": "Jeton birimi"
+  },
+  "perWeek": "Haftalık",
+  "@perWeek": {
+    "description": "Fiyatlandırma sıklığı"
+  },
+  "seeAllTokens": "Tüm Jetonları Gör",
+  "@seeAllTokens": {
+    "description": "Tüm jetonları görme butonu"
+  },
+  "continueButton": "Devam Et",
+  "@continueButton": {
+    "description": "Devam butonu metni"
+  },
+  "skipButton": "Atla",
+  "@skipButton": {
+    "description": "Atla butonu metni"
+  },
+  "userAgreementPrefix": "Kullanıcı sözleşmesini ",
+  "@userAgreementPrefix": {
+    "description": "Kullanıcı sözleşmesi metni ön eki"
+  },
+  "readAndAccept": "Okudum ve Kabul ediyorum.",
+  "@readAndAccept": {
+    "description": "Kullanıcı sözleşmesi kabul metni"
+  },
+  "pleaseReadAgreement": " Lütfen bu sözleşmeyi okuyarak devam ediniz.",
+  "@pleaseReadAgreement": {
+    "description": "Sözleşmeyi okuma talimatı"
+  },
+  "profileDetail": "Profil Detayı",
+  "@profileDetail": {
+    "description": "Profil detay sayfası başlığı"
+  },
+  "noAccountPrompt": "Bir hesabın yok mu?",
+  "@noAccountPrompt": {
+    "description": "Hesabı olmayan kullanıcılar için uyarı"
+  },
+  "registerAction": "Kayıt ol",
+  "@registerAction": {
+    "description": "Kayıt olma eylemi metni"
+  },
+  "uploadPhoto": "Fotoğraf Yükle",
+  "@uploadPhoto": {
+    "description": "Fotoğraf yükleme bölümü başlığı"
+  },
+  "uploadProfilePhotoDescription": "Profil fotoğrafınız için görsel yükleyebilirsiniz",
+  "@uploadProfilePhotoDescription": {
+    "description": "Profil fotoğrafı yükleme açıklaması"
+  },
+  "haveAccountPrompt": "Hesabın var mı?",
+  "@haveAccountPrompt": {
+    "description": "Hesabı olan kullanıcılar için uyarı"
+  },
+  "loginAction": "Giriş yap",
+  "@loginAction": {
+    "description": "Giriş yapma eylemi metni"
+  },
+  "passwordLabel": "Şifre",
+  "@passwordLabel": {
+    "description": "Şifre alanı etiketi"
+  },
+  "forgotPassword": "Şifremi unuttum",
+  "@forgotPassword": {
+    "description": "Şifremi unuttum bağlantı metni"
+  },
+  "loggingIn": "Giriş Yapılıyor...",
+  "@loggingIn": {
+    "description": "Giriş işlemi için yükleme metni"
+  },
+  "loginButton": "Giriş Yap",
+  "@loginButton": {
+    "description": "Giriş butonu metni"
+  },
+  "passwordConfirmLabel": "Şifre Tekrar",
+  "@passwordConfirmLabel": {
+    "description": "Şifre onaylama alanı etiketi"
+  },
+  "registerButton": "Kaydol",
+  "@registerButton": {
+    "description": "Kaydol butonu metni"
+  },
+  "fullNameEmptyError": "Ad Soyad boş bırakılamaz",
+  "@fullNameEmptyError": {
+    "description": "Boş ad soyad için hata mesajı"
+  },
+  "fullNameMinLengthError": "Ad Soyad en az 3 karakter olmalı",
+  "@fullNameMinLengthError": {
+    "description": "Ad soyad minimum uzunluk için hata mesajı"
+  },
+  "emailEmptyError": "E-posta boş bırakılamaz",
+  "@emailEmptyError": {
+    "description": "Boş e-posta için hata mesajı"
+  },
+  "emailInvalidError": "Geçerli bir e-posta adresi girin",
+  "@emailInvalidError": {
+    "description": "Geçersiz e-posta formatı için hata mesajı"
+  },
+  "passwordEmptyError": "Şifre boş bırakılamaz",
+  "@passwordEmptyError": {
+    "description": "Boş şifre için hata mesajı"
+  },
+  "passwordMinLengthError": "Şifre en az 6 karakter olmalı",
+  "@passwordMinLengthError": {
+    "description": "Şifre minimum uzunluk için hata mesajı"
+  },
+  "passwordConfirmEmptyError": "Şifre tekrar boş bırakılamaz",
+  "@passwordConfirmEmptyError": {
+    "description": "Boş şifre onaylama için hata mesajı"
+  },
+  "passwordsDoNotMatchError": "Şifreler eşleşmiyor",
+  "@passwordsDoNotMatchError": {
+    "description": "Şifreler eşleşmediğinde hata mesajı"
+  },
+  "termsNotAcceptedError": "Kullanıcı sözleşmesini kabul etmelisiniz.",
+  "@termsNotAcceptedError": {
+    "description": "Şartlar kabul edilmediğinde hata mesajı"
+  }
+}
