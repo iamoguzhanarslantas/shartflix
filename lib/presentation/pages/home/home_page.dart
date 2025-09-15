@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
-import 'package:shartflix/core/constants/app_text_styles.dart';
 import 'package:shartflix/data/entities/movie_entity.dart';
-import 'package:shartflix/di.dart';
-import 'package:shartflix/core/errors/failures.dart';
-import 'package:shartflix/presentation/cubits/favorite_movie/favorite_movie_cubit.dart';
 import 'package:shartflix/presentation/cubits/movie/movie_cubit.dart';
+import 'package:shartflix/presentation/widgets/movie/movie_cache_and_favorite.dart';
+import 'package:shartflix/presentation/widgets/movie/movie_fetch_widget.dart';
 import 'package:shartflix/presentation/widgets/movie/movie_card.dart';
+import 'package:shartflix/di.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
@@ -16,9 +14,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = MovieCacheAndFavorite(context);
     return BlocProvider(
-      create: (context) =>
-          sl<MovieCubit>()..fetchAllMovies(), 
+      create: (context) => sl<MovieCubit>()..fetchAllMovies(),
       child: Scaffold(
         backgroundColor: AppColors.black,
         body: BlocBuilder<MovieCubit, MovieState>(
@@ -27,89 +25,27 @@ class HomePage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MovieLoaded) {
               return RefreshIndicator(
-                onRefresh: () async {
-                  await context
-                      .read<MovieCubit>()
-                      .fetchAllMovies(); 
-                },
+                onRefresh: () async =>
+                    await context.read<MovieCubit>().fetchAllMovies(),
                 child: PageView.builder(
-                  scrollDirection:
-                      Axis.vertical, 
+                  scrollDirection: Axis.vertical,
                   itemCount: state.movieResponse.movies.length,
                   itemBuilder: (context, index) {
                     final MovieEntity movie = state.movieResponse.movies[index];
                     if (index + 1 < state.movieResponse.movies.length) {
-                      final imageUrl =
+                      final nextImageUrl =
                           state.movieResponse.movies[index + 1].images!.last;
-                      precacheImage(
-                        NetworkImage(imageUrl),
-                        context,
-                        onError: (exception, stackTrace) {
-                          log(
-                            'Network Image Load Exception: Image precaching failed for: $imageUrl. \n Error: $exception',
-                            error: exception,
-                            stackTrace: stackTrace,
-                            name: 'HomePage',
-                          );
-                        },
-                      );
+                      controller.precacheNextImage(nextImageUrl);
                     }
                     return MovieCard(
                       movie: movie,
-                      onFavoriteToggle: () async {
-                        await context.read<MovieCubit>().toggleFavorite(
-                          movie.id!,
-                        );
-                        if (context.mounted) {
-                          context
-                              .read<FavoriteMovieCubit>()
-                              .fetchFavoriteMovies();
-                        }
-                      },
+                      onFavoriteToggle: () => controller.toggleFavorite(movie),
                     );
                   },
                 ),
               );
             } else if (state is MovieError) {
-              String errorMessage = 'Bir hata oluştu.';
-              if (state.failure is NetworkFailure) {
-                errorMessage =
-                    'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.';
-              } else if (state.failure is ServerFailure) {
-                errorMessage = 'Sunucu hatası: ${state.failure.message}';
-              } else if (state.failure is CacheFailure) {
-                errorMessage =
-                    'Veri yüklenirken hata oluştu: ${state.failure.message}';
-              } else if (state.failure is UnknownFailure) {
-                errorMessage =
-                    'Beklenmedik bir hata oluştu: ${state.failure.message}';
-              }
-
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      errorMessage,
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.bodyNormalSemiBold.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<MovieCubit>().fetchAllMovies();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: AppColors.white,
-                      ),
-                      child: Text('Yeniden Dene'),
-                    ),
-                  ],
-                ),
-              );
+              return MovieFetchWidget(failure: state.failure);
             }
             return const Center(child: SizedBox());
           },

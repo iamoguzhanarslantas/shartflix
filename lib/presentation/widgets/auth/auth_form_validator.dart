@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart'; 
+import 'package:shartflix/presentation/cubits/auth/auth_bloc.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_event.dart';
 
 class AuthFormValidator extends StatefulWidget {
@@ -10,30 +10,29 @@ class AuthFormValidator extends StatefulWidget {
     TextEditingController? nameController,
     TextEditingController? emailController,
     TextEditingController? passwordController,
-    TextEditingController? confirmPasswordController, 
+    TextEditingController? confirmPasswordController,
     String? nameErrorText,
     String? emailErrorText,
     String? passwordErrorText,
     String? confirmPasswordErrorText,
-    String? termsErrorText, 
-    FormFieldValidator<String>? validateName, 
+    String? termsErrorText,
+    FormFieldValidator<String>? validateName,
     FormFieldValidator<String>? validateEmail,
     FormFieldValidator<String>? validatePassword,
-    FormFieldValidator<String?>?
-    validateConfirmPassword, 
+    FormFieldValidator<String?>? validateConfirmPassword,
     VoidCallback onSubmit,
     bool isLoading,
   )
   builder;
 
   final bool isRegisterForm;
-  final bool termsAccepted; 
+  final bool termsAccepted;
 
   const AuthFormValidator({
     super.key,
     required this.builder,
     this.isRegisterForm = false,
-    this.termsAccepted = false, 
+    this.termsAccepted = false,
   });
 
   @override
@@ -52,7 +51,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
   String? _emailErrorText;
   String? _passwordErrorText;
   String? _confirmPasswordErrorText;
-  String? _termsErrorText; 
+  String? _termsErrorText;
   bool _isLoading = false;
 
   void clearControllers() {
@@ -65,7 +64,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
       _emailErrorText = null;
       _passwordErrorText = null;
       _confirmPasswordErrorText = null;
-      _termsErrorText = null; 
+      _termsErrorText = null;
     });
   }
 
@@ -109,12 +108,10 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
   }
 
   String? _validateConfirmPassword(String? value) {
-    
     if (value == null || value.isEmpty) {
       return 'Şifre tekrar boş bırakılamaz';
     }
     if (value != _passwordController.text) {
-      
       return 'Şifreler eşleşmiyor';
     }
     return null;
@@ -141,7 +138,6 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
         _isLoading = true;
       });
       try {
-        
         if (widget.isRegisterForm) {
           context.read<AuthBloc>().add(
             AuthRegister(
@@ -158,8 +154,6 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
             ),
           );
         }
-      } catch (e) {
-        
       } finally {
         setState(() {
           _isLoading = false;
@@ -181,7 +175,7 @@ class AuthFormValidatorState extends State<AuthFormValidator> {
       _emailErrorText,
       _passwordErrorText,
       _confirmPasswordErrorText,
-      _termsErrorText, 
+      _termsErrorText,
       _validateName,
       _validateEmail,
       _validatePassword,

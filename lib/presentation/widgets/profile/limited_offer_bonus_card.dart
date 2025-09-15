@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shartflix/core/constants/app_colors.dart';
 import 'package:shartflix/core/constants/app_text_styles.dart';
 
@@ -37,16 +36,17 @@ class LimitedOfferBonusCard extends StatelessWidget {
                 ),
               ],
             ),
-            child: SvgPicture.asset(
+            child: Image.asset(
               iconPath,
               width: 32.w,
               height: 32.h,
-              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+
+              colorBlendMode: BlendMode.srcIn,
             ),
           ),
-          SizedBox(height: 10.h), 
+          SizedBox(height: 10.h),
           Transform.rotate(
-            angle: -0.09 * (3.1415926535 / 180), 
+            angle: -0.09 * (3.1415926535 / 180),
             child: SizedBox(
               width: 80.5.w,
               height: 30.0.h,
@@ -55,7 +55,7 @@ class LimitedOfferBonusCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular.copyWith(
                   color: AppColors.white,
-                  height: 1.0, 
+                  height: 1.0,
                 ),
               ),
             ),

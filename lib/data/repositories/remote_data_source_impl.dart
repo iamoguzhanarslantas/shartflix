@@ -130,7 +130,7 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
   Future<List<MovieModel>> getAllMovies() async {
     List<MovieModel> allMovies = [];
     int currentPage = 1;
-    int totalPages = 1; 
+    int totalPages = 1;
 
     while (currentPage <= totalPages) {
       try {
@@ -234,7 +234,7 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
   Future<void> updateUserProfilePhoto(String? photoUrl) async {
     try {
       await _dioClient.dio.put(
-        '/user/profile/photo', 
+        '/user/profile/photo',
         data: {'photoUrl': photoUrl},
       );
     } on DioException catch (e) {
@@ -260,14 +260,6 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
     }
 
     String errorMessage = defaultMessage;
-    if (e.response?.data is Map) {
-      if (e.response?.data['response'] is Map) {
-        errorMessage =
-            e.response?.data['response']['message'] ?? defaultMessage;
-      } else {
-        errorMessage = e.response?.data['message'] ?? defaultMessage;
-      }
-    }
 
     if (e.type == DioExceptionType.connectionError ||
         e.type == DioExceptionType.receiveTimeout ||
@@ -278,7 +270,6 @@ class RemoteDataSourceImpl implements IRemoteDataSource {
       return ServerFailure(errorMessage);
     } else if (e.response?.statusCode != null &&
         e.response!.statusCode! >= 400) {
-      
       return ServerFailure(errorMessage);
     } else {
       return UnknownFailure(errorMessage);

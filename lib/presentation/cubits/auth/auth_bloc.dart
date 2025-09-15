@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shartflix/core/errors/failures.dart';
 import 'package:shartflix/data/entities/user_entity.dart';
 import 'package:shartflix/data/repositories/i_auth_repository.dart';
 import 'package:shartflix/presentation/cubits/auth/auth_event.dart';
@@ -72,7 +73,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _authRepository.setIsNewUser(false);
       add(AuthCheckStatus()); 
     } catch (e) {
-      String errorMessage = e.toString().replaceFirst('Exception: ', '');
+      String errorMessage = 'Giriş başarısız. Lütfen tekrar deneyin.';
+      if (e is ServerFailure) {
+        errorMessage = e.message;
+      } else {
+        errorMessage = e.toString().replaceFirst('Exception: ', '');
+      }
       emit(AuthError(errorMessage));
     }
   }
